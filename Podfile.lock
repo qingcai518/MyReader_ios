@@ -1,0 +1,28 @@
+PODS:
+  - Alamofire (4.3.0)
+  - Cosmos (7.0.0)
+  - Kingfisher (3.2.4)
+  - MJRefresh (3.1.12)
+  - RxCocoa (3.1.0):
+    - RxSwift (~> 3.1)
+  - RxSwift (3.1.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.3)
+  - Cosmos (~> 7.0)
+  - Kingfisher (~> 3.0)
+  - MJRefresh
+  - RxCocoa (~> 3.0)
+  - RxSwift (~> 3.0)
+
+SPEC CHECKSUMS:
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  Cosmos: 2c8299147138758f6ebbb247cf1aeed77998bdf9
+  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
+  RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
+
+PODFILE CHECKSUM: fe6f26dc59b2a6da23da3f47bc02f4269a0910e7
+
+COCOAPODS: 1.1.1

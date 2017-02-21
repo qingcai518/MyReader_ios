@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fGi-W4-7So">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Controller-->
+        <scene sceneID="ctW-w3-IPa">
+            <objects>
+                <tabBarController id="fGi-W4-7So" customClass="MainController" customModule="MyReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="glM-aG-h7b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="UTe-f4-AzW" kind="relationship" relationship="viewControllers" id="fHL-Tf-YVy"/>
+                        <segue destination="nXg-Gm-DAE" kind="relationship" relationship="viewControllers" id="NBV-YZ-ToI"/>
+                        <segue destination="dmD-jf-Wus" kind="relationship" relationship="viewControllers" id="ShY-oP-NW9"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wVh-MH-Zil" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-596" y="27"/>
+        </scene>
+        <!--书架-->
+        <scene sceneID="KCy-br-sLw">
+            <objects>
+                <navigationController id="UTe-f4-AzW" customClass="Navi1Controller" customModule="MyReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="书架" image="tab_bookself" id="l75-p4-vU1"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xQW-dd-oG7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wrd-PP-V4M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-946" y="770"/>
+        </scene>
+        <!--书库-->
+        <scene sceneID="WHV-dr-nVG">
+            <objects>
+                <navigationController id="nXg-Gm-DAE" customClass="Navi2Controller" customModule="MyReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="书库" image="tab_cloud" id="QeW-IC-MKV"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cAF-Cb-oG3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mkh-c8-YwX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-279" y="770"/>
+        </scene>
+        <!--我的-->
+        <scene sceneID="DP1-nf-dEq">
+            <objects>
+                <navigationController id="dmD-jf-Wus" customClass="Navi3Controller" customModule="MyReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="我的" image="tab_user" id="OvU-uS-ovK"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hyf-jE-MD0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mDk-S2-hFk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="412" y="770"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tab_bookself" width="25" height="25"/>
+        <image name="tab_cloud" width="25" height="25"/>
+        <image name="tab_user" width="25" height="25"/>
+    </resources>
+</document>
