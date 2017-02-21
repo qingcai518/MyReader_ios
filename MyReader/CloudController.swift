@@ -83,8 +83,12 @@ class CloudController: ViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "ToCloudDetail") {
-            guard let next = segue.destination as? CloudDetailController else {return}
+            guard let next = segue.destination as? CloudDetailController else {
+                return
+            }
+            
             next.bookInfo = currentInfo
+            next.hidesBottomBarWhenPushed = true
         }
     }
 }
@@ -98,7 +102,7 @@ extension CloudController : UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         currentInfo = model.cloudBooks[indexPath.row]
-        performSegue(withIdentifier: "ToCloudDetail", sender: nil)
+        self.performSegue(withIdentifier: "ToCloudDetail", sender: nil)
     }
 }
 

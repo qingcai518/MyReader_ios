@@ -13,6 +13,10 @@ class CloudDetailController: ViewController {
     @IBOutlet weak var tableView : UITableView!
     
     var bookInfo: CloudBookInfo!  // params.
+    
+    @IBAction func doDownload() {
+        print("begin to download file.")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

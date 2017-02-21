@@ -21,22 +21,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="380" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="565-gW-DUk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="380" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="565-gW-DUk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CloudDetailCell" rowHeight="380" id="TMc-4C-agd" customClass="CloudDetailCell" customModule="MyReader" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CloudDetailCell" rowHeight="380" id="TMc-4C-agd" customClass="CloudDetailCell" customModule="MyReader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="380"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TMc-4C-agd" id="Y29-Er-06C">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="380"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="udo-LA-WfG">
-                                                    <rect key="frame" x="16" y="24" width="120" height="120"/>
+                                                    <rect key="frame" x="16" y="24" width="120" height="140"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="Aee-Jo-lFb"/>
-                                                        <constraint firstAttribute="height" constant="120" id="V13-Qg-kt0"/>
+                                                        <constraint firstAttribute="height" constant="140" id="V13-Qg-kt0"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pv-gI-VDv">
@@ -62,24 +62,27 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xkv-y4-1PZ">
-                                                    <rect key="frame" x="0.0" y="168" width="375" height="1"/>
+                                                    <rect key="frame" x="0.0" y="188" width="375" height="1"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="Pxk-Hh-TWB"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdY-5f-zSU">
-                                                    <rect key="frame" x="144" y="114" width="215" height="30"/>
+                                                    <rect key="frame" x="144" y="124" width="215" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="2wG-FQ-r3U"/>
+                                                        <constraint firstAttribute="height" constant="40" id="2wG-FQ-r3U"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                                                     <state key="normal" title="下载" backgroundImage="btn_light_blue">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="doDownload" destination="mvf-Aa-tAD" eventType="touchUpInside" id="0hX-fd-IJ2"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细介绍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3h-dQ-4vr">
-                                                    <rect key="frame" x="16" y="185" width="80" height="20"/>
+                                                    <rect key="frame" x="16" y="205" width="80" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Xq2-VP-cb5"/>
                                                         <constraint firstAttribute="width" constant="80" id="jnH-pK-Lun"/>
@@ -89,7 +92,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6O-Of-gQK">
-                                                    <rect key="frame" x="16" y="213" width="343" height="16.5"/>
+                                                    <rect key="frame" x="16" y="233" width="343" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -140,6 +143,9 @@
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="565-gW-DUk" id="QTk-Jd-YdD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGt-bx-iGX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
