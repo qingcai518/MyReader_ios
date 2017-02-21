@@ -12,6 +12,8 @@ import Kingfisher
 class CloudDetailController: ViewController {
     @IBOutlet weak var tableView : UITableView!
     
+    let model = CloudDetailModel()
+    
     var bookInfo: CloudBookInfo!  // params.
     
     @IBAction func doDownload() {
@@ -59,6 +61,11 @@ extension CloudDetailController: UITableViewDataSource {
         cell.cosmosView.rating = bookInfo.rating
         cell.cosmosView.text = String(bookInfo.rating)
         cell.detailLbl.text = bookInfo.detail
+        
+        cell.downloadBtn.rx.tap.asObservable().bindNext { [weak self] in
+            guard let info = self?.bookInfo else {return}
+            self?.model.downloadFile(bookInfo: info)
+        }.addDisposableTo(cell.disposeBag)
         
         return cell
     }

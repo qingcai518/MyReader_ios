@@ -39,4 +39,15 @@ class AppUtility {
         
         return textRect.width
     }
+    
+    static func getSQLitePath() -> String? {
+        // path document
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        guard let documentPath = paths.first else {
+            return nil
+        }
+        
+        let path = documentPath + "/MyReader.sqlite3"
+        return path
+    }
 }

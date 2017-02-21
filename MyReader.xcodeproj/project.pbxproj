@@ -11,6 +11,10 @@
 		3C67EDC21E5C0C8A00B5156D /* CloudDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC11E5C0C8A00B5156D /* CloudDetailController.swift */; };
 		3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC31E5C0CB600B5156D /* CloudDetailCell.swift */; };
 		3C67EDC71E5C1E9A00B5156D /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC61E5C1E9A00B5156D /* UIFont.swift */; };
+		3C67EDC91E5C23B000B5156D /* CloudDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC81E5C23B000B5156D /* CloudDetailModel.swift */; };
+		3C67EDCB1E5C358200B5156D /* SQLiteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDCA1E5C358200B5156D /* SQLiteManager.swift */; };
+		3C67EDCD1E5C3C2F00B5156D /* BooksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDCC1E5C3C2F00B5156D /* BooksModel.swift */; };
+		3C67EDCF1E5C3C4F00B5156D /* LocalBookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDCE1E5C3C4F00B5156D /* LocalBookInfo.swift */; };
 		3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */; };
 		3C999BAE1E5ADC9B0095A696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAC1E5ADC9B0095A696 /* Main.storyboard */; };
 		3C999BB01E5ADC9B0095A696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAF1E5ADC9B0095A696 /* Assets.xcassets */; };
@@ -39,6 +43,10 @@
 		3C67EDC11E5C0C8A00B5156D /* CloudDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudDetailController.swift; sourceTree = "<group>"; };
 		3C67EDC31E5C0CB600B5156D /* CloudDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudDetailCell.swift; sourceTree = "<group>"; };
 		3C67EDC61E5C1E9A00B5156D /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		3C67EDC81E5C23B000B5156D /* CloudDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudDetailModel.swift; sourceTree = "<group>"; };
+		3C67EDCA1E5C358200B5156D /* SQLiteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteManager.swift; sourceTree = "<group>"; };
+		3C67EDCC1E5C3C2F00B5156D /* BooksModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksModel.swift; sourceTree = "<group>"; };
+		3C67EDCE1E5C3C4F00B5156D /* LocalBookInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalBookInfo.swift; sourceTree = "<group>"; };
 		3C999BA51E5ADC9B0095A696 /* MyReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C999BAD1E5ADC9B0095A696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +100,7 @@
 				3C67EDBF1E5C0B0300B5156D /* CloudDetail.storyboard */,
 				3C67EDC11E5C0C8A00B5156D /* CloudDetailController.swift */,
 				3C67EDC31E5C0CB600B5156D /* CloudDetailCell.swift */,
+				3C67EDC81E5C23B000B5156D /* CloudDetailModel.swift */,
 			);
 			name = CloudDetailPage;
 			sourceTree = "<group>";
@@ -175,6 +184,8 @@
 				3C999BCC1E5AE2330095A696 /* Books.storyboard */,
 				3C999BCE1E5AE35A0095A696 /* BooksController.swift */,
 				3C999BD01E5AE3800095A696 /* BooksCell.swift */,
+				3C67EDCC1E5C3C2F00B5156D /* BooksModel.swift */,
+				3C67EDCE1E5C3C4F00B5156D /* LocalBookInfo.swift */,
 			);
 			name = BooksPage;
 			sourceTree = "<group>";
@@ -196,6 +207,7 @@
 			children = (
 				3C999BDA1E5AEAE30095A696 /* AppConstants.swift */,
 				3C999BE01E5AF0C70095A696 /* AppUtility.swift */,
+				3C67EDCA1E5C358200B5156D /* SQLiteManager.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -339,10 +351,13 @@
 				3C999BC81E5AE1B40095A696 /* Navi2Controller.swift in Sources */,
 				3C999BC41E5ADE480095A696 /* MainController.swift in Sources */,
 				3C999BE11E5AF0C70095A696 /* AppUtility.swift in Sources */,
+				3C67EDCD1E5C3C2F00B5156D /* BooksModel.swift in Sources */,
 				3C999BCF1E5AE35A0095A696 /* BooksController.swift in Sources */,
 				3C67EDC21E5C0C8A00B5156D /* CloudDetailController.swift in Sources */,
+				3C67EDCF1E5C3C4F00B5156D /* LocalBookInfo.swift in Sources */,
 				3C999BDD1E5AEDA90095A696 /* CloudBookInfo.swift in Sources */,
 				3C999BC61E5AE1A90095A696 /* Navi1Controller.swift in Sources */,
+				3C67EDCB1E5C358200B5156D /* SQLiteManager.swift in Sources */,
 				3C999BC11E5ADD2A0095A696 /* ViewController.swift in Sources */,
 				3C67EDC71E5C1E9A00B5156D /* UIFont.swift in Sources */,
 				3C999BD61E5AE5DA0095A696 /* CloudController.swift in Sources */,
@@ -351,6 +366,7 @@
 				3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */,
 				3C999BDF1E5AEFEC0095A696 /* CloudModel.swift in Sources */,
 				3C999BBD1E5ADD070095A696 /* NavigationController.swift in Sources */,
+				3C67EDC91E5C23B000B5156D /* CloudDetailModel.swift in Sources */,
 				3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */,
 				3C999BCA1E5AE1C00095A696 /* Navi3Controller.swift in Sources */,
 				3C999BD11E5AE3800095A696 /* BooksCell.swift in Sources */,

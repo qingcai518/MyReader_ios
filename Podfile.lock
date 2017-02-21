@@ -6,6 +6,9 @@ PODS:
   - RxCocoa (3.1.0):
     - RxSwift (~> 3.1)
   - RxSwift (3.1.0)
+  - SQLite.swift (0.11.2):
+    - SQLite.swift/standard (= 0.11.2)
+  - SQLite.swift/standard (0.11.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.3)
@@ -14,6 +17,7 @@ DEPENDENCIES:
   - MJRefresh
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
+  - SQLite.swift (~> 0.11.2)
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
@@ -22,7 +26,8 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
+  SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
 
-PODFILE CHECKSUM: fe6f26dc59b2a6da23da3f47bc02f4269a0910e7
+PODFILE CHECKSUM: 6c621ac0d014dafc5c7e7dd77555431c19424507
 
 COCOAPODS: 1.1.1
