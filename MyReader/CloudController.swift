@@ -17,6 +17,8 @@ class CloudController: ViewController {
     let model = CloudModel()
     var header : MJRefreshGifHeader!
     var footer : MJRefreshAutoNormalFooter!
+    
+    var currentInfo : CloudBookInfo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,11 +80,25 @@ class CloudController: ViewController {
             self?.tableView.reloadData()
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "ToCloudDetail") {
+            guard let next = segue.destination as? CloudDetailController else {return}
+            next.bookInfo = currentInfo
+        }
+    }
 }
 
 extension CloudController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 144
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        currentInfo = model.cloudBooks[indexPath.row]
+        performSegue(withIdentifier: "ToCloudDetail", sender: nil)
     }
 }
 
@@ -99,10 +115,10 @@ extension CloudController : UITableViewDataSource {
         let info = model.cloudBooks[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "CloudCell", for: indexPath) as! CloudCell
         cell.bookNameLbl.text = info.bookName
+        cell.bookImgView.kf.setImage(with: URL(string: info.bookImgUrl))
         cell.authorNameLbl.text = info.authorName
-        cell.bookImgView.kf.setImage(with: URL(string: info.bookImgUrl)!)
         cell.detailLbl.text = info.detail
-        cell.cosmosView.rating = info.rating
+        cell.cosmosView.rating  = info.rating
         cell.cosmosView.text = String(info.rating)
         
         return cell

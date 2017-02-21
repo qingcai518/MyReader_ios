@@ -25,4 +25,18 @@ class AppUtility {
             UIImage(named: "icon_book4")!
         ]
     }
+    
+    static func getTextHeight(text: String, width: CGFloat, font: UIFont) -> CGFloat {
+        let attributedText = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
+        let textRect = attributedText.boundingRect(with: CGSize(width: width, height : 2000), options: .usesLineFragmentOrigin, context: nil)
+        
+        return textRect.height
+    }
+
+    static func getTextWidth(text: String, height: CGFloat, font: UIFont) -> CGFloat {
+        let attributedText = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
+        let textRect = attributedText.boundingRect(with: CGSize(width : 2000, height : height), options: .usesLineFragmentOrigin, context: nil)
+        
+        return textRect.width
+    }
 }
