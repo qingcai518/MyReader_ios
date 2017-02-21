@@ -121,26 +121,23 @@ class SQLiteManager {
         }
     }
     
-//    if (table_books == nil) {
-//    return
-//    }
-//    
-//    let bookId = bookInfo.bookId
-//    let bookName = bookInfo.bookName
-//    let author = bookInfo.authorName
-//    let bookUrl = localPath
-//    let imageUrl = bookInfo.bookImgUrl
-//    
-//    do {
-//    let statement = try db.prepare("insert into Books (id, name, author, url, imageUrl) values (?, ?, ?, ?, ?)")
-//    try statement.run([bookId, bookName, author, bookUrl, imageUrl])
-//    
-//    let totalChanges = db.totalChanges
-//    let changes = db.changes
-//    let lastInsertRowId = db.lastInsertRowid
-//    
-//    print("total changes = \(totalChanges), changes = \(changes), last insert row id = \(lastInsertRowId)")
-//    } catch {
-//    print("fail to insert table_books.")
-//    }
+    func selectBookById(bookId: String) -> LocalBookInfo? {
+        do {
+            for row in try db.prepare("select * from Books where id = \(bookId)") {
+                guard let bookId = row[0] as? String else {continue}
+                guard let bookName = row[1] as? String else {continue}
+                guard let authorName = row[2] as? String else {continue}
+                guard let localPath = row[3] as? String else {continue}
+                guard let bookImgUrl = row[4] as? String else {continue}
+                
+                let info = LocalBookInfo(bookId: bookId, bookName: bookName, authorName: authorName, localPath: localPath, bookImgUrl: bookImgUrl)
+                
+                return info
+            }
+        } catch {
+            print("fail to get book.")
+        }
+        
+        return nil
+    }
 }

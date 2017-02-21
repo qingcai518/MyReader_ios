@@ -26,7 +26,7 @@ class BooksModel {
         
         return completion(nil)
     }
-    
+
     func removeBookById(bookId: String,completion: @escaping (String?) -> Void) {
         SQLiteManager.sharedInstance.deleteBook(bookId: bookId)
         

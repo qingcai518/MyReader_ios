@@ -24,6 +24,7 @@ class CloudDetailController: ViewController {
         super.viewDidLoad()
         
         setTableView()
+        getData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +35,10 @@ class CloudDetailController: ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+    }
+    
+    private func getData() {
+        model.isDownloaded(bookId: bookInfo.bookId)
     }
 }
 
@@ -66,6 +71,14 @@ extension CloudDetailController: UITableViewDataSource {
             guard let info = self?.bookInfo else {return}
             self?.model.downloadFile(bookInfo: info)
         }.addDisposableTo(cell.disposeBag)
+        
+        model.isDownloaded.asObservable().bindNext { value in
+            if(value) {
+                cell.downloadBtn.setTitle("打开", for: .normal)
+            } else {
+                cell.downloadBtn.setTitle("下载", for: .normal)
+            }
+        }
         
         return cell
     }

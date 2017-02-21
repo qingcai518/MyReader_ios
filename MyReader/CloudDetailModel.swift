@@ -9,8 +9,19 @@
 import Foundation
 import Alamofire
 import SQLite
+import RxSwift
 
 class CloudDetailModel {
+    var isDownloaded = Variable(false)
+    
+    func isDownloaded(bookId: String) {
+        if let _ = SQLiteManager.sharedInstance.selectBookById(bookId: bookId) {
+            isDownloaded.value = true
+        } else {
+            isDownloaded.value = false
+        }
+    }
+    
     func downloadFile(bookInfo: CloudBookInfo) {
         let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
         
