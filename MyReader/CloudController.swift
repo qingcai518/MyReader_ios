@@ -67,7 +67,16 @@ class CloudController: ViewController {
     }
     
     func getMoreData() {
-        
+        model.getMoreCloudBooks { [weak self] (msg, isLast) in
+            self?.footer.endRefreshing()
+            self?.footer.isHidden = isLast
+            
+            if let errorMsg = msg {
+                print("error = \(errorMsg)")
+            }
+            
+            self?.tableView.reloadData()
+        }
     }
 }
 
