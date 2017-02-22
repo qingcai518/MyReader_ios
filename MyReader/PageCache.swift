@@ -14,52 +14,20 @@ import UIKit
 
 class PageCache: NSObject {
     var pageSize : CGSize!
-    var dataSource : PageViewDataSource
+    var dataSource : PageViewDataSource!
+    var pageCache: NSMutableDictionary!
 
-    func initWithPageSize(aPageSize: CGSize) {
-        
+    func initWithPageSize(aPageSize : CGSize) {
+        self.pageSize = aPageSize
+        pageCache = NSMutableDictionary()
     }
     
-    //- (CGImageRef)cachedImageForPageIndex:(NSUInteger)pageIndex;
-    func cachedImageForPageIndex(pageIndex: Int) -> CGImage {
-        
-    }
-    
-    //- (void)precacheImageForPageIndex:(NSUInteger)pageIndex;
-    func precacheImageForPageIndex(pageIndex: Int) {
-        
-    }
-    
-    func minimizeToPageIndex(pageIndex: Int) {
-        
-    }
-    
-    func flush() {
+    func imageForPageIndex(pageIndex : Int) -> CGImage{
         
     }
 }
 
-//@property (readonly) NSMutableDictionary *pageCache;
-//
-//@end
-//
-//@implementation LeavesCache
-//
-//- (id)initWithPageSize:(CGSize)aPageSize
-//{
-//    if (self = [super init]) {
-//        _pageSize = aPageSize;
-//        _pageCache = [[NSMutableDictionary alloc] init];
-//    }
-//    return self;
-//    }
-//    
-//    - (void)dealloc
-//        {
-//            [_pageCache release];
-//            [super dealloc];
-//        }
-//        
+
 //        - (CGImageRef)imageForPageIndex:(NSUInteger)pageIndex {
 //            if (CGSizeEqualToSize(self.pageSize, CGSizeZero))
 //            return NULL;
