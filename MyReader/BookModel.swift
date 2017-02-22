@@ -13,12 +13,14 @@ class BookModel {
         print("file path = \(bookInfo.localPath)")
         DispatchQueue.global().async {
             do {
-                let text = try String(contentsOfFile: bookInfo.localPath, encoding: String.Encoding.shiftJIS)
+                let encode = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
+                let text = try String(contentsOfFile: bookInfo.localPath, encoding : String.Encoding(rawValue: encode))
+                
+//                let text = try String(contentsOfFile: bookInfo.localPath, usedEncoding: &String.Encoding(rawValue: encode))
+                
                 DispatchQueue.main.async {
                     return completion(text)
                 }
-
-                return completion(text)
             } catch let error as NSError {
                 print("error = \(error.localizedDescription)")
                 DispatchQueue.main.async {
