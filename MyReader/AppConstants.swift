@@ -15,6 +15,15 @@ let screenHeight = UIScreen.main.bounds.height
 let baseUrl = "https://main-myreader.ssl-lolipop.jp"
 let bookService = baseUrl + "/Books"
 
+let IntUnDownload = -1
+let IntFinishDownload = 101
+
 struct NotificationName {
     static let FinishDownload = "FinishDownload"
+}
+
+enum DLStatus : Int {
+    case downloading = 0
+    case before = 1
+    case after = 2
 }

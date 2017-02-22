@@ -17,6 +17,7 @@ class CloudDetailCell: UITableViewCell {
     @IBOutlet weak var cosmosView : CosmosView!
     @IBOutlet weak var downloadBtn : UIButton!
     @IBOutlet weak var detailLbl: UILabel!
+    @IBOutlet weak var progressLbl: UILabel!
     
     var disposeBag = DisposeBag()
     

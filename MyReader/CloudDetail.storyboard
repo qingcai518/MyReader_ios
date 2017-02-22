@@ -57,7 +57,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fdg-47-bcc" customClass="CosmosView" customModule="Cosmos">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdg-47-bcc" customClass="CosmosView" customModule="Cosmos">
                                                     <rect key="frame" x="144" y="72" width="120" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -74,7 +74,7 @@
                                                         <constraint firstAttribute="height" constant="40" id="2wG-FQ-r3U"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
-                                                    <state key="normal" title="下载" backgroundImage="btn_light_blue">
+                                                    <state key="normal" backgroundImage="btn_light_blue">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -97,6 +97,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下载中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPa-Pp-w0y">
+                                                    <rect key="frame" x="144" y="124" width="215" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="T5V-wf-gRR"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="fdg-47-bcc" firstAttribute="leading" secondItem="udo-LA-WfG" secondAttribute="trailing" constant="8" id="6EV-pD-oM7"/>
@@ -106,6 +121,7 @@
                                                 <constraint firstItem="2Pv-gI-VDv" firstAttribute="top" secondItem="Y29-Er-06C" secondAttribute="top" constant="24" id="A9a-1q-DaL"/>
                                                 <constraint firstItem="xkv-y4-1PZ" firstAttribute="leading" secondItem="Y29-Er-06C" secondAttribute="leading" id="Jgi-Xo-DNr"/>
                                                 <constraint firstAttribute="trailing" secondItem="xkv-y4-1PZ" secondAttribute="trailing" id="KDG-J1-wQH"/>
+                                                <constraint firstItem="PPa-Pp-w0y" firstAttribute="leading" secondItem="udo-LA-WfG" secondAttribute="trailing" constant="8" id="KnL-y2-IYG"/>
                                                 <constraint firstItem="xkv-y4-1PZ" firstAttribute="top" secondItem="udo-LA-WfG" secondAttribute="bottom" constant="24" id="Mps-vf-3wM"/>
                                                 <constraint firstAttribute="trailing" secondItem="2Pv-gI-VDv" secondAttribute="trailing" constant="16" id="Qd9-Gi-uXA"/>
                                                 <constraint firstItem="C3h-dQ-4vr" firstAttribute="leading" secondItem="Y29-Er-06C" secondAttribute="leading" constant="16" id="TgP-P6-ykv"/>
@@ -113,6 +129,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="YdY-5f-zSU" secondAttribute="trailing" constant="16" id="ate-mK-bu9"/>
                                                 <constraint firstItem="udo-LA-WfG" firstAttribute="top" secondItem="Y29-Er-06C" secondAttribute="top" constant="24" id="biA-Xo-Wur"/>
                                                 <constraint firstItem="yzi-lv-0R4" firstAttribute="leading" secondItem="udo-LA-WfG" secondAttribute="trailing" constant="8" id="e9x-Pn-u7c"/>
+                                                <constraint firstAttribute="trailing" secondItem="PPa-Pp-w0y" secondAttribute="trailing" constant="16" id="fwU-gU-SXG"/>
                                                 <constraint firstAttribute="trailing" secondItem="u6O-Of-gQK" secondAttribute="trailing" constant="16" id="n4n-3E-DPf"/>
                                                 <constraint firstItem="udo-LA-WfG" firstAttribute="leading" secondItem="Y29-Er-06C" secondAttribute="leading" constant="16" id="oeW-gl-397"/>
                                                 <constraint firstAttribute="trailing" secondItem="yzi-lv-0R4" secondAttribute="trailing" constant="16" id="rBh-A3-Z7d"/>
@@ -120,6 +137,7 @@
                                                 <constraint firstItem="xkv-y4-1PZ" firstAttribute="top" secondItem="YdY-5f-zSU" secondAttribute="bottom" constant="24" id="t8n-42-Gpn"/>
                                                 <constraint firstItem="C3h-dQ-4vr" firstAttribute="top" secondItem="xkv-y4-1PZ" secondAttribute="bottom" constant="16" id="tN2-1c-ytd"/>
                                                 <constraint firstItem="u6O-Of-gQK" firstAttribute="leading" secondItem="Y29-Er-06C" secondAttribute="leading" constant="16" id="ttR-h1-R0U"/>
+                                                <constraint firstItem="PPa-Pp-w0y" firstAttribute="top" secondItem="fdg-47-bcc" secondAttribute="bottom" constant="32" id="yLe-OQ-Smf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -129,6 +147,7 @@
                                             <outlet property="cosmosView" destination="fdg-47-bcc" id="UK7-QQ-ZF8"/>
                                             <outlet property="detailLbl" destination="u6O-Of-gQK" id="ETw-HY-iup"/>
                                             <outlet property="downloadBtn" destination="YdY-5f-zSU" id="Wbs-oN-90Y"/>
+                                            <outlet property="progressLbl" destination="PPa-Pp-w0y" id="nDD-bs-HB3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

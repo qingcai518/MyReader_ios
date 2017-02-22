@@ -66,19 +66,42 @@ extension CloudDetailController: UITableViewDataSource {
         cell.cosmosView.rating = bookInfo.rating
         cell.cosmosView.text = String(bookInfo.rating)
         cell.detailLbl.text = bookInfo.detail
+        cell.progressLbl.layer.borderColor = UIColor.lightGray.cgColor
+        cell.progressLbl.layer.borderWidth = 1
         
         cell.downloadBtn.rx.tap.asObservable().bindNext { [weak self] in
-            guard let info = self?.bookInfo else {return}
-            self?.model.downloadFile(bookInfo: info)
+            guard let downloadFlag = self?.model.isDownloaded.value else {return}
+            if (downloadFlag == DLStatus.before) {
+                guard let info = self?.bookInfo else {return}
+                self?.model.downloadFile(bookInfo: info)
+            } else if (downloadFlag == DLStatus.after) {
+                // ファイルを開く処理をここに書く.
+                
+            }
         }.addDisposableTo(cell.disposeBag)
         
-        model.isDownloaded.asObservable().bindNext { value in
-            if(value) {
-                cell.downloadBtn.setTitle("打开", for: .normal)
-            } else {
+        model.isDownloaded.asObservable().bindNext { status in
+            switch status {
+            case .before:
+                cell.downloadBtn.isHidden = false
+                cell.progressLbl.isHidden = true
                 cell.downloadBtn.setTitle("下载", for: .normal)
+            case .after:
+                cell.downloadBtn.isHidden = false
+                cell.progressLbl.isHidden = true
+                cell.downloadBtn.setTitle("打开", for: .normal)
+            default:
+                cell.downloadBtn.isHidden = true
+                cell.progressLbl.isHidden = false
             }
-        }
+        }.addDisposableTo(cell.disposeBag)
+        
+        model.progressValue.asObservable().bindNext { value in
+            let valueStr = AppUtility.getDigital2(value: value)
+            print("value str = \(valueStr)")
+            
+            cell.progressLbl.text = valueStr
+        }.addDisposableTo(cell.disposeBag)
         
         return cell
     }

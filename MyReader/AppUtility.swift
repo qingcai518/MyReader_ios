@@ -50,4 +50,28 @@ class AppUtility {
         let path = documentPath + "/MyReader.sqlite3"
         return path
     }
+    
+    // dummy.
+    static func getFileSize(fileSize : String) -> Int {
+        if (fileSize.contains("KB")) {
+            let range = fileSize.range(of: "KB")!
+            var value = fileSize.substring(to: range.lowerBound)
+            value = value + "000"
+            return (value as NSString).integerValue
+        } else if (fileSize.contains("MB")) {
+            let range = fileSize.range(of: "MB")!
+            var value = fileSize.substring(to: range.lowerBound)
+            value = value + "000000"
+            return (value as NSString).integerValue
+        } else {
+            return (fileSize as NSString).integerValue
+        }
+    }
+    
+    static func getDigital2 (value: Double) -> String {
+        var result = "".appendingFormat("%.2f", value)
+        result = "\(result)%"
+        
+        return result
+    }
 }
