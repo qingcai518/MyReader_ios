@@ -27,9 +27,6 @@ class BooksController: ViewController {
     
     private func setRecieveNotification() {
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.FinishDownload)).bindNext { [weak self] sender in
-            
-            print("here")
-            
             self?.getData()
         }.addDisposableTo(disposeBag)
     }
@@ -37,8 +34,59 @@ class BooksController: ViewController {
     private func setCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        let longPress = UILongPressGestureRecognizer(target: self
+            , action: #selector(BooksController.onLongPressAction(_:)))
+        longPress.allowableMovement = 10
+        longPress.minimumPressDuration = 0.5
+        self.collectionView.addGestureRecognizer(longPress)
     }
-    
+
+    func onLongPressAction(_ sender: UILongPressGestureRecognizer) {
+        let point = sender.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: point) else {
+            return
+        }
+        
+        switch sender.state {
+        case .began:
+            let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let action1 = UIAlertAction(title: "删除", style: .destructive, handler: { sender in
+                let alert = UIAlertController(title: "", message: "确定要删除吗？", preferredStyle: .alert)
+                let actionOK = UIAlertAction(title: "好的", style: .default, handler: { [weak self] alert in
+                    guard let bookInfo = self?.model.bookInfos[indexPath.row] else {return}
+                    self?.model.removeBookById(bookId: bookInfo.bookId, completion: { msg in
+                        if let errorMsg = msg {
+                            print("error = \(errorMsg)")
+                        }
+
+                        self?.collectionView.reloadData()
+                    })
+                })
+                
+                let actionCancel = UIAlertAction(title: "点错了", style: .default, handler: nil)
+                alert.addAction(actionOK)
+                alert.addAction(actionCancel)
+                
+                self.present(alert, animated: true, completion: nil)
+                
+            })
+            
+            let action2 = UIAlertAction(title: "阅读", style: .default, handler: { sender1 in
+            })
+            
+            let action3 = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            
+            sheet.addAction(action1)
+            sheet.addAction(action2)
+            sheet.addAction(action3)
+            
+            self.present(sheet, animated: true, completion: nil)
+        default:
+            break
+        }
+    }
+
     private func getData() {
         model.getBookInfos { [weak self] msg in
             if let errorMsg = msg {
@@ -53,23 +101,6 @@ class BooksController: ViewController {
 extension BooksController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        
-        let alertController = UIAlertController(title: "", message: "确定要删除这本书吗？", preferredStyle: .alert)
-        let actionOK = UIAlertAction(title: "OK", style: .default) { [weak self] alert in
-            guard let bookInfo = self?.model.bookInfos[indexPath.row] else {return}
-            self?.model.removeBookById(bookId: bookInfo.bookId, completion: { msg in
-                if let errorMsg = msg {
-                    print("error = \(errorMsg)")
-                }
-                
-                self?.collectionView.reloadData()
-            })
-        }
-        let actionCancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        alertController.addAction(actionOK)
-        alertController.addAction(actionCancel)
-        
-        self.present(alertController, animated: true, completion: nil)
     }
 }
 
