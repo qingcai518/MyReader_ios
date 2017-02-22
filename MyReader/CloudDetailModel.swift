@@ -42,7 +42,12 @@ class CloudDetailModel {
                 print("progress value = \(self.progressValue.value)")
                 
             }).response(completionHandler: { [weak self] response in
-                guard let localPath = response.destinationURL?.absoluteString else {return}
+                guard var localPath = response.destinationURL?.absoluteString else {return}
+                if (localPath.contains("file://")) {
+                    let index = localPath.index(localPath.startIndex, offsetBy: 7)
+                    localPath = localPath.substring(from: index)
+                }
+                
                 SQLiteManager.sharedInstance.insertBook(localPath: localPath, bookInfo: bookInfo)
                 
                 // 通知する.

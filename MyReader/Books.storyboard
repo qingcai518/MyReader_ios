@@ -94,11 +94,20 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="90h-i6-XEG" id="QwB-4i-Ctm"/>
+                        <segue destination="0ox-ET-5MR" kind="show" identifier="ToBook" id="cXR-59-qU3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itT-ld-imd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-114.40000000000001" y="-17.541229385307346"/>
+        </scene>
+        <!--Book-->
+        <scene sceneID="F0D-nf-wew">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Book" id="0ox-ET-5MR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="79i-fm-pdd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="326" y="-202"/>
         </scene>
     </scenes>
 </document>
