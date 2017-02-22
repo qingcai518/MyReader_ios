@@ -19,6 +19,7 @@ class BookController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = bookInfo.bookName
         getData()
     }
 
@@ -31,7 +32,21 @@ class BookController: ViewController {
         model.readFile(bookInfo: bookInfo) { [weak self] value in
             self?.indicator.stopAnimating()
             guard let text = value else {return}
-            self?.contentLbl.text = text
+            self?.setContents(text: text)
         }
+    }
+
+    private func setContents(text: String) {
+        let letterSpacing = 10.0
+        
+        
+        // 文字間間隔を設定.
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(NSKernAttributeName, value: letterSpacing, range: NSMakeRange(0, attributedText.length))
+        
+        // 行間隔を設定.
+        
+        
+        contentLbl.text = text
     }
 }
