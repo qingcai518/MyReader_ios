@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B03-j4-ii6">
-                                <rect key="frame" x="16" y="88" width="343" height="14"/>
+                                <rect key="frame" x="16" y="44" width="343" height="14"/>
                                 <attributedString key="attributedText">
                                     <fragment content="本の内容を設定する">
                                         <attributes>
@@ -41,14 +41,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="B03-j4-ii6" firstAttribute="top" secondItem="Ltq-P1-7Im" secondAttribute="bottom" constant="24" id="90c-f6-RrZ"/>
+                            <constraint firstItem="B03-j4-ii6" firstAttribute="top" secondItem="Ltq-P1-7Im" secondAttribute="bottom" constant="24" id="7V1-tK-rea"/>
                             <constraint firstItem="m6U-6c-yuq" firstAttribute="centerY" secondItem="upk-Xn-zxu" secondAttribute="centerY" id="ayp-dO-Uet"/>
                             <constraint firstItem="m6U-6c-yuq" firstAttribute="centerX" secondItem="upk-Xn-zxu" secondAttribute="centerX" id="c54-d0-HYi"/>
                             <constraint firstItem="B03-j4-ii6" firstAttribute="leading" secondItem="upk-Xn-zxu" secondAttribute="leading" constant="16" id="gCv-Vz-Gtc"/>
                             <constraint firstAttribute="trailing" secondItem="B03-j4-ii6" secondAttribute="trailing" constant="16" id="jmq-YW-RBa"/>
                         </constraints>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="contentLbl" destination="B03-j4-ii6" id="mte-62-jLR"/>
                         <outlet property="indicator" destination="m6U-6c-yuq" id="fnJ-j1-Wmv"/>
