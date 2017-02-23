@@ -9,13 +9,6 @@
 import Foundation
 import UIKit
 
-//protocol LeavesViewDataSource {
-//
-
-//protocol LeavesViewDataSource {
-//    
-//}
-
 class LeavesCache : NSObject {
     var pageSize : CGSize!
     var pageCache : NSMutableDictionary!
@@ -41,12 +34,12 @@ class LeavesCache : NSObject {
         }
         
         context.clip(to: CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height))
-//        [self.dataSource renderPageAtIndex:pageIndex inContext:context];
+        self.dataSource.renderPageAtIndex(index: pageIndex, inContext: context)
         
         guard let image = context.makeImage() else {return nil}
         return image
     }
-    
+
     func cachedImageForPageIndex(pageIndex : Int) {
         let pageIndexNumber = NSNumber(integerLiteral: pageIndex)
         var pageImage : UIImage!

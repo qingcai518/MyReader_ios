@@ -74,4 +74,15 @@ class AppUtility {
         
         return result
     }
+    
+    static func aspectFit(innerRect: CGRect, outerRect : CGRect) -> CGAffineTransform {
+        let scaleFactor = min(outerRect.size.width / innerRect.size.width, outerRect.size.height / innerRect.size.height)
+        let scale = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
+        let scaledInnerRect = innerRect.applying(scale)
+        
+        let translationX = (outerRect.size.width - scaledInnerRect.size.width) / 2 - scaledInnerRect.origin.x
+        let translationY = (outerRect.size.height - scaledInnerRect.size.height) / 2 - scaledInnerRect.origin.y
+        
+        return scale.translatedBy(x: translationX, y: translationY)
+    }
 }

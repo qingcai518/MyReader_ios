@@ -114,9 +114,12 @@ class BooksController: ViewController {
 extension BooksController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        currentInfo = model.bookInfos[indexPath.row]
+//        currentInfo = model.bookInfos[indexPath.row]
+//        
+//        self.performSegue(withIdentifier: "ToBook", sender: nil)
         
-        self.performSegue(withIdentifier: "ToBook", sender: nil)
+        let next = TempController()
+        self.present(next, animated: true, completion: nil)
     }
 }
 

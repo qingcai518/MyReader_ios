@@ -22,7 +22,6 @@ protocol LeavesViewDelegate: NSObjectProtocol {
 }
 
 class LeavesView: UIView {
-    var dataSource : LeavesViewDataSource!
     var delegate : LeavesViewDelegate!
     var targetWidth : CGFloat!
     var preferredTargetWidth : CGFloat!
@@ -121,6 +120,10 @@ class LeavesView: UIView {
     
     func reloadData() {
         pageCache.flush()
+        
+        print("self pageCache dataSource = \(self.pageCache.dataSource)")
+        print("data source = \(self.dataSource)")
+        
         self.numberOfPages = self.pageCache.dataSource.numberOfPagesInLeavesView(leavesView: self)
         self.currentPageIndex = 0
     }
@@ -220,13 +223,24 @@ class LeavesView: UIView {
         self.prevPageRect = CGRect(x: 0, y: 0, width: targetWidth, height: self.bounds.size.height)
     }
     
-    func getDataSource() -> LeavesViewDataSource {
-        return self.pageCache.dataSource
+    var dataSource : LeavesViewDataSource {
+        get {
+            return self.pageCache.dataSource
+        }
+        
+        set(value) {
+            self.pageCache.dataSource = value
+        }
     }
     
-    func setDataSource(value : LeavesViewDataSource) {
-        self.pageCache.dataSource = value
-    }
+
+//    func getDataSource() -> LeavesViewDataSource {
+//        return self.pageCache.dataSource
+//    }
+//    
+//    func setDataSource(value : LeavesViewDataSource) {
+//        self.pageCache.dataSource = value
+//    }
     
     func setLeafEdge(aLeafEdge : CGFloat) {
         self.leafEdge = aLeafEdge
