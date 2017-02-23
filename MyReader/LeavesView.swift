@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-protocol LeavesViewDataSource : Any {
+protocol LeavesViewDataSource : NSObjectProtocol {
     func numberOfPagesInLeavesView(leavesView : LeavesView) -> Int
     func renderPageAtIndex(index: Int, inContext context: CGContext)
 }
 
-protocol LeavesViewDelegate: Any {
+protocol LeavesViewDelegate: NSObjectProtocol {
 //    optional func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: UInt)
 //    optional func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: UInt)
     
-    func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: UInt)
-    func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: UInt)
+    func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int)
+    func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int)
 }
 
 class LeavesView: UIView {
@@ -27,7 +27,7 @@ class LeavesView: UIView {
     var targetWidth : CGFloat!
     var preferredTargetWidth : CGFloat!
     var currentPageIndex : Int!
-    var backgroundRendering: Bool!
+    var backgroundRendering = false
     var topPage: CALayer!
     var topPageOverlay : CALayer!
     var topPageReverse : CALayer!
@@ -39,7 +39,7 @@ class LeavesView: UIView {
     var bottomPageShadow: CAGradientLayer!
     
     var numberOfPages: Int!
-    var leafEdge: CGFloat!
+    var leafEdge = CGFloat(1.0)
     var pageSize : CGFloat!
     var touchBeganPoint : CGPoint!
     var nextPageRect: CGRect!
@@ -95,167 +95,136 @@ class LeavesView: UIView {
         bottomPageShadow.startPoint = CGPoint(x: 0, y: 0.5)
         bottomPageShadow.endPoint = CGPoint(x: 1, y: 0.5)
         
+        topPage.addSublayer(topPageShadow)
+        topPage.addSublayer(topPageOverlay)
         
+        topPageReverse.addSublayer(topPageReverseImage)
+        topPageReverse.addSublayer(topPageReverseOverlay)
+        topPageReverse.addSublayer(topPageReverseShading)
         
+        bottomPage.addSublayer(bottomPageShadow)
+        
+        self.layer.addSublayer(bottomPage)
+        self.layer.addSublayer(topPage)
+        self.layer.addSublayer(topPageReverse)
+        
+        leafEdge = 1.0
+        backgroundRendering = false
+        pageCache = LeavesCache(aPageSize: self.bounds.size)
     }
     
+    override init(frame : CGRect) {
+        super.init(frame: frame)
+        self.initCommon()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initCommon()
+    }
+    
+    func reloadData() {
+        pageCache.flush()
+        self.numberOfPages = self.pageCache.dataSource.numberOfPagesInLeavesView(leavesView: self)
+        self.currentPageIndex = 0
+    }
+    
+    func getImages() {
+        if (self.currentPageIndex < self.numberOfPages) {
+            if (self.currentPageIndex > 0 && self.backgroundRendering) {
+                self.pageCache.precacheImageForPageIndex(pageIndex: self.currentPageIndex - 1)
+            }
+            
+            self.topPage.contents = self.pageCache.cachedImageForPageIndex(pageIndex: self.currentPageIndex)
+            self.topPageReverseImage.contents = self.pageCache.cachedImageForPageIndex(pageIndex: self.currentPageIndex)
+            
+            if (self.currentPageIndex < self.numberOfPages - 1) {
+                self.bottomPage.contents = self.pageCache.cachedImageForPageIndex(pageIndex: self.currentPageIndex + 1)
+            }
+            
+            self.pageCache.minimizeToPageIndex(pageIndex: self.currentPageIndex)
+        } else {
+            self.topPage.contents = nil
+            self.topPageReverseImage.contents = nil
+            self.bottomPage.contents = nil
+
+        }
+    }
+    
+    func setLayerFrames() {
+        self.topPage.frame = CGRect(x: self.layer.bounds.origin.x, y: self.layer.bounds.origin.y, width: self.leafEdge * self.bounds.size.width, height: self.layer.bounds.size.height)
+        self.topPageReverse.frame = CGRect(x: self.layer.bounds.origin.x + (2 * self.leafEdge - 1) * self.bounds.size.width, y: self.layer.bounds.origin.y, width:(1 - self.leafEdge) * self.bounds.size.width, height: self.layer.bounds.size.height)
+        self.bottomPage.frame = self.layer.bounds
+        self.topPageShadow.frame = CGRect(x: self.topPageReverse.frame.origin.x - 40, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
+        
+        self.topPageReverseImage.frame = self.topPageReverse.bounds
+        self.topPageReverseImage.transform = CATransform3DMakeScale(-1, 1, 1)
+        self.topPageReverseOverlay.frame  = self.topPageReverse.bounds
+        self.topPageReverseShading.frame = CGRect(x: self.topPageReverse.bounds.size.width - 50, y: 0, width: 50 + 1, height: self.topPageReverse.bounds.size.height)
+        
+        self.bottomPageShadow.frame = CGRect(x: self.leafEdge * self.bounds.size.width, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
+        
+        self.topPageOverlay.frame = self.topPage.bounds
+    }
+    
+    func willTurnToPageAtIndex(index: Int) {
+        if self.delegate.responds(to: #selector(LeavesView.willTurnToPageAtIndex(index:))) {
+            self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
+        }
+    }
+    
+    func didTurnToPageAtIndex(index: Int) {
+        if self.delegate.responds(to: #selector(LeavesView.didTurnToPageAtIndex(index:))) {
+            self.delegate.leavesView(leavesView: self, didTurnToPageAtIndex: index)
+        }
+    }
+    
+    func didTurnPageBackward() {
+        self.interactionLocked = false
+        self.didTurnToPageAtIndex(index: self.currentPageIndex)
+    }
+    
+    func didTurnPageForward() {
+        self.interactionLocked = false
+        self.currentPageIndex = self.currentPageIndex + 1
+        self.didTurnToPageAtIndex(index: self.currentPageIndex)
+    }
+    
+    func hasPrevPage() -> Bool {
+        return self.currentPageIndex > 0
+    }
+    
+    func hasNextPage() -> Bool {
+        return self.currentPageIndex < self.numberOfPages - 1
+    }
+    
+    func touchedNextPage() -> Bool {
+        return self.nextPageRect.contains(self.touchBeganPoint)
+    }
+    
+    func touchedPrevPage() -> Bool {
+        return self.nextPageRect.contains(self.touchBeganPoint)
+    }
+    
+    func dragThreshold() -> CGFloat {
+        return 10
+    }
+    
+    func targetWidth() -> CGFloat {
+        if (self.preferredTargetWidth > 0 && self.preferredTargetWidth < self.bounds.size.width / 2) {
+            return self.preferredTargetWidth
+        } else {
+            return max(28, self.bounds.size.width / 5)
+        }
+    }
+    
+    func updateTargetRects() {
+        let targetWidth = self.targetWidth()
+        self.nextPageRect = CGRect(x: self.bounds.size.width - targetWidth, y: 0, width: targetWidth, height: self.bounds.size.height)
+        self.prevPageRect = CGRect(x: 0, y: 0, width: targetWidth, height: self.bounds.size.height)
+    }
 }
 
-//- (void)initCommon
-//    [_topPage addSublayer:_topPageShadow];
-//    [_topPage addSublayer:_topPageOverlay];
-//    [_topPageReverse addSublayer:_topPageReverseImage];
-//    [_topPageReverse addSublayer:_topPageReverseOverlay];
-//    [_topPageReverse addSublayer:_topPageReverseShading];
-//    [_bottomPage addSublayer:_bottomPageShadow];
-//    [self.layer addSublayer:_bottomPage];
-//    [self.layer addSublayer:_topPage];
-//    [self.layer addSublayer:_topPageReverse];
-//    
-//    _leafEdge = 1.0;
-//    _backgroundRendering = NO;
-//    _pageCache = [[LeavesCache alloc] initWithPageSize:self.bounds.size];
-//    }
-//    
-//    - (id)initWithFrame:(CGRect)frame {
-//        if ((self = [super initWithFrame:frame])) {
-//            [self initCommon];
-//        }
-//        return self;
-//        }
-//        
-//        - (id)initWithCoder:(NSCoder *)aDecoder {
-//            if (self = [super initWithCoder:aDecoder]) {
-//                [self initCommon];
-//            }
-//            return self;
-//            }
-//            
-//            - (void)dealloc {
-//                [_topPage release];
-//                [_topPageShadow release];
-//                [_topPageOverlay release];
-//                [_topPageReverse release];
-//                [_topPageReverseImage release];
-//                [_topPageReverseOverlay release];
-//                [_topPageReverseShading release];
-//                [_bottomPage release];
-//                [_bottomPageShadow release];
-//                [_pageCache release];
-//                
-//                [super dealloc];
-//                }
-//                
-//                - (void)reloadData {
-//                    [self.pageCache flush];
-//                    self.numberOfPages = [self.pageCache.dataSource numberOfPagesInLeavesView:self];
-//                    self.currentPageIndex = 0;
-//                    }
-//                    
-//                    - (void)getImages {
-//                        if (self.currentPageIndex < self.numberOfPages) {
-//                            if (self.currentPageIndex > 0 && self.backgroundRendering)
-//                            [self.pageCache precacheImageForPageIndex:self.currentPageIndex-1];
-//                            self.topPage.contents = (id)[self.pageCache cachedImageForPageIndex:self.currentPageIndex];
-//                            self.topPageReverseImage.contents = (id)[self.pageCache cachedImageForPageIndex:self.currentPageIndex];
-//                            if (self.currentPageIndex < self.numberOfPages - 1)
-//                            self.bottomPage.contents = (id)[self.pageCache cachedImageForPageIndex:self.currentPageIndex + 1];
-//                            [self.pageCache minimizeToPageIndex:self.currentPageIndex];
-//                        } else {
-//                            self.topPage.contents = nil;
-//                            self.topPageReverseImage.contents = nil;
-//                            self.bottomPage.contents = nil;
-//                        }
-//                        }
-//                        
-//                        - (void)setLayerFrames {
-//                            self.topPage.frame = CGRectMake(self.layer.bounds.origin.x,
-//                                                            self.layer.bounds.origin.y,
-//                                                            self.leafEdge * self.bounds.size.width,
-//                                                            self.layer.bounds.size.height);
-//                            self.topPageReverse.frame = CGRectMake(self.layer.bounds.origin.x + (2*self.leafEdge-1) * self.bounds.size.width,
-//                                                                   self.layer.bounds.origin.y,
-//                                                                   (1-self.leafEdge) * self.bounds.size.width,
-//                                                                   self.layer.bounds.size.height);
-//                            self.bottomPage.frame = self.layer.bounds;
-//                            self.topPageShadow.frame = CGRectMake(self.topPageReverse.frame.origin.x - 40,
-//                                                                  0,
-//                                                                  40,
-//                                                                  self.bottomPage.bounds.size.height);
-//                            self.topPageReverseImage.frame = self.topPageReverse.bounds;
-//                            self.topPageReverseImage.transform = CATransform3DMakeScale(-1, 1, 1);
-//                            self.topPageReverseOverlay.frame = self.topPageReverse.bounds;
-//                            self.topPageReverseShading.frame = CGRectMake(self.topPageReverse.bounds.size.width - 50,
-//                                                                          0,
-//                                                                          50 + 1,
-//                                                                          self.topPageReverse.bounds.size.height);
-//                            self.bottomPageShadow.frame = CGRectMake(self.leafEdge * self.bounds.size.width,
-//                                                                     0,
-//                                                                     40,
-//                                                                     self.bottomPage.bounds.size.height);
-//                            self.topPageOverlay.frame = self.topPage.bounds;
-//                            }
-//                            
-//                            - (void)willTurnToPageAtIndex:(NSUInteger)index {
-//                                if ([self.delegate respondsToSelector:@selector(leavesView:willTurnToPageAtIndex:)])
-//                                [self.delegate leavesView:self willTurnToPageAtIndex:index];
-//                                }
-//                                
-//                                - (void)didTurnToPageAtIndex:(NSUInteger)index {
-//                                    if ([self.delegate respondsToSelector:@selector(leavesView:didTurnToPageAtIndex:)])
-//                                    [self.delegate leavesView:self didTurnToPageAtIndex:index];
-//                                    }
-//                                    
-//                                    - (void)didTurnPageBackward {
-//                                        self.interactionLocked = NO;
-//                                        [self didTurnToPageAtIndex:self.currentPageIndex];
-//                                        }
-//                                        
-//                                        - (void)didTurnPageForward {
-//                                            self.interactionLocked = NO;
-//                                            self.currentPageIndex = self.currentPageIndex + 1;
-//                                            [self didTurnToPageAtIndex:self.currentPageIndex];
-//                                            }
-//                                            
-//                                            - (BOOL)hasPrevPage {
-//                                                return self.currentPageIndex > 0;
-//                                                }
-//                                                
-//                                                - (BOOL)hasNextPage {
-//                                                    return self.currentPageIndex < self.numberOfPages - 1;
-//                                                    }
-//                                                    
-//                                                    - (BOOL)touchedNextPage {
-//                                                        return CGRectContainsPoint(self.nextPageRect, self.touchBeganPoint);
-//                                                        }
-//                                                        
-//                                                        - (BOOL)touchedPrevPage {
-//                                                            return CGRectContainsPoint(self.prevPageRect, self.touchBeganPoint);
-//                                                            }
-//                                                            
-//                                                            - (CGFloat)dragThreshold {
-//                                                                // Magic empirical number
-//                                                                return 10;
-//                                                                }
-//                                                                
-//                                                                - (CGFloat)targetWidth {
-//                                                                    // Magic empirical formula
-//                                                                    if (self.preferredTargetWidth > 0 && self.preferredTargetWidth < self.bounds.size.width / 2)
-//                                                                    return self.preferredTargetWidth;
-//                                                                    else
-//                                                                    return MAX(28, self.bounds.size.width / 5);
-//                                                                    }
-//                                                                    
-//                                                                    - (void)updateTargetRects {
-//                                                                        CGFloat targetWidth = [self targetWidth];
-//                                                                        self.nextPageRect = CGRectMake(self.bounds.size.width - targetWidth,
-//                                                                                                       0,
-//                                                                                                       targetWidth,
-//                                                                                                       self.bounds.size.height);
-//                                                                        self.prevPageRect = CGRectMake(0,
-//                                                                                                       0,
-//                                                                                                       targetWidth,
-//                                                                                                       self.bounds.size.height);
 //}
 //
 //#pragma mark accessors

@@ -21,9 +21,10 @@ class LeavesCache : NSObject {
     var pageCache : NSMutableDictionary!
     var dataSource : LeavesViewDataSource!
     
-    func initWithPageSize(aPageSize: CGSize) {
-        self.pageSize = aPageSize
-        self.pageCache = NSMutableDictionary()
+    init(aPageSize: CGSize) {
+        super.init()
+        pageSize = aPageSize
+        pageCache = NSMutableDictionary()
     }
     
     func imageForPageIndex(pageIndex : Int) -> CGImage? {
