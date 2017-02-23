@@ -120,10 +120,7 @@ class LeavesView: UIView {
     
     func reloadData() {
         pageCache.flush()
-        
-        print("self pageCache dataSource = \(self.pageCache.dataSource)")
-        print("data source = \(self.dataSource)")
-        
+
         self.numberOfPages = self.pageCache.dataSource.numberOfPagesInLeavesView(leavesView: self)
         self.currentPageIndex = 0
     }
@@ -350,18 +347,52 @@ class LeavesView: UIView {
         CATransaction.commit()
     }
     
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        if (!__CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
+//            self.pageSize = self.bounds.size
+//            CATransaction.begin()
+//            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+//            self.setLayerFrames()
+//            CATransaction.commit()
+//            
+//            self.pageCache.pageSize = self.bounds.size
+//            self.getImages()
+//            self.updateTargetRects()
+//        }
+//    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        if (!__CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
+        if (self.pageSize == nil || (__CGSizeEqualToSize(self.pageSize, self.bounds.size))) {
             self.pageSize = self.bounds.size
             CATransaction.begin()
             CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
             self.setLayerFrames()
             CATransaction.commit()
             
-            self.pageCache.pageSize = self.bounds.size
+            self.pageCache.pageCache = self.bounds.size
             self.getImages()
-            self.updateTargetRects()
+            self.updateTargetRect()
+            
         }
     }
+    
+//    - (void)layoutSubviews {
+//    [super layoutSubviews];
+//    
+//    if (!CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
+//    self.pageSize = self.bounds.size;
+//    
+//    [CATransaction begin];
+//    [CATransaction setValue:(id)kCFBooleanTrue
+//    forKey:kCATransactionDisableActions];
+//    [self setLayerFrames];
+//    [CATransaction commit];
+//    
+//    self.pageCache.pageSize = self.bounds.size;
+//    [self getImages];
+//    [self updateTargetRects];
+//    }
+//    }
 }
