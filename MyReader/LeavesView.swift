@@ -371,10 +371,9 @@ class LeavesView: UIView {
             self.setLayerFrames()
             CATransaction.commit()
             
-            self.pageCache.pageCache = self.bounds.size
+            self.pageCache.pageSize = self.bounds.size
             self.getImages()
-            self.updateTargetRect()
-            
+            self.updateTargetRects()
         }
     }
     
@@ -384,6 +383,7 @@ class LeavesView: UIView {
 //    if (!CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
 //    self.pageSize = self.bounds.size;
 //    
+    
 //    [CATransaction begin];
 //    [CATransaction setValue:(id)kCFBooleanTrue
 //    forKey:kCATransactionDisableActions];
