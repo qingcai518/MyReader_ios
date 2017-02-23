@@ -40,7 +40,7 @@ class LeavesView: UIView {
     
     var numberOfPages: Int!
     var leafEdge = CGFloat(1.0)
-    var pageSize : CGFloat!
+    var pageSize : CGSize!
     var touchBeganPoint : CGPoint!
     var nextPageRect: CGRect!
     var prevPageRect: CGRect!
@@ -48,10 +48,6 @@ class LeavesView: UIView {
     var interactionLocked : Bool!
     
     var pageCache : LeavesCache!
-    
-    func distance (a: CGPoint, b : CGPoint) {
-        
-    }
     
     func initCommon() {
         self.clipsToBounds = true
@@ -210,7 +206,7 @@ class LeavesView: UIView {
         return 10
     }
     
-    func targetWidth() -> CGFloat {
+    func getTargetWidth() -> CGFloat {
         if (self.preferredTargetWidth > 0 && self.preferredTargetWidth < self.bounds.size.width / 2) {
             return self.preferredTargetWidth
         } else {
@@ -219,147 +215,139 @@ class LeavesView: UIView {
     }
     
     func updateTargetRects() {
-        let targetWidth = self.targetWidth()
+        let targetWidth = self.getTargetWidth()
         self.nextPageRect = CGRect(x: self.bounds.size.width - targetWidth, y: 0, width: targetWidth, height: self.bounds.size.height)
         self.prevPageRect = CGRect(x: 0, y: 0, width: targetWidth, height: self.bounds.size.height)
     }
-}
+    
+    func getDataSource() -> LeavesViewDataSource {
+        return self.pageCache.dataSource
+    }
+    
+    func setDataSource(value : LeavesViewDataSource) {
+        self.pageCache.dataSource = value
+    }
+    
+    func setLeafEdge(aLeafEdge : CGFloat) {
+        self.leafEdge = aLeafEdge
+        self.topPageShadow.opacity = Float(min(1.0, Double(4 * (1 - self.leafEdge))))
+        self.bottomPageShadow.opacity = Float(min(1.0, Double(4 * self.leafEdge)))
+        self.topPageOverlay.opacity = Float(min(1.0, Double(4 * (1 - self.leafEdge))))
+        
+        self.setLayerFrames()
+    }
+    
+    func setCurrentPageIndex(aCurrentPageIndex: Int) {
+        self.currentPageIndex = aCurrentPageIndex
+        
+        CATransaction.begin()
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+        self.getImages()
+        self.leafEdge = 1.0
+        CATransaction.commit()
+    }
+    
+    func setPreferedTargetWidth (value : CGFloat) {
+        self.preferredTargetWidth = value
+        self.updateTargetRects()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (self.interactionLocked == true) {
+            return
+        }
+        
+        let touch = event?.allTouches?.first
+        self.touchBeganPoint = touch?.location(in: self)
+        
+        if (self.touchedPrevPage() && self.hasPrevPage()) {
+            CATransaction.begin()
+            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+            self.currentPageIndex = self.currentPageIndex - 1
+            self.leafEdge = 0.0
+            CATransaction.commit()
+            
+            self.touchIsActive = true
+        } else if (self.touchedNextPage() && self.hasNextPage()) {
+            self.touchIsActive = true
+        } else {
+            self.touchIsActive = false
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (!self.touchIsActive) {
+            return
+        }
+        
+        let touch = event?.allTouches?.first
+        let touchPoint = touch?.location(in: self)
+        
+        CATransaction.begin()
+        CATransaction.setValue(NSNumber(value: 0.07), forKey: kCATransactionAnimationDuration)
+        
+        guard let touchX = touchPoint?.x else {
+            return
+        }
+        
+        self.leafEdge = touchX / self.bounds.size.width
+        CATransaction.commit()
+    }
+    
+    func distance(a: CGPoint, b: CGPoint) -> CGFloat {
+        return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2))
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (!self.touchIsActive) {
+            return
+        }
+        self.touchIsActive = false
+        
+        let touch = event?.allTouches?.first
+        guard let touchPoint = touch?.location(in: self) else {
+            return
+        }
 
-//}
-//
-//#pragma mark accessors
-//
-//- (id<LeavesViewDataSource>)dataSource {
-//    return self.pageCache.dataSource;
-//    
-//    }
-//    
-//    - (void)setDataSource:(id<LeavesViewDataSource>)value {
-//        self.pageCache.dataSource = value;
-//        }
-//        
-//        - (void)setLeafEdge:(CGFloat)aLeafEdge {
-//            _leafEdge = aLeafEdge;
-//            self.topPageShadow.opacity = MIN(1.0, 4*(1-self.leafEdge));
-//            self.bottomPageShadow.opacity = MIN(1.0, 4*self.leafEdge);
-//            self.topPageOverlay.opacity = MIN(1.0, 4*(1-self.leafEdge));
-//            [self setLayerFrames];
-//            }
-//            
-//            - (void)setCurrentPageIndex:(NSUInteger)aCurrentPageIndex {
-//                _currentPageIndex = aCurrentPageIndex;
-//                
-//                [CATransaction begin];
-//                [CATransaction setValue:(id)kCFBooleanTrue
-//                    forKey:kCATransactionDisableActions];
-//                
-//                [self getImages];
-//                
-//                self.leafEdge = 1.0;
-//                
-//                [CATransaction commit];
-//                }
-//                
-//                - (void)setPreferredTargetWidth:(CGFloat)value {
-//                    _preferredTargetWidth = value;
-//                    [self updateTargetRects];
-//}
-//
-//#pragma mark UIResponder
-//
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    if (self.interactionLocked)
-//    return;
-//    
-//    UITouch *touch = [event.allTouches anyObject];
-//    self.touchBeganPoint = [touch locationInView:self];
-//    
-//    if ([self touchedPrevPage] && [self hasPrevPage]) {		
-//        [CATransaction begin];
-//        [CATransaction setValue:(id)kCFBooleanTrue
-//            forKey:kCATransactionDisableActions];
-//        self.currentPageIndex = self.currentPageIndex - 1;
-//        self.leafEdge = 0.0;
-//        [CATransaction commit];
-//        self.touchIsActive = YES;		
-//    } 
-//    else if ([self touchedNextPage] && [self hasNextPage])
-//    self.touchIsActive = YES;
-//    
-//    else 
-//    self.touchIsActive = NO;
-//    }
-//    
-//    - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-//        if (!self.touchIsActive)
-//        return;
-//        UITouch *touch = [event.allTouches anyObject];
-//        CGPoint touchPoint = [touch locationInView:self];
-//        
-//        [CATransaction begin];
-//        [CATransaction setValue:[NSNumber numberWithFloat:0.07]
-//            forKey:kCATransactionAnimationDuration];
-//        self.leafEdge = touchPoint.x / self.bounds.size.width;
-//        [CATransaction commit];
-//        }
-//        
-//        
-//        - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//            if (!self.touchIsActive)
-//            return;
-//            self.touchIsActive = NO;
-//            
-//            UITouch *touch = [event.allTouches anyObject];
-//            CGPoint touchPoint = [touch locationInView:self];
-//            BOOL dragged = distance(touchPoint, self.touchBeganPoint) > [self dragThreshold];
-//            
-//            [CATransaction begin];
-//            float duration;
-//            if ((dragged && self.leafEdge < 0.5) || (!dragged && [self touchedNextPage])) {
-//                [self willTurnToPageAtIndex:self.currentPageIndex+1];
-//                self.leafEdge = 0;
-//                duration = self.leafEdge;
-//                self.interactionLocked = YES;
-//                if (self.currentPageIndex+2 < self.numberOfPages && self.backgroundRendering)
-//                [self.pageCache precacheImageForPageIndex:self.currentPageIndex+2];
-//                [self performSelector:@selector(didTurnPageForward)
-//                withObject:nil 
-//                afterDelay:duration + 0.25];
-//            }
-//            else {
-//                [self willTurnToPageAtIndex:self.currentPageIndex];
-//                self.leafEdge = 1.0;
-//                duration = 1 - self.leafEdge;
-//                self.interactionLocked = YES;
-//                [self performSelector:@selector(didTurnPageBackward)
-//                withObject:nil 
-//                afterDelay:duration + 0.25];
-//            }
-//            [CATransaction setValue:[NSNumber numberWithFloat:duration]
-//            forKey:kCATransactionAnimationDuration];
-//            [CATransaction commit];
-//            }
-//            
-//            - (void)layoutSubviews {
-//                [super layoutSubviews];
-//                
-//                if (!CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
-//                    self.pageSize = self.bounds.size;
-//                    
-//                    [CATransaction begin];
-//                    [CATransaction setValue:(id)kCFBooleanTrue
-//                        forKey:kCATransactionDisableActions];
-//                    [self setLayerFrames];
-//                    [CATransaction commit];
-//                    
-//                    self.pageCache.pageSize = self.bounds.size;
-//                    [self getImages];
-//                    [self updateTargetRects];
-//                }
-//}
-//
-//@end
-//
-//CGFloat distance(CGPoint a, CGPoint b) {
-//    return sqrtf(powf(a.x-b.x, 2) + powf(a.y-b.y, 2));
-//}
+        let dragged = distance(a: touchPoint, b: self.touchBeganPoint) > self.dragThreshold()
+        
+        CATransaction.begin()
+        var duration: CGFloat!
+        
+        if ((dragged && self.leafEdge < 0.5) || (!dragged && self.touchedNextPage())) {
+            self.willTurnToPageAtIndex(index: self.currentPageIndex + 1)
+            self.leafEdge = 0
+            duration = self.leafEdge
+            self.interactionLocked = true
+            if (self.currentPageIndex + 2 < self.numberOfPages && self.backgroundRendering) {
+                self.pageCache.precacheImageForPageIndex(pageIndex: self.currentPageIndex + 2)
+            }
+            
+            self.perform(#selector(LeavesView.didTurnPageForward), with: nil, afterDelay: Double(duration) + 0.25)
+        } else {
+            self.willTurnToPageAtIndex(index: self.currentPageIndex)
+            self.leafEdge = 1.0
+            duration = 1 - self.leafEdge
+            self.interactionLocked = true
+            self.perform(#selector(LeavesView.didTurnPageBackward), with: nil, afterDelay: Double(duration) + 0.25)
+        }
+        
+        CATransaction.setValue(NSNumber(value : Double(duration)), forKey: kCATransactionAnimationDuration)
+        CATransaction.commit()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if (!__CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
+            self.pageSize = self.bounds.size
+            CATransaction.begin()
+            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+            self.setLayerFrames()
+            CATransaction.commit()
+            
+            self.pageCache.pageSize = self.bounds.size
+            self.getImages()
+            self.updateTargetRects()
+        }
+    }
+}
