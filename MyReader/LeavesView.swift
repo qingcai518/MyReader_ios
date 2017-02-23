@@ -23,9 +23,9 @@ protocol LeavesViewDelegate: NSObjectProtocol {
 
 class LeavesView: UIView {
     var delegate : LeavesViewDelegate!
-    var targetWidth : CGFloat!
+    var targetWidth = CGFloat(0)
     var preferredTargetWidth = CGFloat(0)
-    var currentPageIndex : Int!
+    var currentPageIndex = 0
     var backgroundRendering = false
     var topPage: CALayer!
     var topPageOverlay : CALayer!
@@ -37,15 +37,14 @@ class LeavesView: UIView {
     var topPageReverseShading : CAGradientLayer!
     var bottomPageShadow: CAGradientLayer!
     
-    var numberOfPages: Int!
+    var numberOfPages = 0
     var leafEdge = CGFloat(1.0)
     var pageSize : CGSize!
     var touchBeganPoint : CGPoint!
     var nextPageRect: CGRect!
     var prevPageRect: CGRect!
-    var touchIsActive : Bool!
+    var touchIsActive = false
     var interactionLocked = false
-    
     var pageCache : LeavesCache!
     
     func initCommon() {
@@ -229,15 +228,6 @@ class LeavesView: UIView {
             self.pageCache.dataSource = value
         }
     }
-    
-
-//    func getDataSource() -> LeavesViewDataSource {
-//        return self.pageCache.dataSource
-//    }
-//    
-//    func setDataSource(value : LeavesViewDataSource) {
-//        self.pageCache.dataSource = value
-//    }
     
     func setLeafEdge(aLeafEdge : CGFloat) {
         self.leafEdge = aLeafEdge

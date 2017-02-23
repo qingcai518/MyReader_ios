@@ -119,7 +119,7 @@ extension BooksController : UICollectionViewDelegate {
 //        self.performSegue(withIdentifier: "ToBook", sender: nil)
         
         let next = TempController()
-        self.present(next, animated: true, completion: nil)
+        self.navigationController?.pushViewController(next, animated: true)
     }
 }
 
