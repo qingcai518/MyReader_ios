@@ -65,30 +65,30 @@ class LeavesView: UIView {
         
         topPageShadow = CAGradientLayer()
         topPageShadow.colors = [UIColor(white : 0, alpha : 0.6).cgColor, UIColor.clear.cgColor]
-    
+        
+        topPageShadow.startPoint = CGPoint(x: 1, y: 0.5)
+        topPageShadow.endPoint = CGPoint(x: 0, y : 0,5)
+        
+        topPageReverse = CALayer()
+        topPageReverse.backgroundColor = UIColor.white.cgColor
+        topPageReverse.masksToBounds = true
+        
+        topPageReverseImage = CALayer()
+        topPageReverseImage.masksToBounds = true
+        topPageReverseImage.contentsGravity = kCAGravityRight
+        
+        topPageReverseImage = CGLayer()
         
         
+        return topPageReverseImage
         
     }
     
 }
 
-//- (void)initCommon {
-//    self.clipsToBounds = YES;
-//    
-//    _topPage = [[CALayer alloc] init];
-//    _topPage.masksToBounds = YES;
-//    _topPage.contentsGravity = kCAGravityLeft;
-//    _topPage.backgroundColor = [[UIColor whiteColor] CGColor];
-//    
-//    _topPageOverlay = [[CALayer alloc] init];
-//    _topPageOverlay.backgroundColor = [[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor];
-//    
-//    _topPageShadow = [[CAGradientLayer alloc] init];
-//    _topPageShadow.colors = [NSArray arrayWithObjects:
-//    (id)[[[UIColor blackColor] colorWithAlphaComponent:0.6] CGColor],
-//    (id)[[UIColor clearColor] CGColor],
-//    nil];
+//- (void)initCommon 
+{
+
 //    _topPageShadow.startPoint = CGPointMake(1,0.5);
 //    _topPageShadow.endPoint = CGPointMake(0,0.5);
 //    
