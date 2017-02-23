@@ -258,7 +258,9 @@ class LeavesView: UIView {
         CATransaction.commit()
     }
     
-    func setPreferedTargetWidth (value : CGFloat) {
+    func setPreferredTargetWidth (value : CGFloat) {
+        print("preferred target width = \(value)")
+        
         self.preferredTargetWidth = value
         self.updateTargetRects()
     }
