@@ -67,7 +67,7 @@ class LeavesView: UIView {
         topPageShadow.colors = [UIColor(white : 0, alpha : 0.6).cgColor, UIColor.clear.cgColor]
         
         topPageShadow.startPoint = CGPoint(x: 1, y: 0.5)
-        topPageShadow.endPoint = CGPoint(x: 0, y : 0,5)
+        topPageShadow.endPoint = CGPoint(x: 0, y: 0.5)
         
         topPageReverse = CALayer()
         topPageReverse.backgroundColor = UIColor.white.cgColor
@@ -77,52 +77,31 @@ class LeavesView: UIView {
         topPageReverseImage.masksToBounds = true
         topPageReverseImage.contentsGravity = kCAGravityRight
         
-        topPageReverseImage = CGLayer()
+        topPageReverseOverlay = CALayer()
+        topPageReverseOverlay.backgroundColor = UIColor(white: 1, alpha: 0.8).cgColor
+        
+        topPageReverseShading = CAGradientLayer()
+        topPageReverseShading.colors = [UIColor(white : 0, alpha : 0.6).cgColor, UIColor.clear.cgColor]
+        
+        topPageReverseShading.startPoint = CGPoint(x: 1, y: 0.5)
+        topPageReverseShading.endPoint = CGPoint(x: 0, y: 0.5)
+        
+        bottomPage = CALayer()
+        bottomPage.backgroundColor = UIColor.white.cgColor
+        bottomPage.masksToBounds = true
+        
+        bottomPageShadow = CAGradientLayer()
+        bottomPageShadow.colors = [UIColor(white: 0, alpha: 0.6).cgColor, UIColor.clear.cgColor]
+        bottomPageShadow.startPoint = CGPoint(x: 0, y: 0.5)
+        bottomPageShadow.endPoint = CGPoint(x: 1, y: 0.5)
         
         
-        return topPageReverseImage
         
     }
     
 }
 
-//- (void)initCommon 
-{
-
-//    _topPageShadow.startPoint = CGPointMake(1,0.5);
-//    _topPageShadow.endPoint = CGPointMake(0,0.5);
-//    
-//    _topPageReverse = [[CALayer alloc] init];
-//    _topPageReverse.backgroundColor = [[UIColor whiteColor] CGColor];
-//    _topPageReverse.masksToBounds = YES;
-//    
-//    _topPageReverseImage = [[CALayer alloc] init];
-//    _topPageReverseImage.masksToBounds = YES;
-//    _topPageReverseImage.contentsGravity = kCAGravityRight;
-//    
-//    _topPageReverseOverlay = [[CALayer alloc] init];
-//    _topPageReverseOverlay.backgroundColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.8] CGColor];
-//    
-//    _topPageReverseShading = [[CAGradientLayer alloc] init];
-//    _topPageReverseShading.colors = [NSArray arrayWithObjects:
-//    (id)[[[UIColor blackColor] colorWithAlphaComponent:0.6] CGColor],
-//    (id)[[UIColor clearColor] CGColor],
-//    nil];
-//    _topPageReverseShading.startPoint = CGPointMake(1,0.5);
-//    _topPageReverseShading.endPoint = CGPointMake(0,0.5);
-//    
-//    _bottomPage = [[CALayer alloc] init];
-//    _bottomPage.backgroundColor = [[UIColor whiteColor] CGColor];
-//    _bottomPage.masksToBounds = YES;
-//    
-//    _bottomPageShadow = [[CAGradientLayer alloc] init];
-//    _bottomPageShadow.colors = [NSArray arrayWithObjects:
-//    (id)[[[UIColor blackColor] colorWithAlphaComponent:0.6] CGColor],
-//    (id)[[UIColor clearColor] CGColor],
-//    nil];
-//    _bottomPageShadow.startPoint = CGPointMake(0,0.5);
-//    _bottomPageShadow.endPoint = CGPointMake(1,0.5);
-//    
+//- (void)initCommon
 //    [_topPage addSublayer:_topPageShadow];
 //    [_topPage addSublayer:_topPageOverlay];
 //    [_topPageReverse addSublayer:_topPageReverseImage];
