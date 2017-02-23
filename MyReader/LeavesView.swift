@@ -24,7 +24,7 @@ protocol LeavesViewDelegate: NSObjectProtocol {
 class LeavesView: UIView {
     var delegate : LeavesViewDelegate!
     var targetWidth : CGFloat!
-    var preferredTargetWidth : CGFloat!
+    var preferredTargetWidth = CGFloat(0)
     var currentPageIndex : Int!
     var backgroundRendering = false
     var topPage: CALayer!
@@ -44,7 +44,7 @@ class LeavesView: UIView {
     var nextPageRect: CGRect!
     var prevPageRect: CGRect!
     var touchIsActive : Bool!
-    var interactionLocked : Bool!
+    var interactionLocked = false
     
     var pageCache : LeavesCache!
     
