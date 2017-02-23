@@ -22,6 +22,7 @@ class LeavesCache : NSObject {
     
     func imageForPageIndex(pageIndex : Int) -> CGImage? {
         if (__CGSizeEqualToSize(pageSize, CGSize.zero)) {
+            print("11111111")
             return nil
         }
         
@@ -29,6 +30,7 @@ class LeavesCache : NSObject {
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
 
         guard let context = CGContext(data: nil, width: Int(pageSize.width), height: Int(pageSize.height), bitsPerComponent: 8, bytesPerRow: Int(pageSize.width) * 4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
+            print("22222")
             return nil
         }
         
@@ -38,7 +40,7 @@ class LeavesCache : NSObject {
         guard let image = context.makeImage() else {return nil}
         return image
     }
-
+    
     func cachedImageForPageIndex(pageIndex : Int) {
         let pageIndexNumber = NSNumber(integerLiteral: pageIndex)
         var pageImage : UIImage!

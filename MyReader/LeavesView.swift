@@ -16,7 +16,6 @@ protocol LeavesViewDataSource : NSObjectProtocol {
 protocol LeavesViewDelegate: NSObjectProtocol {
 //    optional func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: UInt)
 //    optional func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: UInt)
-    
     func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int)
     func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int)
 }
@@ -24,8 +23,7 @@ protocol LeavesViewDelegate: NSObjectProtocol {
 class LeavesView: UIView {
     var delegate : LeavesViewDelegate!
     var targetWidth = CGFloat(0)
-//    var preferredTargetWidth = CGFloat(0)
-    var preferredTargetWidth = CGFloat(100)
+    var preferredTargetWidth = CGFloat(0)
     var currentPageIndex = 0
     var backgroundRendering = false
     var topPage: CALayer!
