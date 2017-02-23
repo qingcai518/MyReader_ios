@@ -9,7 +9,7 @@
 import UIKit
 
 class LeavesViewController: UIViewController {
-    var leavesView : LeavesView!
+    private var leavesView : LeavesView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +25,19 @@ class LeavesViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        leavesView = LeavesView(frame : CGRect.zero)
-        leavesView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        leavesView.dataSource = self
-        leavesView.delegate = self
+        self.initCommon()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        self.initCommon()
+    }
+    
+    func initCommon() {
+        leavesView = LeavesView(frame: CGRect.zero)
+        leavesView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        leavesView.dataSource = self
+        leavesView.delegate = self
     }
 }
 

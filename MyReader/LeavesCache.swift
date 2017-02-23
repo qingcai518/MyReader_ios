@@ -27,7 +27,6 @@ class LeavesCache : NSObject {
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-//        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big)
 
         guard let context = CGContext(data: nil, width: Int(pageSize.width), height: Int(pageSize.height), bitsPerComponent: 8, bytesPerRow: Int(pageSize.width) * 4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
             return nil

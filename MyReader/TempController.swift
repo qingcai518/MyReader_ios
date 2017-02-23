@@ -28,6 +28,8 @@ class TempController: LeavesViewController {
     
     // #program mark
     override func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
+        print("number of page in leavesView = \(images.count)")
+        
         return images.count
     }
     

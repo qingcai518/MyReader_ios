@@ -24,7 +24,8 @@ protocol LeavesViewDelegate: NSObjectProtocol {
 class LeavesView: UIView {
     var delegate : LeavesViewDelegate!
     var targetWidth = CGFloat(0)
-    var preferredTargetWidth = CGFloat(0)
+//    var preferredTargetWidth = CGFloat(0)
+    var preferredTargetWidth = CGFloat(100)
     var currentPageIndex = 0
     var backgroundRendering = false
     var topPage: CALayer!
