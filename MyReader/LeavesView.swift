@@ -341,24 +341,16 @@ class LeavesView: UIView {
         CATransaction.setValue(NSNumber(value: duration), forKey: kCATransactionAnimationDuration)
         CATransaction.commit()
     }
-
     
-//    - (void)layoutSubviews {
-//    [super layoutSubviews];
-//    
-//    if (!CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
-//    self.pageSize = self.bounds.size;
-//    
-//    [CATransaction begin];
-//    [CATransaction setValue:(id)kCFBooleanTrue
-//    forKey:kCATransactionDisableActions];
-//    [self setLayerFrames];
-//    [CATransaction commit];
-//    
-//    self.pageCache.pageSize = self.bounds.size;
-//    [self getImages];
-//    [self updateTargetRects];
-//    }
-//    }
-
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if (__CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
+            self.pageSize = self.bounds.size
+        }
+        
+        CATransaction.begin()
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+        self.setLayerFrames()
+        self.updateTargetRects()
+    }
 }
