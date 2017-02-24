@@ -58,17 +58,17 @@ class BookController: LeavesViewController {
         for lineStr in array {
             if (Double(lineStr.characters.count) <= letersPerLine) {
                 contents.append(lineStr)
-            } else {
-                var temp = lineStr
-                while temp.characters.count > 20 {
-                    let subText = (temp as NSString).substring(to: 20)
-                    contents.append(subText)
-                    temp = (temp as NSString).substring(from: 20)
-                }
-                
-                if (temp != "") {
-                    contents.append(temp)
-                }
+            }
+            
+            var temp = lineStr
+            while temp.characters.count > 20 {
+                let subText = (temp as NSString).substring(to: 20)
+                contents.append(subText)
+                temp = (temp as NSString).substring(from: 20)
+            }
+            
+            if (temp != "") {
+                contents.append(temp)
             }
         }
         
@@ -82,7 +82,8 @@ class BookController: LeavesViewController {
                 self.addToPageContents(contentValue: contentValue)
                 contentValue = ""
             } else {
-                // old line.
+                //
+                old line.
                 contentValue.append(content)
                 contentValue.append("\n")
             }
@@ -92,6 +93,10 @@ class BookController: LeavesViewController {
             self.addToPageContents(contentValue: contentValue)
         }
         
+        for str in pageContents {
+            print("str = \(str.string)")
+        }
+
         leavesView.reloadData()
     }
     
