@@ -47,12 +47,8 @@ class BookController: LeavesViewController {
     }
 
     private func setContents(text: String) {
-        let width = screenWidth - 2 * 16
-        let height = screenHeight - UIApplication.shared.statusBarFrame.size.height - 2 * 24
-        
-        let letersPerLine = floor(Double(width / (font.pointSize + CGFloat(letterSpacing))))
-        let lines = floor(Double(height / (font.lineHeight + lineSpacing)))
-        
+        let letersPerLine = floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing))))
+        let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
         
         print("leters per line = \(letersPerLine), lines = \(lines)")
 
@@ -96,7 +92,6 @@ class BookController: LeavesViewController {
             self.addToPageContents(contentValue: contentValue)
         }
         
-        print("page content = \(pageContents)")
         leavesView.reloadData()
     }
     
@@ -133,13 +128,11 @@ class BookController: LeavesViewController {
         let text = pageContents[index]
         
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+
         guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size) else {
             return print("fail to get image.")
         }
-        
-        let transform = AppUtility.aspectFit(innerRect: imageRect, outerRect: context.boundingBoxOfClipPath)
-        context.concatenate(transform)
-        
+
         guard let cgImage = image.cgImage else {
             return
         }

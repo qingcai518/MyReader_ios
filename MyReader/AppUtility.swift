@@ -75,25 +75,12 @@ class AppUtility {
         return result
     }
     
-    static func aspectFit(innerRect: CGRect, outerRect : CGRect) -> CGAffineTransform {
-        let scaleFactor = min(outerRect.size.width / innerRect.size.width, outerRect.size.height / innerRect.size.height)
-        let scale = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
-        let scaledInnerRect = innerRect.applying(scale)
-        
-        let translationX = (outerRect.size.width - scaledInnerRect.size.width) / 2 - scaledInnerRect.origin.x
-        let translationY = (outerRect.size.height - scaledInnerRect.size.height) / 2 - scaledInnerRect.origin.y
-        
-        return scale.translatedBy(x: translationX, y: translationY)
-    }
-    
     static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
         // イメージサイズ
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         
         // 文字列を描画する.
-        let startY = 24 + UIApplication.shared.statusBarFrame.size.height
-        
-        attributedText.draw(in: CGRect(x: 16, y: startY, width: screenWidth - 2 * 16, height: screenHeight - startY - 24))
+        attributedText.draw(in: CGRect(x: (screenWidth - textWidth) / 2, y: screenHeight - textHeight - 24, width: textWidth, height: textHeight))
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
