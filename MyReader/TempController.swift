@@ -43,7 +43,6 @@ class TempController: LeavesViewController {
 //        guard let cgImage = image.cgImage else {return}
 //        
 //        context.draw(cgImage, in: imageRect)
-        
         let bounds = context.boundingBoxOfClipPath
         context.setFillColor(UIColor(hue: CGFloat(index) / 10.0, saturation: 0.8, brightness: 0.8, alpha: 1.0).cgColor)
         context.fill(bounds.insetBy(dx: 100, dy: 100))
