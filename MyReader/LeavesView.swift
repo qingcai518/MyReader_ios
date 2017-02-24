@@ -38,7 +38,9 @@ class LeavesView: UIView {
     
     var numberOfPages = 0
 //    var leafEdge = CGFloat(1.0)
-    var pageSize : CGSize!
+//    var pageSize : CGSize!
+    var pageSize = CGSize(width: 0, height: 0)  // 初期値を0と0で設定する.
+    
     var touchBeganPoint : CGPoint!
     var nextPageRect: CGRect!
     var prevPageRect: CGRect!
@@ -344,9 +346,6 @@ class LeavesView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        print("self  page size = \(self.pageSize
-        )")
         
         if (__CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
             self.pageSize = self.bounds.size
