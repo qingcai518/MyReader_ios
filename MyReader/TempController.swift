@@ -29,12 +29,21 @@ class TempController: LeavesViewController {
     // #program mark
     override func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
         print("number of page in leavesView = \(images.count)")
-        return 10
-        
-//        return images.count
+
+        return images.count
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
+        guard let image = images[index] else {return}
+        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        let transform = AppUtility.aspectFit(innerRect: imageRect, outerRect: context.boundingBoxOfClipPath)
+        context.concatenate(transform)
+        
+        guard let cgImage = image.cgImage else {return}
+        
+        context.draw(cgImage, in: imageRect)
+    }
+    
 //        guard let image = images[index] else {return}
 //        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
 //        let transform = AppUtility.aspectFit(innerRect: imageRect, outerRect: context.boundingBoxOfClipPath)
@@ -42,9 +51,5 @@ class TempController: LeavesViewController {
 //        
 //        guard let cgImage = image.cgImage else {return}
 //        
-//        context.draw(cgImage, in: imageRect)
-        let bounds = context.boundingBoxOfClipPath
-        context.setFillColor(UIColor(hue: CGFloat(index) / 10.0, saturation: 0.8, brightness: 0.8, alpha: 1.0).cgColor)
-        context.fill(bounds.insetBy(dx: 100, dy: 100))
-    }
+//        context.draw(cgImage, in: imageRect)    }
 }

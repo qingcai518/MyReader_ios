@@ -209,9 +209,9 @@ class LeavesView: UIView {
         }
     }
     
-    func didTurnToPageBackward() {
+    func didTurnPageBackward() {
         self.interactionLocked = false
-        self.didTurnToPageBackward()
+        self.didTurnToPageAtIndex(index: self.currentPageIndex)
     }
     
     func didTurnPageForward() {
@@ -337,7 +337,7 @@ class LeavesView: UIView {
             self.leafEdge = 1.0
             duration = Double( 1 - self.leafEdge )
             self.interactionLocked = true
-            self.perform(#selector(LeavesView.didTurnToPageBackward), with: nil, afterDelay: duration + 0.25)
+            self.perform(#selector(LeavesView.didTurnPageBackward), with: nil, afterDelay: duration + 0.25)
         }
         
         CATransaction.setValue(NSNumber(value: duration), forKey: kCATransactionAnimationDuration)
