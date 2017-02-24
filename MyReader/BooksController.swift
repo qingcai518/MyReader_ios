@@ -118,7 +118,15 @@ extension BooksController : UICollectionViewDelegate {
 //        
 //        self.performSegue(withIdentifier: "ToBook", sender: nil)
         
-        let next = TempController()
+//        let next = TempController()
+//        self.present(next, animated: true, completion: nil)
+        
+        let storyboard = UIStoryboard(name: "Book", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? BookController else {
+            return
+        }
+        
+        next.bookInfo = model.bookInfos[indexPath.row]
         self.present(next, animated: true, completion: nil)
     }
 }

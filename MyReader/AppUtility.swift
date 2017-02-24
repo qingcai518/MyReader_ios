@@ -85,4 +85,19 @@ class AppUtility {
         
         return scale.translatedBy(x: translationX, y: translationY)
     }
+    
+    static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
+        // イメージサイズ
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        // 文字列を描画する.
+        let startY = 24 + UIApplication.shared.statusBarFrame.size.height
+        
+        attributedText.draw(in: CGRect(x: 16, y: startY, width: screenWidth - 2 * 16, height: screenHeight - startY - 24))
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
 }

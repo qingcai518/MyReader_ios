@@ -9,6 +9,7 @@
 import UIKit
 
 class TempController: LeavesViewController {
+    var bookInfo : LocalBookInfo!
     
     let images = [ UIImage(named : "icon_book_pause")!,
                    UIImage(named: "icon_book_pull")!,

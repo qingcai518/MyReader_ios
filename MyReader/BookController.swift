@@ -8,13 +8,16 @@
 
 import UIKit
 
-class BookController: ViewController {
-    @IBOutlet weak var contentLbl: UILabel!
+class BookController: LeavesViewController {
     @IBOutlet weak var indicator : UIActivityIndicatorView!
     
     var bookInfo : LocalBookInfo!
+    var pageContents = [NSMutableAttributedString]()
     
     let model = BookModel()
+    let letterSpacing = 1.0
+    let lineSpacing = CGFloat(6.0)
+    let font = UIFont.Helvetica16()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,18 +47,18 @@ class BookController: ViewController {
     }
 
     private func setContents(text: String) {
-        let letterSpacing = 1.0
-        let lineSpacing = CGFloat(6.0)
-        let font = UIFont.Helvetica16()
-        
         let width = screenWidth - 2 * 16
         let height = screenHeight - UIApplication.shared.statusBarFrame.size.height - 2 * 24
         
         let letersPerLine = floor(Double(width / (font.pointSize + CGFloat(letterSpacing))))
         let lines = floor(Double(height / (font.lineHeight + lineSpacing)))
+        
+        
+        print("leters per line = \(letersPerLine), lines = \(lines)")
 
-        var contents = [String]()
         let array = text.components(separatedBy: .newlines)
+        
+        var contents = [String]()
         for lineStr in array {
             if (Double(lineStr.characters.count) <= letersPerLine) {
                 contents.append(lineStr)
@@ -73,29 +76,74 @@ class BookController: ViewController {
             }
         }
         
-        var contentValue = ""
         let count = contents.count > Int(lines) ? Int(lines) : contents.count
-
-        for i in 0..<count {
+        
+        var contentValue = ""
+        for i in 0..<contents.count {
             let content = contents[i]
-            contentValue.append(content)
-            contentValue.append("\n")
+
+            if (i > 0 && i % count == 0) {
+                self.addToPageContents(contentValue: contentValue)
+                contentValue = ""
+            } else {
+                // old line.
+                contentValue.append(content)
+                contentValue.append("\n")
+            }
         }
         
+        if (contentValue != "") {
+            self.addToPageContents(contentValue: contentValue)
+        }
+        
+        print("page content = \(pageContents)")
+        leavesView.reloadData()
+    }
+    
+    private func addToPageContents(contentValue : String) {
         let attributedText = NSMutableAttributedString(string: contentValue)
         let range = NSMakeRange(0, attributedText.length)
         
-        // フォントを設定.
+        // フォント.
         attributedText.addAttribute(NSFontAttributeName, value: font, range: range)
         
-        // 文字間間隔を設定.
+        // 文字間隔.
         attributedText.addAttribute(NSKernAttributeName, value: letterSpacing, range: range)
         
-        // 行間隔を設定.
+        // 行間隔.
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
         attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: range)
         
-        contentLbl.attributedText = attributedText
+        // 背景色.
+        attributedText.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clear, range: range)
+        
+        // 文字色.
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: range)
+        
+        pageContents.append(attributedText)
+    }
+    
+    // #program mark
+    override func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
+        return pageContents.count
+    }
+    
+    override func renderPageAtIndex(index: Int, inContext context: CGContext) {
+        let text = pageContents[index]
+        
+        let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size) else {
+            return print("fail to get image.")
+        }
+        
+        let transform = AppUtility.aspectFit(innerRect: imageRect, outerRect: context.boundingBoxOfClipPath)
+        context.concatenate(transform)
+        
+        guard let cgImage = image.cgImage else {
+            return
+        }
+        
+        context.draw(cgImage, in: imageRect)
     }
 }

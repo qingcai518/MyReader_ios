@@ -21,19 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B03-j4-ii6">
-                                <rect key="frame" x="16" y="44" width="343" height="14"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="本の内容を設定する">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="14" name="HiraginoSans-W3"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="m6U-6c-yuq">
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" red="0.86622596149999997" green="0.35365022779999999" blue="0.11312403140000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,15 +28,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="B03-j4-ii6" firstAttribute="top" secondItem="Ltq-P1-7Im" secondAttribute="bottom" constant="24" id="7V1-tK-rea"/>
                             <constraint firstItem="m6U-6c-yuq" firstAttribute="centerY" secondItem="upk-Xn-zxu" secondAttribute="centerY" id="ayp-dO-Uet"/>
                             <constraint firstItem="m6U-6c-yuq" firstAttribute="centerX" secondItem="upk-Xn-zxu" secondAttribute="centerX" id="c54-d0-HYi"/>
-                            <constraint firstItem="B03-j4-ii6" firstAttribute="leading" secondItem="upk-Xn-zxu" secondAttribute="leading" constant="16" id="gCv-Vz-Gtc"/>
-                            <constraint firstAttribute="trailing" secondItem="B03-j4-ii6" secondAttribute="trailing" constant="16" id="jmq-YW-RBa"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentLbl" destination="B03-j4-ii6" id="mte-62-jLR"/>
                         <outlet property="indicator" destination="m6U-6c-yuq" id="fnJ-j1-Wmv"/>
                     </connections>
                 </viewController>
