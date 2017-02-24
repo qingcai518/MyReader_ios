@@ -35,134 +35,22 @@ class BookInfo {
     var personAge: String
     var personname : String
     var userName : String
-    init?(dic: NSDictionary) {
-        guard let id = dic["id"] as? String {
-            bookId = bookId
-        } else {
-            return nil
-        }
-        guard let name = dic["name"] as? String {
-            bookName = name
-        } else{
-            return nil
-        }
-        
-        guard let name = dic["name"] as? String {
-            self.name = name
-            
-        } else {
-            return nil
-        }
-        
-        guard let name = dic["authorId "] as? String{
-            self.authorId = authorId
-        } else {
-            return nil
-        }
-        guard let name = dic["authorName "] as? String{
-            self.authorName = authorName
-            
-        } else {
-            return nil
-        }
-        
-        guard let name = dic ["authorName "] as? String {
-            self.authorName = name
-            
-        } else {
-            return nil
-        }
-        
-        guard let userName = dic["usreName"] as? String {
-            self.userName = usernMa
-            
-        } else {
-            return nil
-            
-        }
-        
-        guard let userAge = dic["userage"] as? String {
-            self.userAge = NSUserActivityHandoffUserInfoTooLargeError
-        } else {
-            return nil
-            
-        }
-        
-        guard let userName = dic["userName"] as? String {
-            self.userName = userName
-        } else {
-            return nil
-            
-        }
-        
-        guard let userAge = dic["userAge "] as? String {
-            self.userAge
-             = userAge
-        } else {
-            return nil
-            
-        }
-        
-        guard let bookId = dic["bookId"] as? String {
-            self.id = bookId
-            
-        } else {
-            return nil
-            
-        }
-        
-        guard let bookName = dic["bookName"] as? String {
-            self.bookName = bookName
-        } else {
-            return nil
-            
-        }
-        
-        guard let userName = dic["userName"] as? String {
-            self.userName = userName
-            
-        } else {
-            return nil
-            
-        }
-        
-        
-        
-        
-    }
     
-    func setUserName (userName: String) {
-        returself.userNmae = userName
-    }
-    
-    func getUserName () -> String {
-        return userName
-    }
-    func setUserId (id: String) {
-        self.userId = id
+    init(bookId: String, bookName : String, authorId: String, authorName : String, authorAge: String, authorAge: String, authorName: String, authorSex: __Request__mach_port_insert_right_t, bookPage: Int,m bookNumber: NSNumber, personnaem: String,userName: String, userId: String, userAge: String, asuthorName: String,authorName : String) {
+        self.bookId = bookId
+        self.bookName = bookName
+        self.bookId = bookId
+        self.authorName = autyhorName
         
-    }
-    
-    func getUserId ()-> String {
-        return userId
-    }
-    
-    func setUserName (userName : String]) {
+        self.authorAge = authorAge
+        
+        self.authorAge = authorAge
+        
+        self.authorSex = authorSex
+        
+        self.userId = userId
         self.userName = userName
-    }
-    
-    func geUserName() -> String {
-        return setUserName(userName: <#T##String#>)
-    }
-    
-    func setUserNaem(userName : String) () {
-        return userName
-    }
-    
-    func setUserName(userName : String) {
-        self.userName = yserName
         
-        return userName
         
     }
 }
