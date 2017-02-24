@@ -9,19 +9,7 @@
 import UIKit
 
 class LeavesViewController: UIViewController {
-    private var leavesView : LeavesView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        leavesView.frame = self.view.bounds
-        self.view.addSubview(leavesView)
-        leavesView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    private(set) var leavesView = LeavesView(frame: CGRect.zero)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -33,19 +21,30 @@ class LeavesViewController: UIViewController {
         self.initCommon()
     }
     
-    func initCommon() {
-        leavesView = LeavesView(frame: CGRect.zero)
+    private func initCommon() {
         leavesView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         leavesView.dataSource = self
         leavesView.delegate = self
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        leavesView.frame = self.view.bounds
+        self.view.addSubview(leavesView)
+        leavesView.reloadData()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
 }
 
 extension LeavesViewController : LeavesViewDelegate {
-    func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
+    func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
     }
     
-    func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
+    func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
     }
 }
 

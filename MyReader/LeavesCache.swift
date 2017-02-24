@@ -20,11 +20,19 @@ class LeavesCache : NSObject {
     
     init(aPageSize: CGSize) {
         super.init()
-        pageSize = aPageSize
+        
+        print("a page size = \(aPageSize)")
+        
+//        pageSize = aPageSize
+        
+        // dummy.
+        pageSize = CGSize(width : screenWidth, height : screenHeight)
+        
         pageCache = NSMutableDictionary()
     }
     
     func imageForPageIndex(pageIndex: Int) -> CGImage? {
+        print("imageForPageIndex")
         if (__CGSizeEqualToSize(self.pageSize, CGSize.zero)) {
             return nil
         }
@@ -40,6 +48,8 @@ class LeavesCache : NSObject {
             return nil
         }
         context.clip(to: CGRect(x : 0, y: 0, width : self.pageSize.width, height : self.pageSize.height))
+        
+        print("self.dataSource.renderPageAtIndex")
         self.dataSource.renderPageAtIndex(index: pageIndex, inContext: context)
         
         guard let image = context.makeImage() else {

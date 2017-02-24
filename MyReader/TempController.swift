@@ -10,12 +10,12 @@ import UIKit
 
 class TempController: LeavesViewController {
     
-    let images = [ UIImage(named : "icon_book_pause")!,
-                   UIImage(named: "icon_book_pull"),
-                   UIImage(named: "icon_book1"),
-                   UIImage(named: "icon_book2"),
-                   UIImage(named: "icon_book3"),
-                   UIImage(named: "icon_book4")]
+//    let images = [ UIImage(named : "icon_book_pause")!,
+//                   UIImage(named: "icon_book_pull"),
+//                   UIImage(named: "icon_book1"),
+//                   UIImage(named: "icon_book2"),
+//                   UIImage(named: "icon_book3"),
+//                   UIImage(named: "icon_book4")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,21 +27,14 @@ class TempController: LeavesViewController {
     
     // #program mark
     override func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
-        print("number of page in leavesView = \(images.count)")
-
-        return images.count
+        return 3
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
         print("11111")
         
-        guard let image = images[index] else {return print("22222")}
-        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        let transform = AppUtility.aspectFit(innerRect: imageRect, outerRect: context.boundingBoxOfClipPath)
-        context.concatenate(transform)
-        
-        guard let cgImage = image.cgImage else {return print("33333")}
-        
-        context.draw(cgImage, in: imageRect)
+        let bounds = context.boundingBoxOfClipPath
+        context.setFillColor(UIColor(hue: CGFloat(index) / 10.0, saturation: 0.8, brightness: 0.8, alpha: 1.0).cgColor)
+        context.fill(bounds.insetBy(dx: 100, dy: 100))
     }
 }
