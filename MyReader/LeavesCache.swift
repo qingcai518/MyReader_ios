@@ -20,14 +20,7 @@ class LeavesCache : NSObject {
     
     init(aPageSize: CGSize) {
         super.init()
-        
-        print("a page size = \(aPageSize)")
-        
-//        pageSize = aPageSize
-        
-        // dummy.
-        pageSize = CGSize(width : screenWidth, height : screenHeight)
-        
+        pageSize = aPageSize
         pageCache = NSMutableDictionary()
     }
     

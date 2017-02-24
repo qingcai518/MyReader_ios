@@ -141,7 +141,7 @@ class LeavesView: UIView {
         
         leafEdge = 1.0
         backgroundRendering = false
-        pageCache = LeavesCache(aPageSize: self.bounds.size)
+        pageCache = LeavesCache(aPageSize: CGSize(width : screenWidth, height : screenHeight))
     }
     
     override init(frame: CGRect) {
