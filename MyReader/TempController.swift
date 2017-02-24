@@ -19,7 +19,6 @@ class TempController: LeavesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,22 +33,15 @@ class TempController: LeavesViewController {
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
-        guard let image = images[index] else {return}
+        print("11111")
+        
+        guard let image = images[index] else {return print("22222")}
         let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
         let transform = AppUtility.aspectFit(innerRect: imageRect, outerRect: context.boundingBoxOfClipPath)
         context.concatenate(transform)
         
-        guard let cgImage = image.cgImage else {return}
+        guard let cgImage = image.cgImage else {return print("33333")}
         
         context.draw(cgImage, in: imageRect)
     }
-    
-//        guard let image = images[index] else {return}
-//        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-//        let transform = AppUtility.aspectFit(innerRect: imageRect, outerRect: context.boundingBoxOfClipPath)
-//        context.concatenate(transform)
-//        
-//        guard let cgImage = image.cgImage else {return}
-//        
-//        context.draw(cgImage, in: imageRect)    }
 }

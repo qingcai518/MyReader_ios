@@ -39,7 +39,7 @@ class LeavesView: UIView {
     var numberOfPages = 0
 //    var leafEdge = CGFloat(1.0)
 //    var pageSize : CGSize!
-    var pageSize = CGSize(width: 0, height: 0)  // 初期値を0と0で設定する.
+    var pageSize = CGSize(width: 0, height: 0)
     
     var touchBeganPoint : CGPoint!
     var nextPageRect: CGRect!

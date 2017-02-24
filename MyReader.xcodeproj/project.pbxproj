@@ -18,10 +18,10 @@
 		3C67EDD21E5D33D500B5156D /* Book.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C67EDD11E5D33D500B5156D /* Book.storyboard */; };
 		3C67EDD41E5D346200B5156D /* BookController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDD31E5D346200B5156D /* BookController.swift */; };
 		3C67EDD61E5D34D500B5156D /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDD51E5D34D500B5156D /* BookModel.swift */; };
-		3C67EDF91E5E6D4A00B5156D /* LeavesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDF81E5E6D4A00B5156D /* LeavesCache.swift */; };
-		3C67EDFB1E5E6E3400B5156D /* LeavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDFA1E5E6E3400B5156D /* LeavesView.swift */; };
-		3C67EDFD1E5EB60F00B5156D /* LeavesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDFC1E5EB60F00B5156D /* LeavesViewController.swift */; };
 		3C67EDFF1E5EB8D200B5156D /* TempController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDFE1E5EB8D200B5156D /* TempController.swift */; };
+		3C67EE0F1E5FFB4F00B5156D /* LeavesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EE0C1E5FFB4F00B5156D /* LeavesCache.swift */; };
+		3C67EE101E5FFB4F00B5156D /* LeavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EE0D1E5FFB4F00B5156D /* LeavesView.swift */; };
+		3C67EE111E5FFB4F00B5156D /* LeavesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EE0E1E5FFB4F00B5156D /* LeavesViewController.swift */; };
 		3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */; };
 		3C999BAE1E5ADC9B0095A696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAC1E5ADC9B0095A696 /* Main.storyboard */; };
 		3C999BB01E5ADC9B0095A696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAF1E5ADC9B0095A696 /* Assets.xcassets */; };
@@ -58,10 +58,10 @@
 		3C67EDD31E5D346200B5156D /* BookController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookController.swift; sourceTree = "<group>"; };
 		3C67EDD51E5D34D500B5156D /* BookModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
 		3C67EDF11E5E6A3900B5156D /* MyReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyReader-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		3C67EDF81E5E6D4A00B5156D /* LeavesCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeavesCache.swift; sourceTree = "<group>"; };
-		3C67EDFA1E5E6E3400B5156D /* LeavesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeavesView.swift; sourceTree = "<group>"; };
-		3C67EDFC1E5EB60F00B5156D /* LeavesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeavesViewController.swift; sourceTree = "<group>"; };
 		3C67EDFE1E5EB8D200B5156D /* TempController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempController.swift; sourceTree = "<group>"; };
+		3C67EE0C1E5FFB4F00B5156D /* LeavesCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeavesCache.swift; sourceTree = "<group>"; };
+		3C67EE0D1E5FFB4F00B5156D /* LeavesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeavesView.swift; sourceTree = "<group>"; };
+		3C67EE0E1E5FFB4F00B5156D /* LeavesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeavesViewController.swift; sourceTree = "<group>"; };
 		3C999BA51E5ADC9B0095A696 /* MyReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C999BAD1E5ADC9B0095A696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,12 +131,12 @@
 		3C67EDD01E5D33BE00B5156D /* BookPage */ = {
 			isa = PBXGroup;
 			children = (
+				3C67EE0C1E5FFB4F00B5156D /* LeavesCache.swift */,
+				3C67EE0D1E5FFB4F00B5156D /* LeavesView.swift */,
+				3C67EE0E1E5FFB4F00B5156D /* LeavesViewController.swift */,
 				3C67EDD11E5D33D500B5156D /* Book.storyboard */,
 				3C67EDD31E5D346200B5156D /* BookController.swift */,
 				3C67EDD51E5D34D500B5156D /* BookModel.swift */,
-				3C67EDF81E5E6D4A00B5156D /* LeavesCache.swift */,
-				3C67EDFA1E5E6E3400B5156D /* LeavesView.swift */,
-				3C67EDFC1E5EB60F00B5156D /* LeavesViewController.swift */,
 				3C67EDFE1E5EB8D200B5156D /* TempController.swift */,
 			);
 			name = BookPage;
@@ -382,10 +382,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C999BC81E5AE1B40095A696 /* Navi2Controller.swift in Sources */,
-				3C67EDFD1E5EB60F00B5156D /* LeavesViewController.swift in Sources */,
 				3C999BC41E5ADE480095A696 /* MainController.swift in Sources */,
 				3C67EDD41E5D346200B5156D /* BookController.swift in Sources */,
 				3C999BE11E5AF0C70095A696 /* AppUtility.swift in Sources */,
+				3C67EE0F1E5FFB4F00B5156D /* LeavesCache.swift in Sources */,
 				3C67EDCD1E5C3C2F00B5156D /* BooksModel.swift in Sources */,
 				3C999BCF1E5AE35A0095A696 /* BooksController.swift in Sources */,
 				3C67EDD61E5D34D500B5156D /* BookModel.swift in Sources */,
@@ -393,15 +393,15 @@
 				3C67EDFF1E5EB8D200B5156D /* TempController.swift in Sources */,
 				3C67EDCF1E5C3C4F00B5156D /* LocalBookInfo.swift in Sources */,
 				3C999BDD1E5AEDA90095A696 /* CloudBookInfo.swift in Sources */,
-				3C67EDF91E5E6D4A00B5156D /* LeavesCache.swift in Sources */,
 				3C999BC61E5AE1A90095A696 /* Navi1Controller.swift in Sources */,
 				3C67EDCB1E5C358200B5156D /* SQLiteManager.swift in Sources */,
+				3C67EE101E5FFB4F00B5156D /* LeavesView.swift in Sources */,
 				3C999BC11E5ADD2A0095A696 /* ViewController.swift in Sources */,
 				3C67EDC71E5C1E9A00B5156D /* UIFont.swift in Sources */,
 				3C999BD61E5AE5DA0095A696 /* CloudController.swift in Sources */,
-				3C67EDFB1E5E6E3400B5156D /* LeavesView.swift in Sources */,
 				3C999BD81E5AE5F50095A696 /* CloudCell.swift in Sources */,
 				3C999BDB1E5AEAE30095A696 /* AppConstants.swift in Sources */,
+				3C67EE111E5FFB4F00B5156D /* LeavesViewController.swift in Sources */,
 				3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */,
 				3C999BDF1E5AEFEC0095A696 /* CloudModel.swift in Sources */,
 				3C999BBD1E5ADD070095A696 /* NavigationController.swift in Sources */,
@@ -536,6 +536,7 @@
 				DEVELOPMENT_TEAM = 2RW8Q6Y7W7;
 				INFOPLIST_FILE = MyReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.kaka.MyReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyReader-Bridging-Header.h";

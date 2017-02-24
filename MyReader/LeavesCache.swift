@@ -10,9 +10,13 @@ import Foundation
 import UIKit
 
 class LeavesCache : NSObject {
-    var pageSize : CGSize!
     var pageCache : NSMutableDictionary!
     var dataSource : LeavesViewDataSource!
+    var pageSize = CGSize(width: 0, height : 0) {
+        didSet {
+            self.flush()
+        }
+    }
     
     init(aPageSize: CGSize) {
         super.init()
@@ -20,81 +24,71 @@ class LeavesCache : NSObject {
         pageCache = NSMutableDictionary()
     }
     
-    func imageForPageIndex(pageIndex : Int) -> CGImage? {
-        if (__CGSizeEqualToSize(pageSize, CGSize.zero)) {
-            print("11111111")
+    func imageForPageIndex(pageIndex: Int) -> CGImage? {
+        if (__CGSizeEqualToSize(self.pageSize, CGSize.zero)) {
             return nil
         }
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-
-        guard let context = CGContext(data: nil, width: Int(pageSize.width), height: Int(pageSize.height), bitsPerComponent: 8, bytesPerRow: Int(pageSize.width) * 4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
-            print("22222")
+        
+        print("color space = \(colorSpace)")
+        
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
+        
+        guard let context = CGContext(data: nil, width: Int(self.pageSize.width), height: Int(self.pageSize.height), bitsPerComponent: 8, bytesPerRow: Int(self.pageSize.width) * 4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue) else {
+            print("can not create context")
+            return nil
+        }
+        context.clip(to: CGRect(x : 0, y: 0, width : self.pageSize.width, height : self.pageSize.height))
+        self.dataSource.renderPageAtIndex(index: pageIndex, inContext: context)
+        
+        guard let image = context.makeImage() else {
+            print("can not create image.")
             return nil
         }
         
-        context.clip(to: CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height))
-        self.dataSource.renderPageAtIndex(index: pageIndex, inContext: context)
-        
-        guard let image = context.makeImage() else {return nil}
+        _ = UIImage(cgImage: image)
         return image
     }
     
-    func cachedImageForPageIndex(pageIndex : Int) {
-        let pageIndexNumber = NSNumber(integerLiteral: pageIndex)
-        var pageImage : UIImage!
-        
-        let queue = DispatchQueue(label: "cachedImageForPageIndex")
-        queue.sync {
-            if let image = pageCache.object(forKey: pageIndexNumber) as? UIImage {
-                pageImage = image
-            }
+    func cachedImageForPageIndex(pageIndex : Int) -> CGImage? {
+        let pageIndexNumber = NSNumber(value: pageIndex)
+        if let pageImage = pageCache.object(forKey: pageIndexNumber) as? UIImage {
+            return pageImage.cgImage
         }
         
-        if (pageImage == nil) {
-            if let pageCGImage = imageForPageIndex(pageIndex: pageIndex) {
-                pageImage = UIImage(cgImage: pageCGImage)
-                
-                queue.sync {
-                    pageCache.setObject(pageImage, forKey: pageIndexNumber)
-                }
-            }
+        if let pageCGImage = self.imageForPageIndex(pageIndex: pageIndex) {
+            let image = UIImage(cgImage: pageCGImage)
+            self.pageCache.setObject(image, forKey: pageIndexNumber)
+            
+            return image.cgImage
         }
+        
+        return nil
     }
-    
+
     func precacheImageForPageIndexNumber(pageIndexNumber : NSNumber) {
-        cachedImageForPageIndex(pageIndex: pageIndexNumber.intValue)
+        _ = cachedImageForPageIndex(pageIndex: pageIndexNumber.intValue)
     }
     
     func precacheImageForPageIndex(pageIndex : Int) {
         performSelector(inBackground: #selector(LeavesCache.precacheImageForPageIndexNumber(pageIndexNumber:)), with: NSNumber(integerLiteral: pageIndex))
     }
     
-    func minimizeToPageIndex(pageIndex : Int) {
-        let queue = DispatchQueue(label: "minimizeToPageIndex")
-        queue.sync {
-            for key in pageCache.allKeys {
-                guard let keyNumber = key as? NSNumber else {
-                    continue
-                }
-                
-                if (abs(keyNumber.intValue - pageIndex) > 2) {
-                    pageCache.removeObject(forKey: key)
-                }
+    func minimizeToPageIndex(pageIndex: Int) {
+        for key in self.pageCache.allKeys {
+            guard let numberKey = key as? NSNumber else {
+                print("11111")
+                continue
+            }
+            
+            if (abs(numberKey.intValue - pageIndex) > 2) {
+                self.pageCache.removeObject(forKey: key)
             }
         }
     }
     
     func flush() {
-        let queue = DispatchQueue(label: "flush")
-        queue.sync {
-            pageCache.removeAllObjects()
-        }
-    }
-    
-    func setPageSize(value : CGSize) {
-        pageSize = value
-        flush()
+        self.pageCache.removeAllObjects()
     }
 }
