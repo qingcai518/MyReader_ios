@@ -346,6 +346,7 @@ class LeavesView: UIView {
         super.layoutSubviews()
         if (__CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
             self.pageSize = self.bounds.size
+            
         }
         
         CATransaction.begin()
