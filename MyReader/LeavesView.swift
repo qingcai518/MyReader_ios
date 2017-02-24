@@ -344,9 +344,12 @@ class LeavesView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        print("self  page size = \(self.pageSize
+        )")
+        
         if (__CGSizeEqualToSize(self.pageSize, self.bounds.size)) {
             self.pageSize = self.bounds.size
-            
         }
         
         CATransaction.begin()
