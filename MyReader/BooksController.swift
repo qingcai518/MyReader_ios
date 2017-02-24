@@ -98,29 +98,12 @@ class BooksController: ViewController {
             self?.collectionView.reloadData()
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "ToBook") {
-            guard let next = segue.destination as? BookController else {
-                return
-            }
-            
-            next.bookInfo = currentInfo
-            next.hidesBottomBarWhenPushed = true
-        }
-    }
 }
 
 extension BooksController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-//        currentInfo = model.bookInfos[indexPath.row]
-//        
-//        self.performSegue(withIdentifier: "ToBook", sender: nil)
-        
-//        let next = TempController()
-//        self.present(next, animated: true, completion: nil)
-        
+
         let storyboard = UIStoryboard(name: "Book", bundle: nil)
         guard let next = storyboard.instantiateInitialViewController() as? BookController else {
             return

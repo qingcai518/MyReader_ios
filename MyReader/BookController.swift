@@ -29,12 +29,7 @@ class BookController: LeavesViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
+
     private func getData() {
         indicator.startAnimating()
         model.readFile(bookInfo: bookInfo) { [weak self] value in
@@ -47,6 +42,8 @@ class BookController: LeavesViewController {
     }
 
     private func setContents(text: String) {
+        print("font point size = \(font.pointSize)")
+        
         let letersPerLine = floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing))))
         let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
         
@@ -58,17 +55,17 @@ class BookController: LeavesViewController {
         for lineStr in array {
             if (Double(lineStr.characters.count) <= letersPerLine) {
                 contents.append(lineStr)
-            }
-            
-            var temp = lineStr
-            while temp.characters.count > 20 {
-                let subText = (temp as NSString).substring(to: 20)
-                contents.append(subText)
-                temp = (temp as NSString).substring(from: 20)
-            }
-            
-            if (temp != "") {
-                contents.append(temp)
+            } else {
+                var temp = lineStr
+                while temp.characters.count > 20 {
+                    let subText = (temp as NSString).substring(to: 20)
+                    contents.append(subText)
+                    temp = (temp as NSString).substring(from: 20)
+                }
+                
+                if (temp != "") {
+                    contents.append(temp)
+                }
             }
         }
         
@@ -81,12 +78,10 @@ class BookController: LeavesViewController {
             if (i > 0 && i % count == 0) {
                 self.addToPageContents(contentValue: contentValue)
                 contentValue = ""
-            } else {
-                //
-                old line.
-                contentValue.append(content)
-                contentValue.append("\n")
             }
+            
+            contentValue.append(content)
+            contentValue.append("\n")
         }
         
         if (contentValue != "") {
