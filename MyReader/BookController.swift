@@ -95,8 +95,6 @@ class BookController: LeavesViewController {
         leavesView.reloadData()
     }
     
-    
-    
     private func addToPageContents(contentValue : String) {
         let attributedText = NSMutableAttributedString(string: contentValue)
         let range = NSMakeRange(0, attributedText.length)
