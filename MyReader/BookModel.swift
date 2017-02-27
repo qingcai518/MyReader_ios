@@ -32,24 +32,6 @@ class BookModel {
         }
     }
     
-//    func readFile(bookInfo: LocalBookInfo, completion: @escaping (String?) -> Void) {
-//        DispatchQueue.global().async { [weak self] in
-//            let fileHandler = FileHandle(forReadingAtPath: bookInfo.localPath)
-//            fileHandler?.seek(toFileOffset: 0)
-//            guard let data = fileHandler?.readDataToEndOfFile() else {
-//                print("read no data.")
-//                return completion(nil)
-//            }
-//            let subData = data.subdata(in: 0..<625)
-//            let encoding = AppUtility.getEncoding(subData: subData)
-//            
-//            let readStr = String.init(data: data, encoding: String.Encoding(rawValue: encoding))
-//            self?.setContents(text: readStr)
-//            
-//            return completion(readStr)
-//        }
-//    }
-    
     private func setContents(text: String?) {
         guard let content = text else {
             return
@@ -84,6 +66,11 @@ class BookModel {
         var contentValue = ""
         for i in 0..<contents.count {
             let content = contents[i]
+            
+            // 章节分类.
+            if (content.contains("Chapter") || content.contains("章")) {
+                print("")
+            }
             
             if (i > 0 && i % count == 0) {
                 self.addToPageContents(contentValue: contentValue)
