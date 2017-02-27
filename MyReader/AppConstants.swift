@@ -18,6 +18,7 @@ let textHeight = screenHeight - UIApplication.shared.statusBarFrame.size.height 
 let baseUrl = "https://main-myreader.ssl-lolipop.jp"
 let bookService = baseUrl + "/Books"
 
+// 毎回リードするテキストファイルのサイズを指定する.
 let readLength = 2048
 
 struct NotificationName {

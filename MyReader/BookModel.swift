@@ -19,11 +19,19 @@ class BookModel {
                 return completion(nil)
             }
             
+            print("read data = \(data)")
+            
             let readStr = String.init(data: data, encoding: String.Encoding(rawValue: encode))
             
-            DispatchQueue.main.async {
-                return completion(readStr)
-            }
+            // 指定されたエンコードでファイルの読み込みを実施する.
+            
+            print("read str = \(readStr)")
+            
+            return completion(readStr)
+            
+//            DispatchQueue.main.async {
+//                return completion(readStr)
+//            }
         }
     }
 }
