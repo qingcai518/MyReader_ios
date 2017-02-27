@@ -15,29 +15,28 @@ class BookModel {
     let lineSpacing = CGFloat(6.0)
     let font = UIFont.Helvetica18()
     
+    
+    
     func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
-        DispatchQueue(label: "readFile").async { [weak self] in
-            
+        DispatchQueue.global().async { [weak self] in
             let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
             fileHandle?.seek(toFileOffset: 0)
             
             // 文字コードをチェックする.
-            guard let tempData = fileHandle?.readData(ofLength: 1024) else {
-                print("read no temp data.")
-                return completion(nil)
-            }
-            
-            let encode = AppUtility.getEncoding(tempData: tempData)
-            
-            
-            fileHandle?.seek(toFileOffset: 0)
+//            guard let tempData = fileHandle?.readData(ofLength: 1024) else {
+//                print("read no temp data.")
+//                return completion(nil)
+//            }
+//            
+//            let encode = AppUtility.getEncoding(tempData: tempData)
+//            fileHandle?.seek(toFileOffset: 0)
             
             guard let data = fileHandle?.readDataToEndOfFile() else {
                 print("read no data.")
                 return completion(nil)
             }
             
-            let readStr = String.init(data: data, encoding: String.Encoding(rawValue: encode))
+            let readStr = AppUtility.getStringFromData(data: data)
             
             self?.setContents(text: readStr)
             
