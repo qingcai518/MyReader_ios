@@ -44,7 +44,7 @@ class BookController: LeavesViewController {
     private func setContents(text: String) {
         print("text width = \(textWidth), font size = \(font.pointSize), letterSpacing = \(letterSpacing)")
         
-        let letersPerLine = floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing))))
+        let letersPerLine = Int(floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing)))))
         let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
         print("leters per line = \(letersPerLine), lines = \(lines)")
 
@@ -52,14 +52,14 @@ class BookController: LeavesViewController {
         
         var contents = [String]()
         for lineStr in array {
-            if (Double(lineStr.characters.count) <= letersPerLine) {
+            if (lineStr.characters.count <= letersPerLine) {
                 contents.append(lineStr)
             } else {
                 var temp = lineStr
-                while temp.characters.count > 20 {
-                    let subText = (temp as NSString).substring(to: 20)
+                while temp.characters.count > letersPerLine {
+                    let subText = (temp as NSString).substring(to: letersPerLine)
                     contents.append(subText)
-                    temp = (temp as NSString).substring(from: 20)
+                    temp = (temp as NSString).substring(from: letersPerLine)
                 }
                 
                 if (temp != "") {
