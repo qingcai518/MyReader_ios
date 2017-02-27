@@ -129,7 +129,7 @@ class BookController: LeavesViewController {
         guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size) else {
             return print("fail to get image.")
         }
-
+        
         guard let cgImage = image.cgImage else {
             return
         }

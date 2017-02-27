@@ -96,37 +96,7 @@ class AppUtility {
         return image
     }
     
-    static func String2Image(imageString: String) -> UIImage? {
-        guard  let decodeBase64 = NSData(base64Encoded: imageString, options: .ignoreUnknownCharacters) else {
-            return nil
-        }
-        
-        let image = UIImage(data: decodeBase64)
-        
-        return image
+    static func text2Image(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
+
     }
-    
-//    //StringをUIImageに変換する
-//    func String2Image(imageString:String) -> UIImage?{
-//        
-//        //空白を+に変換する
-//        var base64String = imageString.stringByReplacingOccurrencesOfString(" ", withString:"+",options: nil, range:nil)
-//        
-//        //BASE64の文字列をデコードしてNSDataを生成
-//        let decodeBase64:NSData? =
-//            NSData(base64EncodedString:base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
-//        
-//        //NSDataの生成が成功していたら
-//        if let decodeSuccess = decodeBase64 {
-//            
-//            //NSDataからUIImageを生成
-//            let img = UIImage(data: decodeSuccess)
-//            
-//            //結果を返却
-//            return img
-//        }
-//        
-//        return nil
-//        
-//    }
 }
