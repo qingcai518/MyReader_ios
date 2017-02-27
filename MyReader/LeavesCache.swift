@@ -38,8 +38,7 @@ class LeavesCache : NSObject {
             return nil
         }
         context.clip(to: CGRect(x : 0, y: 0, width : self.pageSize.width, height : self.pageSize.height))
-        
-        print("self.dataSource.renderPageAtIndex")
+
         self.dataSource.renderPageAtIndex(index: pageIndex, inContext: context)
         
         guard let image = context.makeImage() else {
