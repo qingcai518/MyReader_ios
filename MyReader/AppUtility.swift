@@ -81,8 +81,6 @@ class AppUtility {
     static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
         let scale = UIScreen.main.scale
         
-        print("scale = \(scale)")
-        
         // イメージサイズ
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         
@@ -94,38 +92,6 @@ class AppUtility {
         UIGraphicsEndImageContext()
         
         return image
-    }
-    
-    static func getEncoding(tempData: Data) -> UInt {
-        let encode1 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_2312_80.rawValue))
-        let encode2 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
-        let encode3 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GBK_95.rawValue))
-        let encode4 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.HZ_GB_2312.rawValue))
-        let encode5 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
-        
-        if let _ = String.init(data: tempData, encoding: String.Encoding(rawValue: encode1)) {
-            print("encoding = gb 2312 80")
-            return encode1
-        }
-        
-        if let _ = String.init(data: tempData, encoding: String.Encoding(rawValue: encode2)) {
-            print("encoding = gb 18030 2000")
-            return encode2
-        }
-        
-        if let _ = String.init(data: tempData, encoding: String.Encoding(rawValue: encode3)) {
-            print("encoding = gbk 95")
-            return encode3
-        }
-        
-        if let _ = String.init(data: tempData, encoding: String.Encoding(rawValue: encode4)) {
-            print("encoding = hz gb 2312")
-            return encode4
-        }
-        
-        print("encoding = mac chinese simp")
-        return encode5
-        
     }
     
     static func getStringFromData(data: Data) -> String? {

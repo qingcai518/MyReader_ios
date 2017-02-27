@@ -25,14 +25,11 @@ class LeavesCache : NSObject {
     }
     
     func imageForPageIndex(pageIndex: Int) -> CGImage? {
-        print("imageForPageIndex")
         if (__CGSizeEqualToSize(self.pageSize, CGSize.zero)) {
             return nil
         }
         
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        print("color space = \(colorSpace)")
         
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
         
