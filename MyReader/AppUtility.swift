@@ -75,6 +75,19 @@ class AppUtility {
         return result
     }
     
+    static func image(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
+        let scale = UIScreen.main.scale
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        
+        attributedText.draw(in : CGRect(x: (screenWidth - textWidth)/ 2, y : screenHeight - textHeight - 24, width : textWidth, height: textHeight))
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+        
+    }
+    
     static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
         let scale = UIScreen.main.scale
         
