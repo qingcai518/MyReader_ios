@@ -7,17 +7,20 @@
 //
 
 import UIKit
+import RxSwift
 
 class BookController: LeavesViewController {
     @IBOutlet weak var indicator : UIActivityIndicatorView!
     
+    var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
     var pageContents = [NSMutableAttributedString]()
     
     let model = BookModel()
     let letterSpacing = 1.0
     let lineSpacing = CGFloat(6.0)
-    let font = UIFont.Helvetica16()
+//    let font = UIFont.Helvetica16()
+    let font = UIFont.Helvetica18()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,23 @@ class BookController: LeavesViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+//    private func setNotificationRecievers() {
+//        NotificationCenter.default.rx.notification(Notification.Name.NSFileHandleReadToEndOfFileCompletion).bindNext { [weak self] notification in
+//            self?.indicator.stopAnimating()
+//            guard let data = notification.userInfo?["NSFileHandleNotificationDataItem"] as? Data else {
+//                return print("can not get data.")
+//            }
+//            
+//            let encode = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
+//            
+//            guard let readStr = String.init(data: data, encoding: String.Encoding(rawValue: encode)) else {
+//                return print("can not get string from data.")
+//            }
+//            
+//            self?.setContents(text: readStr)
+//        }.addDisposableTo(disposeBag)
+//    }
 
     private func getData() {
         indicator.startAnimating()

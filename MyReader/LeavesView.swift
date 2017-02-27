@@ -290,12 +290,11 @@ class LeavesView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (!self.touchIsActive) {
-            print("touch is not action.")
             return
         }
         
         guard let touch = event?.allTouches?.first else {
-            return print("can not get touch.")
+            return
         }
         let touchPoint = touch.location(in: self)
         
@@ -307,12 +306,12 @@ class LeavesView: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (!self.touchIsActive) {
-            return print("touch is not active.")
+            return
         }
         
         self.touchIsActive = false
         guard let touch = event?.allTouches?.first else {
-            return print("can not get touch.")
+            return
         }
         
         let touchPoint = touch.location(in: self)

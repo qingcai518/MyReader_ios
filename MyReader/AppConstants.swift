@@ -19,7 +19,7 @@ let baseUrl = "https://main-myreader.ssl-lolipop.jp"
 let bookService = baseUrl + "/Books"
 
 // 毎回リードするテキストファイルのサイズを指定する.
-let readLength = 3072
+let readLength = 1024
 
 struct NotificationName {
     static let FinishDownload = "FinishDownload"
