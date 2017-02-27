@@ -44,6 +44,7 @@ class BookModel {
         let array = content.components(separatedBy: .newlines)
         
         var contents = [String]()
+        
         for lineStr in array {
             if (lineStr.characters.count <= letersPerLine) {
                 contents.append(lineStr)
@@ -61,6 +62,23 @@ class BookModel {
             }
         }
         
+//        for lineStr in array {
+//            if (lineStr.characters.count <= letersPerLine) {
+//                contents.append(lineStr)
+//            } else {
+//                var temp = lineStr
+//                while temp.characters.count > letersPerLine {
+//                    let subText = (temp as NSString).substring(to: letersPerLine)
+//                    contents.append(subText)
+//                    temp = (temp as NSString).substring(from: letersPerLine)
+//                }
+//                
+//                if (temp != "") {
+//                    contents.append(temp)
+//                }
+//            }
+//        }
+        
         let count = contents.count > Int(lines) ? Int(lines) : contents.count
         
         var contentValue = ""
@@ -68,8 +86,10 @@ class BookModel {
             let content = contents[i]
             
             // 章节分类.
-            if (content.contains("Chapter") || content.contains("章")) {
-                print("")
+            let contentTrim = content.trimmingCharacters(in: CharacterSet.whitespaces)
+            if (contentTrim.contains("Chapter") || (contentTrim.contains("第") && contentTrim.contains("章"))) {
+                self.addToPageContents(contentValue: contentValue)
+                contentValue = ""
             }
             
             if (i > 0 && i % count == 0) {
