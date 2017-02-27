@@ -76,8 +76,12 @@ class AppUtility {
     }
     
     static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
+        let scale = UIScreen.main.scale
+        
+        print("scale = \(scale)")
+        
         // イメージサイズ
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
         
         // 文字列を描画する.
         attributedText.draw(in: CGRect(x: (screenWidth - textWidth) / 2, y: screenHeight - textHeight - 24, width: textWidth, height: textHeight))
