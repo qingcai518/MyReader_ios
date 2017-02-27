@@ -45,6 +45,8 @@ class BookModel {
         
         var contents = [String]()
         
+        
+        // TODO. ここで各章の情報を設定する必要がある.
         for lineStr in array {
             if (lineStr.characters.count <= letersPerLine) {
                 contents.append(lineStr)
@@ -61,23 +63,6 @@ class BookModel {
                 }
             }
         }
-        
-//        for lineStr in array {
-//            if (lineStr.characters.count <= letersPerLine) {
-//                contents.append(lineStr)
-//            } else {
-//                var temp = lineStr
-//                while temp.characters.count > letersPerLine {
-//                    let subText = (temp as NSString).substring(to: letersPerLine)
-//                    contents.append(subText)
-//                    temp = (temp as NSString).substring(from: letersPerLine)
-//                }
-//                
-//                if (temp != "") {
-//                    contents.append(temp)
-//                }
-//            }
-//        }
         
         let count = contents.count > Int(lines) ? Int(lines) : contents.count
         
