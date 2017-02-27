@@ -14,6 +14,7 @@ class BookController: LeavesViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var bottomView : UIView!
     @IBOutlet weak var tapView: UIView!
     
     var disposeBag = DisposeBag()
@@ -47,7 +48,8 @@ class BookController: LeavesViewController {
     
     private func setPopupView() {
         titleLbl.text = bookInfo.bookName
-        topView.transform = topView.transform.translatedBy(x: 0, y: -64)
+        topView.transform = topView.transform.translatedBy(x: 0, y: -topView.bounds.height)
+        bottomView.transform = bottomView.transform.translatedBy(x: 0, y: bottomView.bounds.height)
     }
     
     private func addGestureRecognizer() {
@@ -57,20 +59,29 @@ class BookController: LeavesViewController {
                 return
             }
             
+            guard let bottom = self?.bottomView else {
+                return
+            }
+            
             self?.view.bringSubview(toFront: top)
+            self?.view.bringSubview(toFront: bottom)
             
             if (top.isHidden) {
                 top.isHidden = false
+                bottom.isHidden = false
                 
                 UIView.animate(withDuration: 0.3, animations: {
-                    top.transform = top.transform.translatedBy(x: 0, y: 64)
+                    top.transform = top.transform.translatedBy(x: 0, y: top.bounds.height)
+                    bottom.transform = bottom.transform.translatedBy(x: 0, y: -bottom.bounds.height)
                 }, completion: nil)
             } else {
                 UIView.animate(withDuration: 0.3, animations: {
-                    top.transform = top.transform.translatedBy(x: 0, y: -64)
+                    top.transform = top.transform.translatedBy(x: 0, y: -top.bounds.height)
+                    bottom.transform = bottom.transform.translatedBy(x: 0, y: bottom.bounds.height)
                 }, completion: { isFinished in
                     if (isFinished) {
                         top.isHidden = true
+                        bottom.isHidden = true
                     }
                 })
             }
@@ -100,5 +111,4 @@ class BookController: LeavesViewController {
         
         context.draw(cgImage, in: imageRect)
     }
-    
 }
