@@ -25,4 +25,129 @@ class AppUtility {
             UIImage(named: "icon_book4")!
         ]
     }
+    
+    static func getTextHeight(text: String, width: CGFloat, font: UIFont) -> CGFloat {
+        let attributedText = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
+        let textRect = attributedText.boundingRect(with: CGSize(width: width, height : 2000), options: .usesLineFragmentOrigin, context: nil)
+        
+        return textRect.height
+    }
+
+    static func getTextWidth(text: String, height: CGFloat, font: UIFont) -> CGFloat {
+        let attributedText = NSAttributedString(string: text, attributes: [NSFontAttributeName: font])
+        let textRect = attributedText.boundingRect(with: CGSize(width : 2000, height : height), options: .usesLineFragmentOrigin, context: nil)
+        
+        return textRect.width
+    }
+    
+    static func getSQLitePath() -> String? {
+        // path document
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        guard let documentPath = paths.first else {
+            return nil
+        }
+        
+        let path = documentPath + "/MyReader.sqlite3"
+        return path
+    }
+    
+    // dummy.
+    static func getFileSize(fileSize : String) -> Int {
+        if (fileSize.contains("KB")) {
+            let range = fileSize.range(of: "KB")!
+            var value = fileSize.substring(to: range.lowerBound)
+            value = value + "000"
+            return (value as NSString).integerValue
+        } else if (fileSize.contains("MB")) {
+            let range = fileSize.range(of: "MB")!
+            var value = fileSize.substring(to: range.lowerBound)
+            value = value + "000000"
+            return (value as NSString).integerValue
+        } else {
+            return (fileSize as NSString).integerValue
+        }
+    }
+    
+    static func getDigital2 (value: Double) -> String {
+        var result = "".appendingFormat("%.2f", value)
+        result = "\(result)%"
+        
+        return result
+    }
+    
+    /*
+     * 画像を文字列から取得する処理.
+     */
+    static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
+        let scale = UIScreen.main.scale
+        
+        // イメージサイズ
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        
+        // 文字列を描画する.
+        attributedText.draw(in: CGRect(x: (screenWidth - textWidth) / 2, y: screenHeight - textHeight - 24, width: textWidth, height: textHeight))
+        
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
+    static func getEncoding(subData: Data) -> UInt {
+        let encode1 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_2312_80.rawValue))
+        let encode2 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
+        let encode3 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GBK_95.rawValue))
+        let encode4 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.HZ_GB_2312.rawValue))
+        let encode5 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
+        
+        if let _ = String.init(data: subData, encoding: String.Encoding(rawValue: encode1)) {
+            return encode1
+        }
+        
+        if let _ = String.init(data: subData, encoding: String.Encoding(rawValue: encode2)) {
+            return encode2
+        }
+        
+        if let _ = String.init(data: subData, encoding: String.Encoding(rawValue: encode3)) {
+            return encode3
+        }
+        
+        if let _ = String.init(data: subData, encoding: String.Encoding(rawValue: encode4)) {
+            return encode4
+        }
+        
+        return encode5
+    }
+    
+    static func getStringFromData(data: Data) -> String? {
+        let encode1 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_2312_80.rawValue))
+        let encode2 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
+        let encode3 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GBK_95.rawValue))
+        let encode4 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.HZ_GB_2312.rawValue))
+        let encode5 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode1)) {
+            print("gb 2312 80.")
+            return text
+        }
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode2)) {
+            print("gb 18030 2000")
+            return text
+        }
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode3)) {
+            print("gbk 95.")
+            return text
+        }
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode4)) {
+            print("hz gb 2312.")
+            return text
+        }
+        
+        print("mac chinese simp.")
+        return String.init(data: data, encoding: String.Encoding(rawValue: encode5))
+    }
 }
