@@ -69,19 +69,30 @@
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" red="0.86622596149999997" green="0.35365022779999999" blue="0.11312403140000001" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPN-Jv-6Oq">
+                                <rect key="frame" x="165" y="0.0" width="44" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="bNI-K9-IH5"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qrE-oj-kwb" secondAttribute="trailing" id="7Wm-yh-QMo"/>
+                            <constraint firstItem="lPN-Jv-6Oq" firstAttribute="top" secondItem="upk-Xn-zxu" secondAttribute="top" id="Arj-ul-vSF"/>
+                            <constraint firstItem="lPN-Jv-6Oq" firstAttribute="centerX" secondItem="upk-Xn-zxu" secondAttribute="centerX" id="FWw-An-saE"/>
                             <constraint firstItem="m6U-6c-yuq" firstAttribute="centerY" secondItem="upk-Xn-zxu" secondAttribute="centerY" id="ayp-dO-Uet"/>
                             <constraint firstItem="m6U-6c-yuq" firstAttribute="centerX" secondItem="upk-Xn-zxu" secondAttribute="centerX" id="c54-d0-HYi"/>
                             <constraint firstItem="qrE-oj-kwb" firstAttribute="leading" secondItem="upk-Xn-zxu" secondAttribute="leading" id="kgg-c5-JLD"/>
                             <constraint firstItem="qrE-oj-kwb" firstAttribute="top" secondItem="upk-Xn-zxu" secondAttribute="top" id="rh3-L0-aom"/>
+                            <constraint firstItem="aWc-JK-Rhm" firstAttribute="top" secondItem="lPN-Jv-6Oq" secondAttribute="bottom" id="wzN-xh-Z7o"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backBtn" destination="Z3g-xh-r8M" id="EbN-fk-9JR"/>
                         <outlet property="indicator" destination="m6U-6c-yuq" id="fnJ-j1-Wmv"/>
+                        <outlet property="tapView" destination="lPN-Jv-6Oq" id="Gb0-l8-PeG"/>
                         <outlet property="titleLbl" destination="Ptn-YS-hfg" id="Hhf-hb-VKn"/>
                         <outlet property="topView" destination="qrE-oj-kwb" id="vBK-xa-aQ4"/>
                     </connections>

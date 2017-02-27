@@ -14,6 +14,7 @@ class BookController: LeavesViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var tapView: UIView!
     
     var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
@@ -75,7 +76,8 @@ class BookController: LeavesViewController {
             }
             
         }.addDisposableTo(disposeBag)
-        self.view.addGestureRecognizer(recognizer)
+        self.tapView.addGestureRecognizer(recognizer)
+        self.view.bringSubview(toFront: tapView)
     }
     
     // #program mark
