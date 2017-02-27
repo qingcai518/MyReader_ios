@@ -42,17 +42,15 @@ class BookController: LeavesViewController {
     }
 
     private func setContents(text: String) {
+        print("font leading = \(font.leading), size = \(font.pointSize)")
         
-        print("text width = \(textWidth)")
-        print("text height = \(textHeight)")
-
-        let letersPerLine = floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing))))
+        
+//        let letersPerLine = floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing))))
+        
+        let letersPerLine = floor(Double(textWidth / (font.leading + CGFloat(letterSpacing))))
         let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
-        
         print("leters per line = \(letersPerLine), lines = \(lines)")
 
-        
-        
         let array = text.components(separatedBy: .newlines)
         
         var contents = [String]()
