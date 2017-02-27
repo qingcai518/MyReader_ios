@@ -38,9 +38,6 @@ class CloudDetailModel {
                 
                 let completed = progress.completedUnitCount
                 self.progressValue.value = 100 * Double(completed) / Double(fileSize)
-                
-                print("progress value = \(self.progressValue.value)")
-                
             }).response(completionHandler: { [weak self] response in
                 guard var localPath = response.destinationURL?.absoluteString else {return}
                 if (localPath.contains("file://")) {

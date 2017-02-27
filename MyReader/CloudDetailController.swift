@@ -98,7 +98,6 @@ extension CloudDetailController: UITableViewDataSource {
         
         model.progressValue.asObservable().bindNext { value in
             let valueStr = AppUtility.getDigital2(value: value)
-            print("value str = \(valueStr)")
             
             cell.progressLbl.text = valueStr
         }.addDisposableTo(cell.disposeBag)
