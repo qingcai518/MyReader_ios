@@ -11,17 +11,24 @@ import RxSwift
 
 class BookController: LeavesViewController {
     @IBOutlet weak var indicator : UIActivityIndicatorView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var titleLbl: UILabel!
     
     var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
     let model = BookModel()
 
+    @IBAction func doClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = bookInfo.bookName
         getData()
         addGestureRecognizer()
+        setPopupView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,10 +44,36 @@ class BookController: LeavesViewController {
         }
     }
     
+    private func setPopupView() {
+        titleLbl.text = bookInfo.bookName
+        topView.transform = topView.transform.translatedBy(x: 0, y: -64)
+    }
+    
     private func addGestureRecognizer() {
         let recognizer = UITapGestureRecognizer()
-        recognizer.rx.event.asObservable().bindNext { sender in
-            print("tap the screen.")
+        recognizer.rx.event.asObservable().bindNext { [weak self] sender in
+            guard let top = self?.topView else {
+                return
+            }
+            
+            self?.view.bringSubview(toFront: top)
+            
+            if (top.isHidden) {
+                top.isHidden = false
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    top.transform = top.transform.translatedBy(x: 0, y: 64)
+                }, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    top.transform = top.transform.translatedBy(x: 0, y: -64)
+                }, completion: { isFinished in
+                    if (isFinished) {
+                        top.isHidden = true
+                    }
+                })
+            }
+            
         }.addDisposableTo(disposeBag)
         self.view.addGestureRecognizer(recognizer)
     }
