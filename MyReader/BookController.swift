@@ -52,6 +52,7 @@ class BookController: LeavesViewController {
         print("leters per line = \(letersPerLine), lines = \(lines)")
 
         
+        
         let array = text.components(separatedBy: .newlines)
         
         var contents = [String]()
