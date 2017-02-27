@@ -33,6 +33,18 @@ class BookController: LeavesViewController {
         super.didReceiveMemoryWarning()
     }
     
+    private func setNotificationRecivers() {
+        NotificationCenter.default.rx.notification(Notification.Name.NSFileHandleReadToEndOfFileCompletion).bindNext { [weak self] sender in
+            guard let data = sender.userInfo?["NSFileHandleNotificationDataItem"] as? Data else {
+                return print("can not get data.")
+            }
+            
+            let readStr = AppUtility.getStringFromData(data: data)
+            self?.setContents(text: readStr)
+            
+        }.addDisposableTo(disposeBag)
+    }
+    
 //    private func setNotificationRecievers() {
 //        NotificationCenter.default.rx.notification(Notification.Name.NSFileHandleReadToEndOfFileCompletion).bindNext { [weak self] notification in
 //            self?.indicator.stopAnimating()
@@ -50,23 +62,33 @@ class BookController: LeavesViewController {
 //        }.addDisposableTo(disposeBag)
 //    }
 
+//    private func getData() {
+//        indicator.startAnimating()
+//        model.readFile(bookInfo: bookInfo) { [weak self] value in
+//            self?.indicator.stopAnimating()
+//            guard let text = value else {
+//                return
+//            }
+//            self?.setContents(text: text)
+//        }
+//    }
+    
     private func getData() {
         indicator.startAnimating()
-        model.readFile(bookInfo: bookInfo) { [weak self] value in
-            self?.indicator.stopAnimating()
-            guard let text = value else {
-                return
-            }
-            self?.setContents(text: text)
-        }
+        model.readFile(bookInfo: bookInfo)
     }
 
-    private func setContents(text: String) {
+    private func setContents(text: String?) {
+        guard let content = text else {
+            self.indicator.stopAnimating()
+            return
+        }
+        
         let letersPerLine = Int(floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing)))))
         let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
         print("leters per line = \(letersPerLine), lines = \(lines)")
 
-        let array = text.components(separatedBy: .newlines)
+        let array = content.components(separatedBy: .newlines)
         
         var contents = [String]()
         for lineStr in array {
@@ -110,6 +132,7 @@ class BookController: LeavesViewController {
         }
 
         leavesView.reloadData()
+        self.indicator.stopAnimating()
     }
     
     private func addToPageContents(contentValue : String) {

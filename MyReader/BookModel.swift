@@ -9,6 +9,12 @@
 import Foundation
 
 class BookModel {
+    func readFile(bookInfo: LocalBookInfo) {
+        let fileHandle = FileHandle(forReadingAtPath : bookInfo.localPath)
+        fileHandle?.seek(toFileOffset: 0)
+        fileHandle?.readToEndOfFileInBackgroundAndNotify()
+    }
+    
     func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
         DispatchQueue.main.async {
             let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
@@ -25,10 +31,6 @@ class BookModel {
             
             fileHandle?.seek(toFileOffset: 0)
             
-//            guard let data = fileHandle?.readData(ofLength: 10240) else {
-//                print("read no data.")
-//                return completion(nil)
-//            }
             guard let data = fileHandle?.readDataToEndOfFile() else {
                 print("read no data.")
                 return completion(nil)
@@ -37,8 +39,6 @@ class BookModel {
             let readStr = String.init(data: data, encoding: String.Encoding(rawValue: encode))
             
             DispatchQueue.main.async {
-                print("read str = \(readStr)")
-                
                 return completion(readStr)
             }
         }

@@ -127,4 +127,30 @@ class AppUtility {
         return encode5
         
     }
+    
+    static func getStringFromData(data: Data) -> String? {
+        let encode1 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_2312_80.rawValue))
+        let encode2 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
+        let encode3 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GBK_95.rawValue))
+        let encode4 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.HZ_GB_2312.rawValue))
+        let encode5 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode1)) {
+            return text
+        }
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode2)) {
+            return text
+        }
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode3)) {
+            return text
+        }
+        
+        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode4)) {
+            return text
+        }
+        
+        return String.init(data: data, encoding: String.Encoding(rawValue: encode5))
+    }
 }
