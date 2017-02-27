@@ -136,21 +136,26 @@ class AppUtility {
         let encode5 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
         
         if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode1)) {
+            print("gb 2312 80.")
             return text
         }
         
         if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode2)) {
+            print("gb 18030 2000")
             return text
         }
         
         if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode3)) {
+            print("gbk 95.")
             return text
         }
         
         if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode4)) {
+            print("hz gb 2312.")
             return text
         }
         
+        print("mac chinese simp.")
         return String.init(data: data, encoding: String.Encoding(rawValue: encode5))
     }
 }

@@ -10,9 +10,13 @@ import Foundation
 
 class BookModel {
     func readFile(bookInfo: LocalBookInfo) {
-        let fileHandle = FileHandle(forReadingAtPath : bookInfo.localPath)
-        fileHandle?.seek(toFileOffset: 0)
-        fileHandle?.readToEndOfFileInBackgroundAndNotify()
+        print("11111")
+        
+        DispatchQueue.global().async {
+            let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
+            fileHandle?.seek(toFileOffset: 0)
+            fileHandle?.readToEndOfFileInBackgroundAndNotify()
+        }
     }
     
     func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {

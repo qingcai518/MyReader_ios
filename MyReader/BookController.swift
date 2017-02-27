@@ -26,6 +26,7 @@ class BookController: LeavesViewController {
         super.viewDidLoad()
         
         self.title = bookInfo.bookName
+        setNotificationRecivers()
         getData()
     }
 
