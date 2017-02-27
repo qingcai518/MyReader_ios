@@ -11,7 +11,6 @@ import Foundation
 class BookModel {
     func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
          let encode = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
-//        let encode = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_2312_80.rawValue))
         
         DispatchQueue.global().async {
             let readHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
