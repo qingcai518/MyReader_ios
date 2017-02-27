@@ -18,7 +18,7 @@ let textHeight = screenHeight - UIApplication.shared.statusBarFrame.size.height 
 let baseUrl = "https://main-myreader.ssl-lolipop.jp"
 let bookService = baseUrl + "/Books"
 
-let readLength = 2048
+let readLength = 1024 * 10
 
 struct NotificationName {
     static let FinishDownload = "FinishDownload"
