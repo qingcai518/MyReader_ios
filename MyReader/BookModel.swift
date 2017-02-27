@@ -105,7 +105,7 @@ class BookModel {
             self.addToPageContents(contentValue: contentValue)
         }
     }
-    
+
     private func addToPageContents(contentValue : String) {
         let attributedText = NSMutableAttributedString(string: contentValue)
         let range = NSMakeRange(0, attributedText.length)
