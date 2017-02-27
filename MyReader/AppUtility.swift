@@ -97,6 +97,14 @@ class AppUtility {
     }
     
     static func text2Image(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
-
+        
+        
+        UIGraphicsBeginPDFContextToData(data, CGRect(x: screenWidth - textWidth) / 2, y: screenHeight - textHeight - 24, width : textWidth, height : textHeight))
+        
+        
+        
+//        NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"YOLO" attributes:nil];
+//        NSData *data = [str dataFromRange:(NSRange){0, [str length]} documentAttributes:@{NSDocumentTypeDocumentAttribute: NSRTFTextDocumentType} error:NULL];
+//        [data writeToFile:@"/me.rtf" atomically:YES];
     }
 }
