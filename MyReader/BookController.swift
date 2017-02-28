@@ -43,9 +43,8 @@ class BookController: LeavesViewController {
         model.readFile(bookInfo: bookInfo) { [weak self] value in
             self?.indicator.stopAnimating()
             
-            // yと見込み対象ページをsh亭する.
+            // 前回読み込んだページ数を取得する.
             let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
-            print("current inde x= \(currentIndex)")
             
             self?.leavesView.reloadData()
             self?.leavesView.currentPageIndex = currentIndex
@@ -104,11 +103,11 @@ class BookController: LeavesViewController {
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
-        print("index = \(index)")
-        
-        // 現在のページをUserDefaultに保存する.
-        UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
-        UserDefaults.standard.synchronize()
+        // 現在のページ数を保存する.
+        if (index > 0) {
+            UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
+            UserDefaults.standard.synchronize()
+        }
 
         let text = model.pageContents[index]
 
