@@ -31,7 +31,7 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func toPreChapter() {
-        
+        self.setChapterInfo()
     }
     
     @IBAction func toNextChapter() {
@@ -113,6 +113,7 @@ class BookController: LeavesViewController {
     private func setChapterInfo() {
         let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
 
+        var chapterNumber : Int!
         for chapterInfo in model.chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
@@ -121,9 +122,17 @@ class BookController: LeavesViewController {
             
             if (currentIndex >= startIndex && currentIndex <= endIndex) {
                 self.chapterLbl.text = chapterName
+                chapterNumber = chapterInfo.chapterNumber
                 break
             }
         }
+        
+        if (chapterNumber == nil) {
+            return
+        }
+        
+        preBtn.isEnabled = chapterNumber != 0
+        nextBtn.isEnabled = chapterNumber != model.chapterInfos.count - 1
     }
     
     // #program mark  delegate.
