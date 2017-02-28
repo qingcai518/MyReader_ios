@@ -14,14 +14,13 @@ protocol LeavesViewDataSource : NSObjectProtocol {
 }
 
 protocol LeavesViewDelegate: NSObjectProtocol {
-//    optional func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: UInt)
-//    optional func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: UInt)
     func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int)
     func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int)
 }
 
 class LeavesView: UIView {
     var delegate : LeavesViewDelegate!
+    
 //    var targetWidth = CGFloat(0)
 //    var preferredTargetWidth = CGFloat(0)
 //    var currentPageIndex = 0
@@ -37,8 +36,6 @@ class LeavesView: UIView {
     var bottomPageShadow: CAGradientLayer!
     
     var numberOfPages = 0
-//    var leafEdge = CGFloat(1.0)
-//    var pageSize : CGSize!
     var pageSize = CGSize(width: 0, height: 0)
     
     var touchBeganPoint : CGPoint!
@@ -83,7 +80,7 @@ class LeavesView: UIView {
             CATransaction.commit()
         }
     }
-
+    
     func initCommon() {
         self.clipsToBounds = true
         topPage = CALayer()
@@ -198,15 +195,19 @@ class LeavesView: UIView {
     }
     
     func willTurnToPageAtIndex(index: Int) {
-        if (self.delegate.responds(to: #selector(LeavesView.willTurnToPageAtIndex(index:)))) {
-            self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
-        }
+        self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
+        
+//        if (self.delegate.responds(to: #selector(LeavesView.willTurnToPageAtIndex(index:)))) {
+//            self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
+//        }
     }
     
     func didTurnToPageAtIndex(index: Int) {
-        if (self.delegate.responds(to: #selector(LeavesView.didTurnToPageAtIndex(index:)))) {
-            self.delegate.leavesView(leavesView: self, didTurnToPageAtIndex: index)
-        }
+        self.delegate.leavesView(leavesView: self, didTurnToPageAtIndex: index)
+        
+//        if (self.delegate.responds(to: #selector(LeavesView.didTurnToPageAtIndex(index:)))) {
+//            self.delegate.leavesView(leavesView: self, didTurnToPageAtIndex: index)
+//        }
     }
     
     func didTurnPageBackward() {
@@ -259,7 +260,7 @@ class LeavesView: UIView {
             self.pageCache.dataSource = value
         }
     }
-
+    
     // #pragma mark UIResponder
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (interactionLocked == true) {

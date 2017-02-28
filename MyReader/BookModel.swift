@@ -8,12 +8,15 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class BookModel {
     var pageContents = [NSMutableAttributedString]()
     let letterSpacing = 1.0
     let lineSpacing = CGFloat(6.0)
     let font = UIFont.Helvetica18()
+    var currentChapter = Variable("")
+    var chapterInfos = [ChapterInfo]()
 
     func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
         DispatchQueue.global().async { [weak self] in
@@ -32,24 +35,6 @@ class BookModel {
         }
     }
     
-//    func readFile(bookInfo: LocalBookInfo, completion: @escaping (String?) -> Void) {
-//        DispatchQueue.global().async { [weak self] in
-//            let fileHandler = FileHandle(forReadingAtPath: bookInfo.localPath)
-//            fileHandler?.seek(toFileOffset: 0)
-//            guard let data = fileHandler?.readDataToEndOfFile() else {
-//                print("read no data.")
-//                return completion(nil)
-//            }
-//            let subData = data.subdata(in: 0..<625)
-//            let encoding = AppUtility.getEncoding(subData: subData)
-//            
-//            let readStr = String.init(data: data, encoding: String.Encoding(rawValue: encoding))
-//            self?.setContents(text: readStr)
-//            
-//            return completion(readStr)
-//        }
-//    }
-    
     private func setContents(text: String?) {
         guard let content = text else {
             return
@@ -62,6 +47,7 @@ class BookModel {
         let array = content.components(separatedBy: .newlines)
         
         var contents = [String]()
+        
         for lineStr in array {
             if (lineStr.characters.count <= letersPerLine) {
                 contents.append(lineStr)
@@ -82,8 +68,28 @@ class BookModel {
         let count = contents.count > Int(lines) ? Int(lines) : contents.count
         
         var contentValue = ""
+        var startPage = 0
+        var chapterNumber = 0
+        var chapterName = "序言"
         for i in 0..<contents.count {
             let content = contents[i]
+ 
+            // 章节分类.
+            let contentTrim = content.trimmingCharacters(in: CharacterSet.whitespaces)
+            if (contentTrim.hasPrefix("Chapter") || (contentTrim.hasPrefix("第") && contentTrim.contains("章"))) {
+                // 把当前章添加入数组.
+                let endPage = pageContents.count
+                let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage: endPage)
+                self.chapterInfos.append(chapterInfo)
+                
+                // 设置下一章的信息.
+                chapterNumber = chapterNumber + 1
+                chapterName = contentTrim
+                startPage = endPage + 1
+                
+                self.addToPageContents(contentValue: contentValue)
+                contentValue = ""
+            }
             
             if (i > 0 && i % count == 0) {
                 self.addToPageContents(contentValue: contentValue)
@@ -94,11 +100,27 @@ class BookModel {
             contentValue.append("\n")
         }
         
+        if (chapterNumber > 0) {
+            // 添加最后一章的信息.
+            let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage:  self.pageContents.count)
+            chapterInfos.append(chapterInfo)
+        }
+        
         if (contentValue != "") {
             self.addToPageContents(contentValue: contentValue)
         }
+        
+        // dummy. print chapter infos.
+        for chapterInfo in chapterInfos {
+            let chapterNumber = chapterInfo.chapterNumber
+            let chapterName = chapterInfo.chapterName
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            print("chapterNumber = \(chapterNumber), chapterName = \(chapterName), startIndex = \(startIndex), endIndex = \(endIndex)")
+        }
     }
-    
+
     private func addToPageContents(contentValue : String) {
         let attributedText = NSMutableAttributedString(string: contentValue)
         let range = NSMakeRange(0, attributedText.length)

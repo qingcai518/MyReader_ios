@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C56DF071E6513B500812A16 /* ChapterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C56DF061E6513B500812A16 /* ChapterInfo.swift */; };
 		3C67EDC01E5C0B0300B5156D /* CloudDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C67EDBF1E5C0B0300B5156D /* CloudDetail.storyboard */; };
 		3C67EDC21E5C0C8A00B5156D /* CloudDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC11E5C0C8A00B5156D /* CloudDetailController.swift */; };
 		3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC31E5C0CB600B5156D /* CloudDetailCell.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C56DF061E6513B500812A16 /* ChapterInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterInfo.swift; sourceTree = "<group>"; };
 		3C67EDBF1E5C0B0300B5156D /* CloudDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CloudDetail.storyboard; sourceTree = "<group>"; };
 		3C67EDC11E5C0C8A00B5156D /* CloudDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudDetailController.swift; sourceTree = "<group>"; };
 		3C67EDC31E5C0CB600B5156D /* CloudDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudDetailCell.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				3C67EDD11E5D33D500B5156D /* Book.storyboard */,
 				3C67EDD31E5D346200B5156D /* BookController.swift */,
 				3C67EDD51E5D34D500B5156D /* BookModel.swift */,
+				3C56DF061E6513B500812A16 /* ChapterInfo.swift */,
 			);
 			name = BookPage;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */,
 				3C999BDF1E5AEFEC0095A696 /* CloudModel.swift in Sources */,
 				3C999BBD1E5ADD070095A696 /* NavigationController.swift in Sources */,
+				3C56DF071E6513B500812A16 /* ChapterInfo.swift in Sources */,
 				3C67EDC91E5C23B000B5156D /* CloudDetailModel.swift in Sources */,
 				3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */,
 				3C999BCA1E5AE1C00095A696 /* Navi3Controller.swift in Sources */,

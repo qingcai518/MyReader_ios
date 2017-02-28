@@ -15,14 +15,121 @@ class BookController: LeavesViewController {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var bottomView : UIView!
+    @IBOutlet weak var chapterLbl: UILabel!
+    @IBOutlet weak var preBtn: UIButton!
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var slider: UISlider!
+    
     @IBOutlet weak var tapView: UIView!
     
     var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
     let model = BookModel()
-
+    
     @IBAction func doClose() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func doSlider(sender: UISlider) {
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        var currentChapter : ChapterInfo!
+        for chapterInfo in model.chapterInfos {
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                currentChapter = chapterInfo
+                break
+            }
+        }
+        
+        if (currentChapter == nil) {
+            return
+        }
+        
+        let pageIndex = currentChapter.startPage + Int(ceil(sender.value))
+        
+        leavesView.reloadData()
+        leavesView.currentPageIndex = pageIndex
+        
+        // 現在のページを保存する.
+        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage)
+        UserDefaults.standard.synchronize()
+    }
+    
+    @IBAction func toPreChapter() {
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        var preInfo : ChapterInfo!
+        
+        for chapterInfo in model.chapterInfos {
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                break
+            }
+            preInfo = chapterInfo
+        }
+        
+        if (preInfo != nil) {
+            let startIndex = preInfo.startPage
+            self.leavesView.reloadData()
+            self.leavesView.currentPageIndex = startIndex
+            
+            // 現在のページを保存する.
+            UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
+            UserDefaults.standard.synchronize()
+            
+            // 章の名前を設定する.
+            self.chapterLbl.text = preInfo.chapterName
+            
+            // slideの値を設定する.
+            slider.maximumValue = Float(preInfo.endPage - startIndex)
+            slider.value = 1.0
+            
+            // ボタンの活性非活性を設定する.
+            self.preBtn.isEnabled = preInfo.chapterNumber != 0
+            self.nextBtn.isEnabled = preInfo.chapterNumber != model.chapterInfos.count - 1
+        }
+    }
+    
+    @IBAction func toNextChapter() {
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        var nextInfo : ChapterInfo!
+        
+        for i in (0..<model.chapterInfos.count).reversed() {
+            let chapterInfo = model.chapterInfos[i]
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                break
+            }
+            
+            nextInfo = chapterInfo
+        }
+        
+        if (nextInfo != nil) {
+            let startIndex = nextInfo.startPage
+            self.leavesView.reloadData()
+            self.leavesView.currentPageIndex = startIndex
+            
+            // 現在のページを保存する.
+            UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
+            UserDefaults.standard.synchronize()
+            
+            // 章の名前を設定する.
+            self.chapterLbl.text = nextInfo.chapterName
+            
+            // slideの値を設定する.
+            slider.maximumValue = Float(nextInfo.endPage - startIndex)
+            slider.value = 1.0
+//            slider.value = 1.0 / Float(nextInfo.endPage - startIndex)
+            
+            // ボタンの活性・非活性を設定する.
+            self.preBtn.isEnabled = nextInfo.chapterNumber != 0
+            self.nextBtn.isEnabled = nextInfo.chapterNumber != model.chapterInfos.count - 1
+        }
     }
     
     override func viewDidLoad() {
@@ -42,7 +149,12 @@ class BookController: LeavesViewController {
         indicator.startAnimating()
         model.readFile(bookInfo: bookInfo) { [weak self] value in
             self?.indicator.stopAnimating()
+            
+            // 前回読み込んだページ数を取得する.
+            let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
             self?.leavesView.reloadData()
+            self?.leavesView.currentPageIndex = currentIndex
+            
         }
     }
     
@@ -67,6 +179,8 @@ class BookController: LeavesViewController {
             self?.view.bringSubview(toFront: bottom)
             
             if (top.isHidden) {
+                self?.setChapterInfo()
+                
                 top.isHidden = false
                 bottom.isHidden = false
                 
@@ -85,22 +199,76 @@ class BookController: LeavesViewController {
                     }
                 })
             }
-            
         }.addDisposableTo(disposeBag)
         self.tapView.addGestureRecognizer(recognizer)
         self.view.bringSubview(toFront: tapView)
     }
     
-    // #program mark
+    private func setChapterInfo() {
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+
+        var chapterNumber : Int!
+//        var sliderValue = Float(0.0)
+        for chapterInfo in model.chapterInfos {
+            let chapterName = chapterInfo.chapterName
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                self.chapterLbl.text = chapterName
+                chapterNumber = chapterInfo.chapterNumber
+                
+                // slideの内容を設定する.
+                if (endIndex > startIndex) {
+                    slider.maximumValue = Float(endIndex - startIndex)
+                    slider.value = Float(currentIndex - startIndex)
+                } else {
+                    slider.value = 1.0
+                }
+                
+//                if (endIndex > startIndex) {
+//                    sliderValue = Float(currentIndex - startIndex) / Float(endIndex - startIndex)
+//                } else {
+//                    sliderValue = 1.0
+//                }
+                
+                break
+            }
+        }
+        
+        if (chapterNumber == nil) {
+            return
+        }
+        
+        // ボタンの活性・非活性を設定する.
+        preBtn.isEnabled = chapterNumber != 0
+        nextBtn.isEnabled = chapterNumber != model.chapterInfos.count - 1
+    }
+
+    // #program mark  delegate.
+    override func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
+    }
+    
+    override func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
+        // 現在のページ数を保存する.
+        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage)
+        UserDefaults.standard.synchronize()
+        
+        if (!topView.isHidden) {
+            // popViewが表示される際に、更新を実施する.
+            setChapterInfo()
+        }
+    }
+
+    // #program mark  dataSource.
     override func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
         return model.pageContents.count
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
         let text = model.pageContents[index]
-
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-
         guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size) else {
             return print("fail to get image.")
         }
