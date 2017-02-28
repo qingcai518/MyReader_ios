@@ -100,6 +100,18 @@ class BookController: LeavesViewController {
         self.view.bringSubview(toFront: tapView)
     }
     
+    private func setChapterInfo(currentIndex: Int) {
+        for chapterInfo in model.chapterInfos {
+            let chapterName = chapterInfo.chapterName
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                self.chapterLbl.text = chapterName
+            }
+        }
+    }
+
     // #program mark
     override func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
         return model.pageContents.count
@@ -109,7 +121,6 @@ class BookController: LeavesViewController {
         // 現在のページ数を保存する.
         print("index = \(index)")
         if (index > 0) {
-            
             if (preIndex < index) {
                 UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
             } else {
@@ -120,16 +131,7 @@ class BookController: LeavesViewController {
         }
         
         // 判断在第几章.
-        
-        for chapterInfo in model.chapterInfos {
-            let chapterName = chapterInfo.chapterName
-            let startIndex = chapterInfo.startPage
-            let endIndex = chapterInfo.endPage
-            if (index >= startIndex && index <= endIndex) {
-                self.chapterLbl.text = chapterName
-                break
-            }
-        }
+        self.setChapterInfo(currentIndex: index)
         
         let text = model.pageContents[index]
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
