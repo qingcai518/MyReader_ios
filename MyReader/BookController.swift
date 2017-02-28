@@ -49,7 +49,7 @@ class BookController: LeavesViewController {
             self.leavesView.reloadData()
             self.leavesView.currentPageIndex = startIndex
             
-            // 現在のページを設定する.
+            // 現在のページを保存する.
             UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
             UserDefaults.standard.synchronize()
             
@@ -65,7 +65,39 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func toNextChapter() {
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        var nextInfo : ChapterInfo!
         
+        for i in (0..<model.chapterInfos.count).reversed() {
+            let chapterInfo = model.chapterInfos[i]
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                break
+            }
+            
+            nextInfo = chapterInfo
+        }
+        
+        if (nextInfo != nil) {
+            let startIndex = nextInfo.startPage
+            self.leavesView.reloadData()
+            self.leavesView.currentPageIndex = startIndex
+            
+            // 現在のページを保存する.
+            UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
+            UserDefaults.standard.synchronize()
+            
+            // 章の名前を設定する.
+            self.chapterLbl.text = nextInfo.chapterName
+            
+            // slideの値を設定する.
+            
+            // ボタンの活性・非活性を設定する.
+            self.preBtn.isEnabled = nextInfo.chapterNumber != 0
+            self.nextBtn.isEnabled = nextInfo.chapterNumber != model.chapterInfos.count - 1
+        }
     }
     
     override func viewDidLoad() {
@@ -173,6 +205,11 @@ class BookController: LeavesViewController {
         // 現在のページ数を保存する.
         UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage)
         UserDefaults.standard.synchronize()
+        
+        if (!topView.isHidden) {
+            // popViewが表示される際に、更新を実施する.
+            setChapterInfo()
+        }
     }
 
     // #program mark  dataSource.
