@@ -44,9 +44,13 @@ class BookController: LeavesViewController {
             self?.indicator.stopAnimating()
             self?.leavesView.reloadData()
             
-            // 読み込みのページ数を指定する.
+            // 読み込み対象ページを指定する.
             let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
-            self?.leavesView.currentPageIndex = currentIndex
+            self?.leavesView.currentPageIndex  = currentIndex
+            
+            print("current page = \(currentIndex)")
+            
+            
         }
     }
     
