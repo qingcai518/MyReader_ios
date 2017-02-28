@@ -107,6 +107,7 @@ class BookController: LeavesViewController {
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
         // 現在のページ数を保存する.
+        print("index = \(index)")
         if (index > 0) {
             
             if (preIndex < index) {
@@ -117,11 +118,20 @@ class BookController: LeavesViewController {
             
             UserDefaults.standard.synchronize()
         }
-
+        
+        // 判断在第几章.
+        for chapterInfo in model.chapterInfos {
+            let chapterName = chapterInfo.chapterName
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            if (index >= startIndex && index <= endIndex) {
+                self.chapterLbl.text = chapterName
+                break
+            }
+        }
+        
         let text = model.pageContents[index]
-
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-
         guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size) else {
             return print("fail to get image.")
         }
