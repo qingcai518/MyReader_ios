@@ -85,7 +85,7 @@ class BookModel {
                 // 设置下一章的信息.
                 chapterNumber = chapterNumber + 1
                 chapterName = contentTrim
-                startPage = i
+                startPage = endPage + 1
                 
                 self.addToPageContents(contentValue: contentValue)
                 contentValue = ""
@@ -103,7 +103,7 @@ class BookModel {
         
         if (chapterNumber > 0) {
             // 添加最后一章的信息.
-            let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage: contents.count - 1 )
+            let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage:  self.pageContents.count)
             chapterInfos.append(chapterInfo)
         }
         
