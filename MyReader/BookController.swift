@@ -20,6 +20,8 @@ class BookController: LeavesViewController {
     var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
     let model = BookModel()
+    
+    var preIndex = 0
 
     @IBAction func doClose() {
         self.dismiss(animated: true, completion: nil)
@@ -45,6 +47,7 @@ class BookController: LeavesViewController {
             
             // 前回読み込んだページ数を取得する.
             let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+            preIndex = currentIndex
             
             self?.leavesView.reloadData()
             self?.leavesView.currentPageIndex = currentIndex
@@ -91,7 +94,6 @@ class BookController: LeavesViewController {
                     }
                 })
             }
-            
         }.addDisposableTo(disposeBag)
         self.tapView.addGestureRecognizer(recognizer)
         self.view.bringSubview(toFront: tapView)
@@ -105,7 +107,15 @@ class BookController: LeavesViewController {
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
         // 現在のページ数を保存する.
         if (index > 0) {
-            UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
+            
+            if (preIndex < index) {
+                print("to right")
+                UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
+            } else {
+                print("to left")
+                UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
+            }
+            
             UserDefaults.standard.synchronize()
         }
 
@@ -122,5 +132,7 @@ class BookController: LeavesViewController {
         }
         
         context.draw(cgImage, in: imageRect)
+        
+        preIndex = index
     }
 }
