@@ -109,6 +109,18 @@ class BookModel {
         if (contentValue != "") {
             self.addToPageContents(contentValue: contentValue)
         }
+        
+        // dummy. print chapter infos.
+        for chapterInfo in chapterInfos {
+            let chapterNumber = chapterInfo.chapterNumber
+            let chapterName = chapterInfo.chapterName
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            print("chapterNumber = \(chapterNumber), chapterName = \(chapterName), startIndex = \(startIndex), endIndex = \(endIndex)")
+            
+        }
+        
     }
 
     private func addToPageContents(contentValue : String) {
