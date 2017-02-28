@@ -101,20 +101,13 @@ class BookController: LeavesViewController {
     }
     
     private func setChapterInfo(currentIndex: Int) {
-        // 章の情報を出力する.
-        for chapterInfo in model.chapterInfos {
-            let chapterName = chapterInfo.chapterName
-            let chapterNumber = chapterInfo.chapterNumber
-            let startIndex = chapterInfo.startPage
-            let endIndex = chapterInfo.endPage
-            print("chapterNumber = \(chapterNumber), chapterName = \(chapterName), startIndex = \(startIndex), endIndex = \(endIndex)")
-            
-        }
+        print("current index = \(currentIndex)")
         
         for chapterInfo in model.chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
             let endIndex = chapterInfo.endPage
+            
             
             if (currentIndex >= startIndex && currentIndex <= endIndex) {
                 self.chapterLbl.text = chapterName
