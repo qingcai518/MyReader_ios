@@ -42,11 +42,9 @@ class LeavesViewController: UIViewController {
 
 extension LeavesViewController : LeavesViewDelegate {
     func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
-        print("will turn to page at index.")
     }
     
     func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
-        print("did turn to page at index.")
     }
 }
 

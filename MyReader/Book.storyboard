@@ -87,21 +87,57 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqH-Gh-0qA">
-                                        <rect key="frame" x="16" y="1" width="343" height="30"/>
+                                        <rect key="frame" x="16" y="1" width="343" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="wEW-ll-AwJ"/>
+                                            <constraint firstAttribute="height" constant="40" id="wEW-ll-AwJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29S-WE-yBL">
+                                        <rect key="frame" x="0.0" y="41" width="80" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="82a-ce-BVu"/>
+                                            <constraint firstAttribute="width" constant="80" id="9JA-5j-qeN"/>
+                                        </constraints>
+                                        <state key="normal" title="前一章"/>
+                                        <connections>
+                                            <action selector="toPreChapter" destination="i2h-DX-0Af" eventType="touchUpInside" id="L8j-rn-NpF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej2-6h-YVx">
+                                        <rect key="frame" x="295" y="41" width="80" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="CCW-E5-tPp"/>
+                                            <constraint firstAttribute="height" constant="44" id="w0P-gs-suA"/>
+                                        </constraints>
+                                        <state key="normal" title="下一章"/>
+                                        <connections>
+                                            <action selector="toNextChapter" destination="i2h-DX-0Af" eventType="touchUpInside" id="Bde-nf-dkm"/>
+                                        </connections>
+                                    </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="oUV-b0-x82">
+                                        <rect key="frame" x="78" y="41" width="219" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="XCB-mm-zMI"/>
+                                        </constraints>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="ej2-6h-YVx" firstAttribute="leading" secondItem="oUV-b0-x82" secondAttribute="trailing" id="5sZ-KC-q01"/>
+                                    <constraint firstItem="ej2-6h-YVx" firstAttribute="top" secondItem="OqH-Gh-0qA" secondAttribute="bottom" id="6F5-p5-Yjc"/>
                                     <constraint firstItem="OqH-Gh-0qA" firstAttribute="leading" secondItem="fEX-Nb-XX3" secondAttribute="leading" constant="16" id="8az-DK-gIl"/>
                                     <constraint firstItem="MxK-k4-COi" firstAttribute="leading" secondItem="fEX-Nb-XX3" secondAttribute="leading" id="B2Z-gs-FLa"/>
+                                    <constraint firstItem="ej2-6h-YVx" firstAttribute="top" secondItem="OqH-Gh-0qA" secondAttribute="bottom" id="HsX-YP-qj3"/>
+                                    <constraint firstAttribute="trailing" secondItem="ej2-6h-YVx" secondAttribute="trailing" id="Le3-hi-BuM"/>
+                                    <constraint firstItem="oUV-b0-x82" firstAttribute="top" secondItem="OqH-Gh-0qA" secondAttribute="bottom" id="PAs-D3-laV"/>
                                     <constraint firstItem="OqH-Gh-0qA" firstAttribute="top" secondItem="MxK-k4-COi" secondAttribute="bottom" id="Pe9-97-Oui"/>
+                                    <constraint firstItem="oUV-b0-x82" firstAttribute="leading" secondItem="29S-WE-yBL" secondAttribute="trailing" id="PsV-qg-org"/>
                                     <constraint firstAttribute="trailing" secondItem="MxK-k4-COi" secondAttribute="trailing" id="Qtd-bQ-hPd"/>
+                                    <constraint firstItem="29S-WE-yBL" firstAttribute="top" secondItem="OqH-Gh-0qA" secondAttribute="bottom" id="YVJ-L4-6M7"/>
+                                    <constraint firstItem="29S-WE-yBL" firstAttribute="leading" secondItem="fEX-Nb-XX3" secondAttribute="leading" id="d7f-mF-ZSS"/>
                                     <constraint firstAttribute="trailing" secondItem="OqH-Gh-0qA" secondAttribute="trailing" constant="16" id="kcI-i1-c70"/>
                                     <constraint firstAttribute="height" constant="160" id="wFu-xl-pxD"/>
                                     <constraint firstItem="MxK-k4-COi" firstAttribute="top" secondItem="fEX-Nb-XX3" secondAttribute="top" id="xqF-Gl-xsn"/>
@@ -128,6 +164,9 @@
                         <outlet property="bottomView" destination="fEX-Nb-XX3" id="bMW-Ph-YIc"/>
                         <outlet property="chapterLbl" destination="OqH-Gh-0qA" id="q0e-3x-q3Q"/>
                         <outlet property="indicator" destination="m6U-6c-yuq" id="fnJ-j1-Wmv"/>
+                        <outlet property="nextBtn" destination="ej2-6h-YVx" id="yat-Fg-1JU"/>
+                        <outlet property="preBtn" destination="29S-WE-yBL" id="Lbd-iL-qFy"/>
+                        <outlet property="slider" destination="oUV-b0-x82" id="uAV-0R-idC"/>
                         <outlet property="tapView" destination="lPN-Jv-6Oq" id="Gb0-l8-PeG"/>
                         <outlet property="titleLbl" destination="Ptn-YS-hfg" id="Hhf-hb-VKn"/>
                         <outlet property="topView" destination="qrE-oj-kwb" id="vBK-xa-aQ4"/>

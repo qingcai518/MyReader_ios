@@ -16,16 +16,26 @@ class BookController: LeavesViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var bottomView : UIView!
     @IBOutlet weak var chapterLbl: UILabel!
+    @IBOutlet weak var preBtn: UIButton!
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var slider: UISlider!
+    
     @IBOutlet weak var tapView: UIView!
     
     var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
     let model = BookModel()
     
-    var preIndex = 0
-
     @IBAction func doClose() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func toPreChapter() {
+        
+    }
+    
+    @IBAction func toNextChapter() {
+        
     }
     
     override func viewDidLoad() {
@@ -48,8 +58,6 @@ class BookController: LeavesViewController {
             
             // 前回読み込んだページ数を取得する.
             let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
-            self?.preIndex = currentIndex
-            
             self?.leavesView.reloadData()
             self?.leavesView.currentPageIndex = currentIndex
             
@@ -77,6 +85,8 @@ class BookController: LeavesViewController {
             self?.view.bringSubview(toFront: bottom)
             
             if (top.isHidden) {
+                self?.setChapterInfo()
+                
                 top.isHidden = false
                 bottom.isHidden = false
                 
@@ -100,7 +110,9 @@ class BookController: LeavesViewController {
         self.view.bringSubview(toFront: tapView)
     }
     
-    private func setChapterInfo(currentIndex: Int) {
+    private func setChapterInfo() {
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+
         for chapterInfo in model.chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
@@ -116,17 +128,12 @@ class BookController: LeavesViewController {
     
     // #program mark  delegate.
     override func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
-        print("page index = \(pageIndex)")
     }
     
     override func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
-        print("page index = \(pageIndex)")
         // 現在のページ数を保存する.
         UserDefaults.standard.set(pageIndex - 1, forKey: UDKey.CurrentPage)
         UserDefaults.standard.synchronize()
-        
-        // 判断在第几章.
-        self.setChapterInfo(currentIndex: pageIndex)
     }
 
     // #program mark  dataSource.
@@ -135,20 +142,6 @@ class BookController: LeavesViewController {
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
-//        // 現在のページ数を保存する.
-//        print("index = \(index)")
-//        if (index > 0) {
-//            if (preIndex < index) {
-//                UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
-//            } else {
-//                UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
-//            }
-//            
-//            UserDefaults.standard.synchronize()
-//        }
-//        // 判断在第几章.
-//        self.setChapterInfo(currentIndex: index)
-        
         let text = model.pageContents[index]
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
         guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size) else {
@@ -160,6 +153,5 @@ class BookController: LeavesViewController {
         }
         
         context.draw(cgImage, in: imageRect)
-        preIndex = index
     }
 }
