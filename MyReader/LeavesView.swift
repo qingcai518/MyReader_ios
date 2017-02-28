@@ -21,6 +21,7 @@ protocol LeavesViewDelegate: NSObjectProtocol {
 }
 
 class LeavesView: UIView {
+//    var delegate : LeavesViewDelegate!
     var delegate : LeavesViewDelegate!
 //    var targetWidth = CGFloat(0)
 //    var preferredTargetWidth = CGFloat(0)
