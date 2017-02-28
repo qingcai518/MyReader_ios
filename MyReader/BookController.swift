@@ -47,7 +47,7 @@ class BookController: LeavesViewController {
             
             // 前回読み込んだページ数を取得する.
             let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
-            preIndex = currentIndex
+            self?.preIndex = currentIndex
             
             self?.leavesView.reloadData()
             self?.leavesView.currentPageIndex = currentIndex
