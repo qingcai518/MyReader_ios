@@ -123,7 +123,7 @@
                                             <constraint firstAttribute="height" constant="44" id="XCB-mm-zMI"/>
                                         </constraints>
                                         <connections>
-                                            <action selector="doSliderWithSender:" destination="i2h-DX-0Af" eventType="touchCancel" id="o8m-mH-L3T"/>
+                                            <action selector="doSliderWithSender:" destination="i2h-DX-0Af" eventType="valueChanged" id="s2C-1I-owq"/>
                                         </connections>
                                     </slider>
                                 </subviews>

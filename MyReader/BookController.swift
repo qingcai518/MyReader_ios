@@ -31,8 +31,6 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func doSlider(sender: UISlider) {
-        print("slider value = \(sender.value)")
-        
         let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
         var currentChapter : ChapterInfo!
         for chapterInfo in model.chapterInfos {
@@ -49,10 +47,14 @@ class BookController: LeavesViewController {
             return
         }
         
-        let pageIndex = currentChapter.startPage + Int(sender.value)
+        let pageIndex = currentChapter.startPage + Int(ceil(sender.value))
         
         leavesView.reloadData()
         leavesView.currentPageIndex = pageIndex
+        
+        // 現在のページを保存する.
+        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage)
+        UserDefaults.standard.synchronize()
     }
     
     @IBAction func toPreChapter() {
