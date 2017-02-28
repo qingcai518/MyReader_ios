@@ -31,7 +31,31 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func toPreChapter() {
-        self.setChapterInfo()
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        var preInfo : ChapterInfo!
+        
+        for chapterInfo in model.chapterInfos {
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                break
+            }
+            preInfo = chapterInfo
+        }
+        
+        if (preInfo != nil) {
+            let startIndex = preInfo.startPage
+            self.leavesView.reloadData()
+            self.leavesView.currentPageIndex = startIndex
+            
+            // 現在のページを設定する.
+            UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
+            UserDefaults.standard.synchronize()
+            
+            // ボタンの活性非活性を設定する.
+            self.preBtn.isEnabled = startIndex != 0
+        }
     }
     
     @IBAction func toNextChapter() {
@@ -134,7 +158,7 @@ class BookController: LeavesViewController {
         preBtn.isEnabled = chapterNumber != 0
         nextBtn.isEnabled = chapterNumber != model.chapterInfos.count - 1
     }
-    
+
     // #program mark  delegate.
     override func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
     }
