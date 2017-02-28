@@ -45,7 +45,8 @@ class BookController: LeavesViewController {
             self?.leavesView.reloadData()
             
             // 読み込みのページ数を指定する.
-            self?.leavesView.currentPageIndex = 12
+            let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+            self?.leavesView.currentPageIndex = currentIndex
         }
     }
     
@@ -101,6 +102,10 @@ class BookController: LeavesViewController {
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
         print("index = \(index)")
+        
+        // 現在のページをUserDefaultに保存する.
+        UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
+        UserDefaults.standard.synchronize()
 
         let text = model.pageContents[index]
 

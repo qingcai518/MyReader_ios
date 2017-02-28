@@ -30,3 +30,7 @@ enum DLStatus : Int {
     case before = 1
     case after = 2
 }
+
+struct UDKey {
+    static let CurrentPage = "CurrentPage"
+}
