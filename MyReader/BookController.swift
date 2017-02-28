@@ -132,7 +132,7 @@ class BookController: LeavesViewController {
     
     override func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
         // 現在のページ数を保存する.
-        UserDefaults.standard.set(pageIndex - 1, forKey: UDKey.CurrentPage)
+        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage)
         UserDefaults.standard.synchronize()
     }
 
