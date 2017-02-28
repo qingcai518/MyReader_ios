@@ -53,8 +53,14 @@ class BookController: LeavesViewController {
             UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
             UserDefaults.standard.synchronize()
             
+            // 章の名前を設定する.
+            self.chapterLbl.text = preInfo.chapterName
+            
+            // slideの値を設定する.
+            
             // ボタンの活性非活性を設定する.
-            self.preBtn.isEnabled = startIndex != 0
+            self.preBtn.isEnabled = preInfo.chapterNumber != 0
+            self.nextBtn.isEnabled = preInfo.chapterNumber != model.chapterInfos.count - 1
         }
     }
     
