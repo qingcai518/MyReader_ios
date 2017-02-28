@@ -116,7 +116,7 @@ class BookController: LeavesViewController {
     
     // #program mark  delegate.
     override func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
-        print("will turn to page at index. pageIndex = \(pageIndex)")
+        print("page index = \(pageIndex)")
     }
     
     override func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
