@@ -57,6 +57,7 @@ class BookController: LeavesViewController {
             self.chapterLbl.text = preInfo.chapterName
             
             // slideの値を設定する.
+            slider.value = 1.0 / Float(preInfo.endPage - startIndex)
             
             // ボタンの活性非活性を設定する.
             self.preBtn.isEnabled = preInfo.chapterNumber != 0
@@ -93,6 +94,7 @@ class BookController: LeavesViewController {
             self.chapterLbl.text = nextInfo.chapterName
             
             // slideの値を設定する.
+            slider.value = 1.0 / Float(nextInfo.endPage - startIndex)
             
             // ボタンの活性・非活性を設定する.
             self.preBtn.isEnabled = nextInfo.chapterNumber != 0
@@ -176,6 +178,7 @@ class BookController: LeavesViewController {
         let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
 
         var chapterNumber : Int!
+        var sliderValue = Float(0.0)
         for chapterInfo in model.chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
@@ -185,6 +188,13 @@ class BookController: LeavesViewController {
             if (currentIndex >= startIndex && currentIndex <= endIndex) {
                 self.chapterLbl.text = chapterName
                 chapterNumber = chapterInfo.chapterNumber
+                
+                if (endIndex > startIndex) {
+                    sliderValue = Float(currentIndex - startIndex) / Float(endIndex - startIndex)
+                } else {
+                    sliderValue = 1.0
+                }
+                
                 break
             }
         }
@@ -193,8 +203,13 @@ class BookController: LeavesViewController {
             return
         }
         
+        // slideの内容を設定する.
+        slider.value = sliderValue
+        
+        // ボタンの活性・非活性を設定する.
         preBtn.isEnabled = chapterNumber != 0
-        nextBtn.isEnabled = chapterNumber != model.chapterInfos.count - 1
+        nextBtn.isEnabled = chapterNumber != model.chapterI
+        nfos.count - 1
     }
 
     // #program mark  delegate.
