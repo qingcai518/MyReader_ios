@@ -8,12 +8,15 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class BookModel {
     var pageContents = [NSMutableAttributedString]()
     let letterSpacing = 1.0
     let lineSpacing = CGFloat(6.0)
     let font = UIFont.Helvetica18()
+    var currentChapter = Variable("")
+    var chapterInfos = [ChapterInfo]()
 
     func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
         DispatchQueue.global().async { [weak self] in
@@ -45,8 +48,6 @@ class BookModel {
         
         var contents = [String]()
         
-        
-        // TODO. ここで各章の情報を設定する必要がある.
         for lineStr in array {
             if (lineStr.characters.count <= letersPerLine) {
                 contents.append(lineStr)
@@ -67,12 +68,24 @@ class BookModel {
         let count = contents.count > Int(lines) ? Int(lines) : contents.count
         
         var contentValue = ""
+        var startPage = 0
+        var chapterNumber = 0
+        var chapterName = "序言"
         for i in 0..<contents.count {
             let content = contents[i]
-            
+ 
             // 章节分类.
             let contentTrim = content.trimmingCharacters(in: CharacterSet.whitespaces)
             if (contentTrim.contains("Chapter") || (contentTrim.contains("第") && contentTrim.contains("章"))) {
+                // 把当前章添加入数组.
+                let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage: i - 1)
+                self.chapterInfos.append(chapterInfo)
+                
+                // 设置下一章的信息.
+                chapterNumber = chapterNumber + 1
+                chapterName = contentTrim
+                startPage = i
+                
                 self.addToPageContents(contentValue: contentValue)
                 contentValue = ""
             }
@@ -84,6 +97,13 @@ class BookModel {
             
             contentValue.append(content)
             contentValue.append("\n")
+        }
+        
+        
+        if (chapterNumber > 0) {
+            // 添加最后一章的信息.
+            let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage: contents.count - 1 )
+            chapterInfos.append(chapterInfo)
         }
         
         if (contentValue != "") {

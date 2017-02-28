@@ -15,6 +15,7 @@ class BookController: LeavesViewController {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var bottomView : UIView!
+    @IBOutlet weak var chapterLbl: UILabel!
     @IBOutlet weak var tapView: UIView!
     
     var disposeBag = DisposeBag()
@@ -109,10 +110,8 @@ class BookController: LeavesViewController {
         if (index > 0) {
             
             if (preIndex < index) {
-                print("to right")
                 UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
             } else {
-                print("to left")
                 UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
             }
             
