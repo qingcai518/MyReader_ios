@@ -43,6 +43,7 @@ class BookController: LeavesViewController {
         model.readFile(bookInfo: bookInfo) { [weak self] value in
             self?.indicator.stopAnimating()
             self?.leavesView.reloadData()
+            self?.leavesView.currentPageIndex = 12
         }
     }
     
@@ -97,6 +98,8 @@ class BookController: LeavesViewController {
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
+        print("index = \(index)")
+
         let text = model.pageContents[index]
 
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
