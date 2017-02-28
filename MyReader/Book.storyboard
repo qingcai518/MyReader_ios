@@ -122,6 +122,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="XCB-mm-zMI"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="doSliderWithSender:" destination="i2h-DX-0Af" eventType="touchCancel" id="o8m-mH-L3T"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

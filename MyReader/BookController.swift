@@ -30,6 +30,31 @@ class BookController: LeavesViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func doSlider(sender: UISlider) {
+        print("slider value = \(sender.value)")
+        
+        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        var currentChapter : ChapterInfo!
+        for chapterInfo in model.chapterInfos {
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                currentChapter = chapterInfo
+                break
+            }
+        }
+        
+        if (currentChapter == nil) {
+            return
+        }
+        
+        let pageIndex = currentChapter.startPage + Int(sender.value)
+        
+        leavesView.reloadData()
+        leavesView.currentPageIndex = pageIndex
+    }
+    
     @IBAction func toPreChapter() {
         let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
         var preInfo : ChapterInfo!
@@ -57,7 +82,8 @@ class BookController: LeavesViewController {
             self.chapterLbl.text = preInfo.chapterName
             
             // slideの値を設定する.
-            slider.value = 1.0 / Float(preInfo.endPage - startIndex)
+            slider.maximumValue = Float(preInfo.endPage - startIndex)
+            slider.value = 1.0
             
             // ボタンの活性非活性を設定する.
             self.preBtn.isEnabled = preInfo.chapterNumber != 0
@@ -94,7 +120,9 @@ class BookController: LeavesViewController {
             self.chapterLbl.text = nextInfo.chapterName
             
             // slideの値を設定する.
-            slider.value = 1.0 / Float(nextInfo.endPage - startIndex)
+            slider.maximumValue = Float(nextInfo.endPage - startIndex)
+            slider.value = 1.0
+//            slider.value = 1.0 / Float(nextInfo.endPage - startIndex)
             
             // ボタンの活性・非活性を設定する.
             self.preBtn.isEnabled = nextInfo.chapterNumber != 0
@@ -178,7 +206,7 @@ class BookController: LeavesViewController {
         let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
 
         var chapterNumber : Int!
-        var sliderValue = Float(0.0)
+//        var sliderValue = Float(0.0)
         for chapterInfo in model.chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
@@ -189,11 +217,19 @@ class BookController: LeavesViewController {
                 self.chapterLbl.text = chapterName
                 chapterNumber = chapterInfo.chapterNumber
                 
+                // slideの内容を設定する.
                 if (endIndex > startIndex) {
-                    sliderValue = Float(currentIndex - startIndex) / Float(endIndex - startIndex)
+                    slider.maximumValue = Float(endIndex - startIndex)
+                    slider.value = Float(currentIndex - startIndex)
                 } else {
-                    sliderValue = 1.0
+                    slider.value = 1.0
                 }
+                
+//                if (endIndex > startIndex) {
+//                    sliderValue = Float(currentIndex - startIndex) / Float(endIndex - startIndex)
+//                } else {
+//                    sliderValue = 1.0
+//                }
                 
                 break
             }
@@ -203,13 +239,9 @@ class BookController: LeavesViewController {
             return
         }
         
-        // slideの内容を設定する.
-        slider.value = sliderValue
-        
         // ボタンの活性・非活性を設定する.
         preBtn.isEnabled = chapterNumber != 0
-        nextBtn.isEnabled = chapterNumber != model.chapterI
-        nfos.count - 1
+        nextBtn.isEnabled = chapterNumber != model.chapterInfos.count - 1
     }
 
     // #program mark  delegate.
