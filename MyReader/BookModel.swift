@@ -100,7 +100,6 @@ class BookModel {
             contentValue.append("\n")
         }
         
-        
         if (chapterNumber > 0) {
             // 添加最后一章的信息.
             let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage:  self.pageContents.count)
