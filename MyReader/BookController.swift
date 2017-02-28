@@ -42,14 +42,13 @@ class BookController: LeavesViewController {
         indicator.startAnimating()
         model.readFile(bookInfo: bookInfo) { [weak self] value in
             self?.indicator.stopAnimating()
-            self?.leavesView.reloadData()
             
-            // 読み込み対象ページを指定する.
+            // yと見込み対象ページをsh亭する.
             let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
-            self?.leavesView.currentPageIndex  = currentIndex
+            print("current inde x= \(currentIndex)")
             
-            print("current page = \(currentIndex)")
-            
+            self?.leavesView.reloadData()
+            self?.leavesView.currentPageIndex = currentIndex
             
         }
     }
