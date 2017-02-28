@@ -101,8 +101,6 @@ class BookController: LeavesViewController {
     }
     
     private func setChapterInfo(currentIndex: Int) {
-        print("current index = \(currentIndex)")
-        
         for chapterInfo in model.chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
@@ -115,27 +113,41 @@ class BookController: LeavesViewController {
             }
         }
     }
+    
+    // #program mark  delegate.
+    override func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
+        print("will turn to page at index. pageIndex = \(pageIndex)")
+    }
+    
+    override func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
+        print("page index = \(pageIndex)")
+        // 現在のページ数を保存する.
+        UserDefaults.standard.set(pageIndex - 1, forKey: UDKey.CurrentPage)
+        UserDefaults.standard.synchronize()
+        
+        // 判断在第几章.
+        self.setChapterInfo(currentIndex: pageIndex)
+    }
 
-    // #program mark
+    // #program mark  dataSource.
     override func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
         return model.pageContents.count
     }
     
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
-        // 現在のページ数を保存する.
-        print("index = \(index)")
-        if (index > 0) {
-            if (preIndex < index) {
-                UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
-            } else {
-                UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
-            }
-            
-            UserDefaults.standard.synchronize()
-        }
-        
-        // 判断在第几章.
-        self.setChapterInfo(currentIndex: index)
+//        // 現在のページ数を保存する.
+//        print("index = \(index)")
+//        if (index > 0) {
+//            if (preIndex < index) {
+//                UserDefaults.standard.set(index - 1, forKey: UDKey.CurrentPage)
+//            } else {
+//                UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
+//            }
+//            
+//            UserDefaults.standard.synchronize()
+//        }
+//        // 判断在第几章.
+//        self.setChapterInfo(currentIndex: index)
         
         let text = model.pageContents[index]
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
