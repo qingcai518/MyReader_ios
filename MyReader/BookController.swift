@@ -31,7 +31,7 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func doSlider(sender: UISlider) {
-        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        let currentIndex = self.getCurrentPage()
         var currentChapter : ChapterInfo!
         for chapterInfo in model.chapterInfos {
             let startIndex = chapterInfo.startPage
@@ -53,12 +53,11 @@ class BookController: LeavesViewController {
         leavesView.currentPageIndex = pageIndex
         
         // 現在のページを保存する.
-        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage)
-        UserDefaults.standard.synchronize()
+        self.saveCurrentPage(pageIndex: pageIndex)
     }
     
     @IBAction func toPreChapter() {
-        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        let currentIndex = self.getCurrentPage()
         var preInfo : ChapterInfo!
         
         for chapterInfo in model.chapterInfos {
@@ -77,8 +76,7 @@ class BookController: LeavesViewController {
             self.leavesView.currentPageIndex = startIndex
             
             // 現在のページを保存する.
-            UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
-            UserDefaults.standard.synchronize()
+            self.saveCurrentPage(pageIndex: startIndex)
             
             // 章の名前を設定する.
             self.chapterLbl.text = preInfo.chapterName
@@ -94,7 +92,7 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func toNextChapter() {
-        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        let currentIndex = self.getCurrentPage()
         var nextInfo : ChapterInfo!
         
         for i in (0..<model.chapterInfos.count).reversed() {
@@ -115,8 +113,7 @@ class BookController: LeavesViewController {
             self.leavesView.currentPageIndex = startIndex
             
             // 現在のページを保存する.
-            UserDefaults.standard.set(startIndex, forKey: UDKey.CurrentPage)
-            UserDefaults.standard.synchronize()
+            self.saveCurrentPage(pageIndex: startIndex)
             
             // 章の名前を設定する.
             self.chapterLbl.text = nextInfo.chapterName
@@ -124,7 +121,6 @@ class BookController: LeavesViewController {
             // slideの値を設定する.
             slider.maximumValue = Float(nextInfo.endPage - startIndex)
             slider.value = 1.0
-//            slider.value = 1.0 / Float(nextInfo.endPage - startIndex)
             
             // ボタンの活性・非活性を設定する.
             self.preBtn.isEnabled = nextInfo.chapterNumber != 0
@@ -151,7 +147,7 @@ class BookController: LeavesViewController {
             self?.indicator.stopAnimating()
             
             // 前回読み込んだページ数を取得する.
-            let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+            guard let currentIndex = self?.getCurrentPage() else {return}
             self?.leavesView.reloadData()
             self?.leavesView.currentPageIndex = currentIndex
             
@@ -205,7 +201,7 @@ class BookController: LeavesViewController {
     }
     
     private func setChapterInfo() {
-        let currentIndex = UserDefaults.standard.integer(forKey: UDKey.CurrentPage)
+        let currentIndex = self.getCurrentPage()
 
         var chapterNumber : Int!
 //        var sliderValue = Float(0.0)
@@ -245,6 +241,15 @@ class BookController: LeavesViewController {
         preBtn.isEnabled = chapterNumber != 0
         nextBtn.isEnabled = chapterNumber != model.chapterInfos.count - 1
     }
+    
+    private func saveCurrentPage(pageIndex: Int) {
+        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage + "_" + bookInfo.bookId)
+        UserDefaults.standard.synchronize()
+    }
+    
+    private func getCurrentPage() -> Int {
+        return UserDefaults.standard.integer(forKey: UDKey.CurrentPage + "_" + bookInfo.bookId)
+    }
 
     // #program mark  delegate.
     override func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
@@ -252,8 +257,7 @@ class BookController: LeavesViewController {
     
     override func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
         // 現在のページ数を保存する.
-        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage)
-        UserDefaults.standard.synchronize()
+        self.saveCurrentPage(pageIndex: pageIndex)
         
         if (!topView.isHidden) {
             // popViewが表示される際に、更新を実施する.
