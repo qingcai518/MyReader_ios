@@ -43,6 +43,8 @@ class BookController: LeavesViewController {
         model.readFile(bookInfo: bookInfo) { [weak self] value in
             self?.indicator.stopAnimating()
             self?.leavesView.reloadData()
+            
+            // 読み込みのページ数を指定する.
             self?.leavesView.currentPageIndex = 12
         }
     }
