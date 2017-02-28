@@ -76,7 +76,9 @@ class BookModel {
  
             // 章节分类.
             let contentTrim = content.trimmingCharacters(in: CharacterSet.whitespaces)
-            if (contentTrim.contains("Chapter") || (contentTrim.contains("第") && contentTrim.contains("章"))) {
+            if (contentTrim.hasPrefix("Chapter") || (contentTrim.hasPrefix("第") && contentTrim.contains("章"))) {
+                
+                
                 // 把当前章添加入数组.
                 let endPage = pageContents.count
                 let chapterInfo = ChapterInfo(chapterNumber: chapterNumber, chapterName: chapterName, startPage: startPage, endPage: endPage)
@@ -118,9 +120,7 @@ class BookModel {
             let endIndex = chapterInfo.endPage
             
             print("chapterNumber = \(chapterNumber), chapterName = \(chapterName), startIndex = \(startIndex), endIndex = \(endIndex)")
-            
         }
-        
     }
 
     private func addToPageContents(contentValue : String) {
