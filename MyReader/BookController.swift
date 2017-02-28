@@ -160,7 +160,6 @@ class BookController: LeavesViewController {
         }
         
         context.draw(cgImage, in: imageRect)
-        
         preIndex = index
     }
 }

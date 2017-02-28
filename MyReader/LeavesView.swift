@@ -195,15 +195,19 @@ class LeavesView: UIView {
     }
     
     func willTurnToPageAtIndex(index: Int) {
-        if (self.delegate.responds(to: #selector(LeavesView.willTurnToPageAtIndex(index:)))) {
-            self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
-        }
+        self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
+        
+//        if (self.delegate.responds(to: #selector(LeavesView.willTurnToPageAtIndex(index:)))) {
+//            self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
+//        }
     }
     
     func didTurnToPageAtIndex(index: Int) {
-        if (self.delegate.responds(to: #selector(LeavesView.didTurnToPageAtIndex(index:)))) {
-            self.delegate.leavesView(leavesView: self, didTurnToPageAtIndex: index)
-        }
+        self.delegate.leavesView(leavesView: self, didTurnToPageAtIndex: index)
+        
+//        if (self.delegate.responds(to: #selector(LeavesView.didTurnToPageAtIndex(index:)))) {
+//            self.delegate.leavesView(leavesView: self, didTurnToPageAtIndex: index)
+//        }
     }
     
     func didTurnPageBackward() {
