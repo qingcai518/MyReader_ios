@@ -297,20 +297,5 @@ class BookController: LeavesViewController {
         return model.pageContents.count
     }
     
-    override func renderPageAtIndex(index: Int, inContext context: CGContext) {
-        let text = model.pageContents[index]
-        let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-        guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size, context: context) else {
-            return print("fail to get image.")
-        }
-        
-//        context.setFillColor(UIColor.yellow.cgColor)
-//        context.fill(CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-        
-        guard let cgImage = image.cgImage else {
-            return
-        }
 
-        context.draw(cgImage, in: imageRect)
-    }
 }
