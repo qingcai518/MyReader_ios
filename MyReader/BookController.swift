@@ -169,8 +169,10 @@ class BookController: LeavesViewController {
         lightMode.asObservable().bindNext { [weak self] value in
             if (value == lightModeDay) {
                 self?.setBackgroundColor(color: UIColor.white)
+                self?.lightBtn.setImage(UIImage(named: "btn_moon"), for: .normal)
             } else {
                 self?.setBackgroundColor(color: UIColor.black)
+                self?.lightBtn.setImage(UIImage(named: "btn_sun"), for: .normal)
             }
             
             UserDefaults.standard.set(value, forKey: UDKey.LightMode)
