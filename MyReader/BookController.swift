@@ -164,7 +164,7 @@ class BookController: LeavesViewController {
     }
     
     private func setInitStatus() {
-        leavesView.backgroundColor = UIColor.yellow
+        leavesView.topPage.backgroundColor = UIColor.yellow.cgColor
         
         let lightMode = UserDefaults.standard.integer(forKey: UDKey.LightMode)
         if (lightMode == lightModeDay) {
