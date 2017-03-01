@@ -56,13 +56,16 @@ class AddBookmarkController: ViewController {
     }
     
     private func setBookmarkInfo(bookmarkName: String) {
+        print("content = \(content), pageNumber = \(pageNumber), bookId = \(bookId)")
         if (content == nil || pageNumber == nil || bookId == nil) {
             return
         }
         
         // 現在の時間を取得する.
         let timeString = AppUtility.getCurrentTimeString()
-        let _ = SQLiteManager.sharedInstance.insertBookmark(name: bookmarkName, bookId: bookId!, time: timeString, content: content!, pageNumber: pageNumber!)
+        let id = SQLiteManager.sharedInstance.insertBookmark(name: bookmarkName, bookId: bookId!, time: timeString, content: content!, pageNumber: pageNumber!)
+        
+        print("id = \(id)")
     }
 }
 
