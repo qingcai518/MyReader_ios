@@ -39,7 +39,16 @@ class BookController: LeavesViewController {
     var lightMode = Variable(UserDefaults.standard.integer(forKey: UDKey.LightMode))
     
     @IBAction func showList() {
+        let storyboard = UIStoryboard(name: "Chapter", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
+            return
+        }
+        guard let chapterController = next.viewControllers.first as? ChapterController else {
+            return
+        }
+        chapterController.chapterInfos = model.chapterInfos
         
+        self.present(next, animated: true, completion: nil)
     }
     
     @IBAction func showBookmarks() {
