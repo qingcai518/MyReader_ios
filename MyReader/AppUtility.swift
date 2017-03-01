@@ -78,7 +78,7 @@ class AppUtility {
     /*
      * 画像を文字列から取得する処理.
      */
-    static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
+    static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize, context: CGContext) -> UIImage? {
         let scale = UIScreen.main.scale
         
         // イメージサイズ
@@ -89,6 +89,10 @@ class AppUtility {
         
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        context.setFillColor(UIColor.init(white: 1, alpha: 0.5).cgColor)
+        context.fill(CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+        
         UIGraphicsEndImageContext()
         
         return image

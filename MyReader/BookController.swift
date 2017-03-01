@@ -164,6 +164,8 @@ class BookController: LeavesViewController {
     }
     
     private func setInitStatus() {
+        leavesView.backgroundColor = UIColor.yellow
+        
         let lightMode = UserDefaults.standard.integer(forKey: UDKey.LightMode)
         if (lightMode == lightModeDay) {
             
@@ -298,7 +300,7 @@ class BookController: LeavesViewController {
     override func renderPageAtIndex(index: Int, inContext context: CGContext) {
         let text = model.pageContents[index]
         let imageRect = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-        guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size) else {
+        guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size, context: context) else {
             return print("fail to get image.")
         }
         
@@ -308,9 +310,7 @@ class BookController: LeavesViewController {
         guard let cgImage = image.cgImage else {
             return
         }
-        
-        context.add
-        
+
         context.draw(cgImage, in: imageRect)
     }
 }
