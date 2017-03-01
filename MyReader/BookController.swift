@@ -164,24 +164,20 @@ class BookController: LeavesViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     private func setInitStatus() {
         lightMode.asObservable().bindNext { [weak self] value in
             if (value == lightModeDay) {
+                let contents = self?.leavesView.topPage.contents
+                
+                print("contents = \(contents)")
+                
+                
                 self?.setBackgroundColor(color: UIColor.white)
                 self?.lightBtn.setImage(UIImage(named: "btn_moon"), for: .normal)
             } else {
                 self?.setBackgroundColor(color: UIColor.black)
                 self?.lightBtn.setImage(UIImage(named: "btn_sun"), for: .normal)
-                
-                // 文字の色を変更する.
-                guard let pageContents = self?.model.pageContents else {
-                    return
-                }
-                
-                for content in pageContents {
-                    content.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, content.length))
-                }
             }
             
             UserDefaults.standard.set(value, forKey: UDKey.LightMode)

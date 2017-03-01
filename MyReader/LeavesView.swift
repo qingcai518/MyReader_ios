@@ -88,7 +88,6 @@ class LeavesView: UIView {
         
         // テストのために追加する.
         topPage.backgroundColor = UIColor.white.cgColor
-//        topPage.backgroundColor = UIColor.clear.cgColor
         
         topPageOverlay = CALayer()
         topPageOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.2).cgColor
@@ -101,7 +100,6 @@ class LeavesView: UIView {
         
         topPageReverse = CALayer()
         topPageReverse.backgroundColor = UIColor.white.cgColor
-//        topPageReverse.backgroundColor = UIColor.clear.cgColor
         topPageReverse.masksToBounds = true
         
         topPageReverseImage = CALayer()
@@ -119,7 +117,6 @@ class LeavesView: UIView {
         
         bottomPage = CALayer()
         bottomPage.backgroundColor = UIColor.white.cgColor
-//        bottomPage.backgroundColor = UIColor.clear.cgColor
         bottomPage.masksToBounds = true
         
         bottomPageShadow = CAGradientLayer()
