@@ -230,7 +230,6 @@
 				3C999BBA1E5ADCE70095A696 /* Common */,
 				3C999BC21E5ADE200095A696 /* MainPage */,
 				3C999BCB1E5AE2070095A696 /* BooksPage */,
-				3C999BD21E5AE48A0095A696 /* CloudPage */,
 				3C67EDBE1E5C0AE600B5156D /* CloudDetailPage */,
 				3C67EDD01E5D33BE00B5156D /* BookPage */,
 				3C587ED11E66A1D100B622E2 /* ChapterPage */,
@@ -274,6 +273,7 @@
 		3C999BCB1E5AE2070095A696 /* BooksPage */ = {
 			isa = PBXGroup;
 			children = (
+				3C999BD21E5AE48A0095A696 /* CloudPage */,
 				3C999BCC1E5AE2330095A696 /* Books.storyboard */,
 				3C999BCE1E5AE35A0095A696 /* BooksController.swift */,
 				3C999BD01E5AE3800095A696 /* BooksCell.swift */,

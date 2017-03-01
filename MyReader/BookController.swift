@@ -45,6 +45,11 @@ class BookController: LeavesViewController {
             return
         }
         
+        next.bookId = bookInfo.bookId
+        let pageNumber = self.getCurrentPage()
+        next.pageNumber = pageNumber
+        next.content = self.model.pageContents[pageNumber].string
+        
         next.modalPresentationStyle = .custom
         self.present(next, animated: true, completion: nil)
         

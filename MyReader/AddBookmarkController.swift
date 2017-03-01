@@ -62,11 +62,7 @@ class AddBookmarkController: ViewController {
         
         // 現在の時間を取得する.
         let timeString = AppUtility.getCurrentTimeString()
-        let id = SQLiteManager.sharedInstance.insertBookmark(name: bookmarkName, bookId: bookId!, time: timeString, content: content!, pageNumber: pageNumber!)
-        
-        let info = BookmarkInfo(bookmarkId: id, bookmarkName: bookmarkName, bookmarkTime: timeString, contents: content!, bookId: bookId!, pageNumber: pageNumber!)
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.BookmarkAdded), object: nil, userInfo: ["info": info])
+        let _ = SQLiteManager.sharedInstance.insertBookmark(name: bookmarkName, bookId: bookId!, time: timeString, content: content!, pageNumber: pageNumber!)
     }
 }
 

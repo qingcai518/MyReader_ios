@@ -22,20 +22,16 @@ class BookmarkController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setRecieveNotifications()
         setTableView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         getData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    private func setRecieveNotifications() {
-        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.BookmarkAdded)).bindNext { [weak self] sender in
-            // 現在のデータを更新する.
-            self?.getData()
-        }.addDisposableTo(disposeBag)
     }
     
     private func setTableView() {
