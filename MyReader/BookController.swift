@@ -9,6 +9,12 @@
 import UIKit
 import RxSwift
 
+
+/**
+ * TODO List.
+ 文字のサイズと文字色を変更する方法がわからない。
+ 
+ **/
 class BookController: LeavesViewController {
     @IBOutlet weak var indicator : UIActivityIndicatorView!
     @IBOutlet weak var topView: UIView!
@@ -169,8 +175,6 @@ class BookController: LeavesViewController {
     private func setInitStatus() {
         lightMode.asObservable().bindNext { [weak self] value in
             if (value == lightModeDay) {
-                let cgImage = self?.leavesView.topPage.contents
-                print("cg image = \(cgImage)")
                 self?.setBackgroundColor(color: UIColor.white)
                 self?.lightBtn.setImage(UIImage(named: "btn_moon"), for: .normal)
             } else {
@@ -199,7 +203,6 @@ class BookController: LeavesViewController {
             guard let currentIndex = self?.getCurrentPage() else {return}
             self?.leavesView.reloadData()
             self?.leavesView.currentPageIndex = currentIndex
-            
         }
     }
     
