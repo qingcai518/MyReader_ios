@@ -19,12 +19,32 @@ class BookController: LeavesViewController {
     @IBOutlet weak var preBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var listBtn: UIButton!
+    @IBOutlet weak var bookmarkBtn: UIButton!
+    @IBOutlet weak var lightBtn: UIButton!
+    @IBOutlet weak var fontBtn: UIButton!
     
     @IBOutlet weak var tapView: UIView!
     
     var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
     let model = BookModel()
+    
+    @IBAction func showList() {
+        
+    }
+    
+    @IBAction func showBookmarks() {
+        
+    }
+    
+    @IBAction func switchLight() {
+
+    }
+    
+    @IBAction func showSettings() {
+        
+    }
     
     @IBAction func doClose() {
         self.dismiss(animated: true, completion: nil)
@@ -131,6 +151,9 @@ class BookController: LeavesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 初期状態を設定する.
+        setInitStatus()
+        
         getData()
         addGestureRecognizer()
         setPopupView()
@@ -138,6 +161,15 @@ class BookController: LeavesViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func setInitStatus() {
+        let lightMode = UserDefaults.standard.integer(forKey: UDKey.LightMode)
+        if (lightMode == lightModeDay) {
+            
+        } else {
+            
+        }
     }
 
     private func getData() {
@@ -204,7 +236,6 @@ class BookController: LeavesViewController {
         let currentIndex = self.getCurrentPage()
 
         var chapterNumber : Int!
-//        var sliderValue = Float(0.0)
         for chapterInfo in model.chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
@@ -222,13 +253,7 @@ class BookController: LeavesViewController {
                 } else {
                     slider.value = 1.0
                 }
-                
-//                if (endIndex > startIndex) {
-//                    sliderValue = Float(currentIndex - startIndex) / Float(endIndex - startIndex)
-//                } else {
-//                    sliderValue = 1.0
-//                }
-                
+
                 break
             }
         }
@@ -277,9 +302,14 @@ class BookController: LeavesViewController {
             return print("fail to get image.")
         }
         
+//        context.setFillColor(UIColor.yellow.cgColor)
+//        context.fill(CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        
         guard let cgImage = image.cgImage else {
             return
         }
+        
+        context.add
         
         context.draw(cgImage, in: imageRect)
     }
