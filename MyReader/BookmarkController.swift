@@ -60,7 +60,9 @@ class BookmarkController: ViewController {
 }
 
 extension BookmarkController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 16 + 18 + 8 + 40 + 24
+    }
 }
 
 extension BookmarkController : UITableViewDataSource {
