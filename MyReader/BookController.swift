@@ -165,14 +165,13 @@ class BookController: LeavesViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
     private func setInitStatus() {
+        
         lightMode.asObservable().bindNext { [weak self] value in
             if (value == lightModeDay) {
                 let contents = self?.leavesView.topPage.contents
-                
                 print("contents = \(contents)")
-                
-                
                 self?.setBackgroundColor(color: UIColor.white)
                 self?.lightBtn.setImage(UIImage(named: "btn_moon"), for: .normal)
             } else {
