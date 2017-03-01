@@ -12,6 +12,7 @@ import SQLite
 class SQLiteManager {
     var db : Connection!
     var table_books: Table!
+    var table_bookmarks: Table!
     
     class var sharedInstance : SQLiteManager {
         struct Static {
@@ -48,6 +49,24 @@ class SQLiteManager {
                 table.column(bookUrl, unique: true)
                 table.column(imageUrl)
             })
+            
+            
+            // bookmark tableを作成する.
+            table_bookmarks = Table("Bookmarks")
+            let bookmarkId = Expression<Int>("id")
+            let bookmarkName = Expression<String>("name")
+            let bookId = Expression<String>("bookId")
+            let time = Expression<String>("time")
+            let pageNumber = Expression<Int>("pageNumber")
+            
+            try db.run(table_bookmarks.create{ table in
+                table.column(bookmarkId, primaryKey:true)
+                table.column(bookId)
+                table.column(bookmarkName)
+                table.column(time)
+                table.column(pageNumber)
+            })
+            
         } catch {
             print("11111")
         }

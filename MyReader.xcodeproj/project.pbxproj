@@ -11,6 +11,10 @@
 		3C587ED31E66A1DE00B622E2 /* Chapter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C587ED21E66A1DE00B622E2 /* Chapter.storyboard */; };
 		3C587ED51E66A2B600B622E2 /* ChapterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C587ED41E66A2B600B622E2 /* ChapterController.swift */; };
 		3C587ED71E66A2D000B622E2 /* ChapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C587ED61E66A2D000B622E2 /* ChapterCell.swift */; };
+		3C587EDB1E66A66800B622E2 /* Bookmark.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C587EDA1E66A66800B622E2 /* Bookmark.storyboard */; };
+		3C587EDD1E66A73600B622E2 /* BookmarkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C587EDC1E66A73600B622E2 /* BookmarkController.swift */; };
+		3C587EDF1E66A75200B622E2 /* BookmarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C587EDE1E66A75200B622E2 /* BookmarkCell.swift */; };
+		3C587EE11E66A85F00B622E2 /* BookmarkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C587EE01E66A85F00B622E2 /* BookmarkInfo.swift */; };
 		3C67EDC01E5C0B0300B5156D /* CloudDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C67EDBF1E5C0B0300B5156D /* CloudDetail.storyboard */; };
 		3C67EDC21E5C0C8A00B5156D /* CloudDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC11E5C0C8A00B5156D /* CloudDetailController.swift */; };
 		3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EDC31E5C0CB600B5156D /* CloudDetailCell.swift */; };
@@ -53,6 +57,10 @@
 		3C587ED21E66A1DE00B622E2 /* Chapter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chapter.storyboard; sourceTree = "<group>"; };
 		3C587ED41E66A2B600B622E2 /* ChapterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterController.swift; sourceTree = "<group>"; };
 		3C587ED61E66A2D000B622E2 /* ChapterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterCell.swift; sourceTree = "<group>"; };
+		3C587EDA1E66A66800B622E2 /* Bookmark.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Bookmark.storyboard; sourceTree = "<group>"; };
+		3C587EDC1E66A73600B622E2 /* BookmarkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkController.swift; sourceTree = "<group>"; };
+		3C587EDE1E66A75200B622E2 /* BookmarkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkCell.swift; sourceTree = "<group>"; };
+		3C587EE01E66A85F00B622E2 /* BookmarkInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkInfo.swift; sourceTree = "<group>"; };
 		3C67EDBF1E5C0B0300B5156D /* CloudDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CloudDetail.storyboard; sourceTree = "<group>"; };
 		3C67EDC11E5C0C8A00B5156D /* CloudDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudDetailController.swift; sourceTree = "<group>"; };
 		3C67EDC31E5C0CB600B5156D /* CloudDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudDetailCell.swift; sourceTree = "<group>"; };
@@ -135,6 +143,17 @@
 			name = Leaves;
 			sourceTree = "<group>";
 		};
+		3C587ED91E66A64F00B622E2 /* BookmarkPage */ = {
+			isa = PBXGroup;
+			children = (
+				3C587EDA1E66A66800B622E2 /* Bookmark.storyboard */,
+				3C587EDC1E66A73600B622E2 /* BookmarkController.swift */,
+				3C587EDE1E66A75200B622E2 /* BookmarkCell.swift */,
+				3C587EE01E66A85F00B622E2 /* BookmarkInfo.swift */,
+			);
+			name = BookmarkPage;
+			sourceTree = "<group>";
+		};
 		3C67EDBE1E5C0AE600B5156D /* CloudDetailPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +217,7 @@
 				3C67EDBE1E5C0AE600B5156D /* CloudDetailPage */,
 				3C67EDD01E5D33BE00B5156D /* BookPage */,
 				3C587ED11E66A1D100B622E2 /* ChapterPage */,
+				3C587ED91E66A64F00B622E2 /* BookmarkPage */,
 			);
 			path = MyReader;
 			sourceTree = "<group>";
@@ -342,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C587ED31E66A1DE00B622E2 /* Chapter.storyboard in Resources */,
+				3C587EDB1E66A66800B622E2 /* Bookmark.storyboard in Resources */,
 				3C999BB31E5ADC9B0095A696 /* LaunchScreen.storyboard in Resources */,
 				3C999BCD1E5AE2330095A696 /* Books.storyboard in Resources */,
 				3C999BB01E5ADC9B0095A696 /* Assets.xcassets in Resources */,
@@ -410,6 +431,7 @@
 				3C999BC81E5AE1B40095A696 /* Navi2Controller.swift in Sources */,
 				3C999BC41E5ADE480095A696 /* MainController.swift in Sources */,
 				3C67EDD41E5D346200B5156D /* BookController.swift in Sources */,
+				3C587EDF1E66A75200B622E2 /* BookmarkCell.swift in Sources */,
 				3C999BE11E5AF0C70095A696 /* AppUtility.swift in Sources */,
 				3C67EE0F1E5FFB4F00B5156D /* LeavesCache.swift in Sources */,
 				3C67EDCD1E5C3C2F00B5156D /* BooksModel.swift in Sources */,
@@ -424,6 +446,7 @@
 				3C587ED51E66A2B600B622E2 /* ChapterController.swift in Sources */,
 				3C587ED71E66A2D000B622E2 /* ChapterCell.swift in Sources */,
 				3C999BC11E5ADD2A0095A696 /* ViewController.swift in Sources */,
+				3C587EE11E66A85F00B622E2 /* BookmarkInfo.swift in Sources */,
 				3C67EDC71E5C1E9A00B5156D /* UIFont.swift in Sources */,
 				3C999BD61E5AE5DA0095A696 /* CloudController.swift in Sources */,
 				3C999BD81E5AE5F50095A696 /* CloudCell.swift in Sources */,
@@ -434,6 +457,7 @@
 				3C999BBD1E5ADD070095A696 /* NavigationController.swift in Sources */,
 				3C56DF071E6513B500812A16 /* ChapterInfo.swift in Sources */,
 				3C67EDC91E5C23B000B5156D /* CloudDetailModel.swift in Sources */,
+				3C587EDD1E66A73600B622E2 /* BookmarkController.swift in Sources */,
 				3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */,
 				3C999BCA1E5AE1C00095A696 /* Navi3Controller.swift in Sources */,
 				3C999BD11E5AE3800095A696 /* BooksCell.swift in Sources */,
