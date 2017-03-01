@@ -85,7 +85,10 @@ class LeavesView: UIView {
         self.clipsToBounds = true
         topPage = CALayer()
         topPage.masksToBounds = true
-        topPage.backgroundColor = UIColor.white.cgColor
+        
+        // テストのために追加する.
+//        topPage.backgroundColor = UIColor.white.cgColor
+        topPage.backgroundColor = UIColor.clear.cgColor
         
         topPageOverlay = CALayer()
         topPageOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.2).cgColor
@@ -97,7 +100,8 @@ class LeavesView: UIView {
         topPageShadow.endPoint = CGPoint(x: 0, y: 0.5)
         
         topPageReverse = CALayer()
-        topPageReverse.backgroundColor = UIColor.white.cgColor
+//        topPageReverse.backgroundColor = UIColor.white.cgColor
+        topPageReverse.backgroundColor = UIColor.clear.cgColor
         topPageReverse.masksToBounds = true
         
         topPageReverseImage = CALayer()
@@ -114,7 +118,8 @@ class LeavesView: UIView {
         topPageReverseShading.endPoint = CGPoint(x: 0, y: 0.5)
         
         bottomPage = CALayer()
-        bottomPage.backgroundColor = UIColor.white.cgColor
+//        bottomPage.backgroundColor = UIColor.white.cgColor
+        bottomPage.backgroundColor = UIColor.clear.cgColor
         bottomPage.masksToBounds = true
         
         bottomPageShadow = CAGradientLayer()
