@@ -92,8 +92,21 @@
                             <constraint firstItem="6xj-zO-aLE" firstAttribute="top" secondItem="yVz-eO-rqo" secondAttribute="bottom" id="vhe-8H-UAa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="书签" id="9pu-bF-msK"/>
+                    <navigationItem key="navigationItem" title="书签" id="9pu-bF-msK">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="Shh-Lm-czN">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dpH-Mr-yBt">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="关闭"/>
+                                <connections>
+                                    <action selector="doClose" destination="KKD-sH-VsE" eventType="touchUpInside" id="C69-YI-vHK"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="closeBtn" destination="dpH-Mr-yBt" id="35v-Qd-GkH"/>
                         <outlet property="indicator" destination="6Fa-Vx-zxu" id="2Gs-zC-1Mw"/>
                         <outlet property="tableView" destination="yVz-eO-rqo" id="hTu-Uc-fOV"/>
                     </connections>

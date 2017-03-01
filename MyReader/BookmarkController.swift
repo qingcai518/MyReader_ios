@@ -11,9 +11,14 @@ import UIKit
 class BookmarkController: ViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var closeBtn: UIButton!
     
     let model = BookmarkModel()
 
+    @IBAction func doClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
