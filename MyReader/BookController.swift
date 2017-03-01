@@ -30,6 +30,8 @@ class BookController: LeavesViewController {
     var bookInfo : LocalBookInfo!
     let model = BookModel()
     
+    var lightMode = Variable(UserDefaults.standard.integer(forKey: UDKey.LightMode))
+    
     @IBAction func showList() {
         
     }
@@ -39,7 +41,7 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func switchLight() {
-
+        lightMode.value = abs(lightMode.value - 1)
     }
     
     @IBAction func showSettings() {
@@ -162,18 +164,24 @@ class BookController: LeavesViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     private func setInitStatus() {
-        leavesView.topPage.backgroundColor = UIColor.yellow.cgColor
-        leavesView.topPageReverse.backgroundColor = UIColor.yellow.cgColor
-        leavesView.bottomPage.backgroundColor = UIColor.yellow.cgColor
-        
-        let lightMode = UserDefaults.standard.integer(forKey: UDKey.LightMode)
-        if (lightMode == lightModeDay) {
+        lightMode.asObservable().bindNext { [weak self] value in
+            if (value == lightModeDay) {
+                self?.setBackgroundColor(color: UIColor.white)
+            } else {
+                self?.setBackgroundColor(color: UIColor.black)
+            }
             
-        } else {
-            
-        }
+            UserDefaults.standard.set(value, forKey: UDKey.LightMode)
+            UserDefaults.standard.synchronize()
+        }.addDisposableTo(disposeBag)
+    }
+    
+    private func setBackgroundColor(color : UIColor) {
+        leavesView.topPage.backgroundColor = color.cgColor
+        leavesView.topPageReverse.backgroundColor = color.cgColor
+        leavesView.bottomPage.backgroundColor = color.cgColor
     }
 
     private func getData() {

@@ -48,16 +48,6 @@ extension LeavesViewController : LeavesViewDelegate {
     }
 }
 
-//extension LeavesViewController : LeavesViewDelegate {
-//    func leavesView(leavesView: LeavesView, didTurnToPageAtIndex pageIndex: Int) {
-//        print("did turn to page at index \(pageIndex)")
-//    }
-//    
-//    func leavesView(leavesView: LeavesView, willTurnToPageAtIndex pageIndex: Int) {
-//        print("will trun to page at index \(pageIndex)")
-//    }
-//}
-
 extension LeavesViewController : LeavesViewDataSource {
     func numberOfPagesInLeavesView(leavesView: LeavesView) -> Int {
         return 0
