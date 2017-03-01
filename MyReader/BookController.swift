@@ -31,12 +31,24 @@ class BookController: LeavesViewController {
     @IBOutlet weak var fontBtn: UIButton!
     
     @IBOutlet weak var tapView: UIView!
+    @IBOutlet weak var addBookmarkBtn: UIButton!
     
     var disposeBag = DisposeBag()
     var bookInfo : LocalBookInfo!
     let model = BookModel()
     
     var lightMode = Variable(UserDefaults.standard.integer(forKey: UDKey.LightMode))
+    
+    @IBAction func addBookmark() {
+        let storyboard = UIStoryboard(name: "AddBookmark", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? AddBookmarkController else {
+            return
+        }
+        
+        next.modalPresentationStyle = .custom
+        self.present(next, animated: true, completion: nil)
+        
+    }
     
     @IBAction func showList() {
         let storyboard = UIStoryboard(name: "Chapter", bundle: nil)
@@ -52,7 +64,17 @@ class BookController: LeavesViewController {
     }
     
     @IBAction func showBookmarks() {
+        // bookmark 画面を開く.
+        let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
+            return
+        }
         
+        guard let _ = next.viewControllers.first as? BookmarkController else {
+            return
+        }
+        
+        self.present(next, animated: true, completion: nil)
     }
     
     @IBAction func switchLight() {

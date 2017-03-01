@@ -9,16 +9,19 @@
 import Foundation
 
 class BookmarkInfo {
-    var bookmarkName: String
-    var bookmarkTime: String
-    var bookmarkPage: Int
-    var bookmarkContents: String
+    var bookmarkId : Int
+    var bookmarkName : String
+    var bookmarkTime : String
+    var contents : String
+    var bookId : String
+    var pageNumber: Int
     
-    init(bookmarkName: String, bookmarkTime: String, bookmarkPage: Int, bookmarkContents: String) {
+    init(bookmarkId: Int, bookmarkName: String, bookmarkTime: String, contents: String, bookId: String, pageNumber: Int) {
+        self.bookmarkId = bookmarkId
         self.bookmarkName = bookmarkName
         self.bookmarkTime = bookmarkTime
-        self.bookmarkPage = bookmarkPage
-        self.bookmarkContents = bookmarkContents
-        
+        self.contents = contents
+        self.bookId = bookId
+        self.pageNumber = pageNumber
     }
 }

@@ -151,4 +151,13 @@ class AppUtility {
         print("mac chinese simp.")
         return String.init(data: data, encoding: String.Encoding(rawValue: encode5))
     }
+    
+    static func getCurrentTimeString() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = formatter.string(from: date)
+        
+        return formattedDate
+    }
 }

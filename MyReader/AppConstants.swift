@@ -23,6 +23,7 @@ let readLength = 1024
 
 struct NotificationName {
     static let FinishDownload = "FinishDownload"
+    static let BookmarkAdded = "BookmarkAdded"
 }
 
 enum DLStatus : Int {

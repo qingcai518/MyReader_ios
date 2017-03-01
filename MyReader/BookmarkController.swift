@@ -10,21 +10,47 @@ import UIKit
 
 class BookmarkController: ViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    let model = BookmarkModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setRecieveNotifications()
         setTableView()
+        getData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    private func setRecieveNotifications() {
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.BookmarkAdded)).bindNext { [weak self] sender in
+            // 現在のデータを更新する.
+            self?.getData()
+        }.addDisposableTo(disposeBag)
+    }
+    
     private func setTableView() {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func getData() {
+        self.indicator.startAnimating()
+        model.getBookmarkInfos { [weak self] msg in
+            self?.indicator.stopAnimating()
+            
+            if let errorMsg = msg {
+                print("error message = \(errorMsg)")
+                return
+            }
+            
+            self?.tableView.reloadData()
+        }
     }
 }
 
@@ -38,14 +64,16 @@ extension BookmarkController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contents.count
-
-
+        return model.bookmarkInfos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BookmarkCell", for: indexPath) as! BookmarkCell!
-        return cell
+        let info = model.bookmarkInfos[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BookmarkCell", for: indexPath) as! BookmarkCell
+        cell.nameLbl.text = info.bookmarkName
+        cell.timeLbl.text = info.bookmarkTime
+        cell.contentLbl.text = info.contents
         
+        return cell
     }
 }

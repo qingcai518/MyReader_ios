@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Em7-hS-Y0a">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Bookmark Controller-->
+        <scene sceneID="Wos-zu-hp7">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" id="Em7-hS-Y0a" customClass="AddBookmarkController" customModule="MyReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x1H-Vy-gSo"/>
+                        <viewControllerLayoutGuide type="bottom" id="64V-ow-SGa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NuK-6G-qdn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ofu-Zo-8PZ">
+                                <rect key="frame" x="37.5" y="243.5" width="300" height="180"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="给书签起个名字吧" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xjM-VJ-5bT">
+                                        <rect key="frame" x="16" y="32" width="268" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="uEp-Dy-eXZ"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9b-b2-z8D">
+                                        <rect key="frame" x="16" y="106" width="100" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="EtU-hP-JIW"/>
+                                            <constraint firstAttribute="width" constant="100" id="lSy-q7-p4o"/>
+                                        </constraints>
+                                        <state key="normal" title="OK" backgroundImage="btn_light_blue"/>
+                                        <connections>
+                                            <action selector="doConfirm" destination="Em7-hS-Y0a" eventType="touchUpInside" id="A8g-SF-fbA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hA-nC-0Ef">
+                                        <rect key="frame" x="184" y="106" width="100" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="bLc-6Y-9yX"/>
+                                            <constraint firstAttribute="height" constant="44" id="tgN-vv-S3m"/>
+                                        </constraints>
+                                        <state key="normal" title="随便" backgroundImage="btn_light_blue"/>
+                                        <connections>
+                                            <action selector="doCancel" destination="Em7-hS-Y0a" eventType="touchUpInside" id="iGH-Ff-vYb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xjM-VJ-5bT" secondAttribute="trailing" constant="16" id="0q7-9c-i6q"/>
+                                    <constraint firstItem="Y9b-b2-z8D" firstAttribute="top" secondItem="xjM-VJ-5bT" secondAttribute="bottom" constant="24" id="11l-iB-LFc"/>
+                                    <constraint firstAttribute="width" constant="300" id="2Me-DC-dwf"/>
+                                    <constraint firstItem="3hA-nC-0Ef" firstAttribute="top" secondItem="xjM-VJ-5bT" secondAttribute="bottom" constant="24" id="2Rk-WT-HZ9"/>
+                                    <constraint firstItem="xjM-VJ-5bT" firstAttribute="top" secondItem="Ofu-Zo-8PZ" secondAttribute="top" constant="32" id="DLq-0X-8xM"/>
+                                    <constraint firstAttribute="height" constant="180" id="FvZ-KJ-SyC"/>
+                                    <constraint firstItem="Y9b-b2-z8D" firstAttribute="leading" secondItem="Ofu-Zo-8PZ" secondAttribute="leading" constant="16" id="eTy-XR-LvC"/>
+                                    <constraint firstItem="xjM-VJ-5bT" firstAttribute="leading" secondItem="Ofu-Zo-8PZ" secondAttribute="leading" constant="16" id="q7Q-2o-lpu"/>
+                                    <constraint firstAttribute="trailing" secondItem="3hA-nC-0Ef" secondAttribute="trailing" constant="16" id="qaw-FU-QHA"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ofu-Zo-8PZ" firstAttribute="centerY" secondItem="NuK-6G-qdn" secondAttribute="centerY" id="gPJ-ue-jrg"/>
+                            <constraint firstItem="Ofu-Zo-8PZ" firstAttribute="centerX" secondItem="NuK-6G-qdn" secondAttribute="centerX" id="j3a-tk-E4y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelBtn" destination="3hA-nC-0Ef" id="tds-QM-6cs"/>
+                        <outlet property="confirmBtn" destination="Y9b-b2-z8D" id="Qp6-gb-GC7"/>
+                        <outlet property="nameTf" destination="xjM-VJ-5bT" id="rGa-X9-EEw"/>
+                        <outlet property="nameView" destination="Ofu-Zo-8PZ" id="t5b-eo-dws"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TYg-w5-is9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="293.60000000000002" y="172.26386806596702"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btn_light_blue" width="100" height="22"/>
+    </resources>
+</document>

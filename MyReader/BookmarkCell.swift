@@ -9,6 +9,7 @@
 import UIKit
 
 class BookmarkCell: UITableViewCell {
+    @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var contentLbl: UILabel!
     
