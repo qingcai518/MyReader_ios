@@ -173,6 +173,15 @@ class BookController: LeavesViewController {
             } else {
                 self?.setBackgroundColor(color: UIColor.black)
                 self?.lightBtn.setImage(UIImage(named: "btn_sun"), for: .normal)
+                
+                // 文字の色を変更する.
+                guard let pageContents = self?.model.pageContents else {
+                    return
+                }
+                
+                for content in pageContents {
+                    content.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, content.length))
+                }
             }
             
             UserDefaults.standard.set(value, forKey: UDKey.LightMode)
