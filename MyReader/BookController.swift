@@ -165,6 +165,8 @@ class BookController: LeavesViewController {
     
     private func setInitStatus() {
         leavesView.topPage.backgroundColor = UIColor.yellow.cgColor
+        leavesView.topPageReverse.backgroundColor = UIColor.yellow.cgColor
+        leavesView.bottomPage.backgroundColor = UIColor.yellow.cgColor
         
         let lightMode = UserDefaults.standard.integer(forKey: UDKey.LightMode)
         if (lightMode == lightModeDay) {
@@ -303,10 +305,7 @@ class BookController: LeavesViewController {
         guard let image = AppUtility.imageWithText(attributedText: text, size: imageRect.size, context: context) else {
             return print("fail to get image.")
         }
-        
-//        context.setFillColor(UIColor.yellow.cgColor)
-//        context.fill(CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-        
+
         guard let cgImage = image.cgImage else {
             return
         }

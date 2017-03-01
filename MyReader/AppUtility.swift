@@ -89,10 +89,7 @@ class AppUtility {
         
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        context.setFillColor(UIColor.init(white: 1, alpha: 0.5).cgColor)
-        context.fill(CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
-        
+
         UIGraphicsEndImageContext()
         
         return image
