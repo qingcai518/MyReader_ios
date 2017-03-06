@@ -12,7 +12,7 @@ import RxCocoa
 
 class ViewController: UIViewController {
     var disposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }

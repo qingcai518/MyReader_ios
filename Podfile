@@ -11,5 +11,4 @@ pod 'MJRefresh'
 pod 'RxSwift',    '~> 3.0'
 pod 'RxCocoa',    '~> 3.0'
 pod 'SQLite.swift', '~> 0.11.2'
-pod 'TKRubberPageControl'
 end

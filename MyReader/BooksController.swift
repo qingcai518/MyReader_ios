@@ -91,9 +91,7 @@ class BooksController: ViewController {
     }
 
     private func getData() {
-        indicator.startAnimating()
         model.getBookInfos { [weak self] msg in
-            self?.indicator.stopAnimating()
             if let errorMsg = msg {
                 print("error = \(errorMsg)")
             }
@@ -109,9 +107,7 @@ extension BooksController : UICollectionViewDelegate {
         
         let bookInfo = model.bookInfos[indexPath.row]
 
-        indicator.startAnimating()
         model.readFile(bookInfo: bookInfo) { [weak self] content in
-            self?.indicator.stopAnimating()
             guard let contents = self?.model.pageContents else {
                 return
             }
