@@ -9,6 +9,7 @@ PODS:
   - SQLite.swift (0.11.2):
     - SQLite.swift/standard (= 0.11.2)
   - SQLite.swift/standard (0.11.2)
+  - TKRubberPageControl (1.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.3)
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
   - SQLite.swift (~> 0.11.2)
+  - TKRubberPageControl
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
@@ -27,7 +29,8 @@ SPEC CHECKSUMS:
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
   SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
+  TKRubberPageControl: ca0762dae51f562ebfd43ddbe3952e9b1ea11594
 
-PODFILE CHECKSUM: 6c621ac0d014dafc5c7e7dd77555431c19424507
+PODFILE CHECKSUM: 1642e471eef5e390ab6d6530cf0c31a8df21067b
 
 COCOAPODS: 1.1.1
