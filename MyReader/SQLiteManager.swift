@@ -49,8 +49,7 @@ class SQLiteManager {
                 table.column(bookUrl, unique: true)
                 table.column(imageUrl)
             })
-            
-            
+
             // bookmark tableを作成する.
             table_bookmarks = Table("Bookmarks")
             let bookmarkId = Expression<Int>("id")
@@ -194,14 +193,37 @@ class SQLiteManager {
         
         do {
             for row in try db.prepare("select * from Bookmarks") {
-                guard let bookmarkId = row[0] as? Int else {continue}
-                guard let bookId = row[1] as? String else {continue}
-                guard let bookmarkName = row[2] as? String else {continue}
-                guard let content = row[3] as? String else {continue}
-                guard let bookmarkTime = row[4] as? String else {continue}
-                guard let pageNumber = row[5] as? Int else {continue}
+                guard let bookmarkId = row[0] as? NSNumber else {
+                    print("fail to get bookmark id.")
+                    continue
+                }
                 
-                let info = BookmarkInfo(bookmarkId: bookmarkId, bookmarkName: bookmarkName, bookmarkTime: bookmarkTime, contents: content, bookId: bookId, pageNumber: pageNumber)
+                guard let bookId = row[1] as? String else {
+                    print("fail to get book id.")
+                    continue
+                }
+                
+                guard let bookmarkName = row[2] as? String else {
+                    print("fail to get bookmark name")
+                    continue
+                }
+                
+                guard let content = row[3] as? String else {
+                    print("fail to get content.")
+                    continue
+                }
+                
+                guard let bookmarkTime = row[4] as? String else {
+                    print("fail to get time.")
+                    continue
+                }
+                
+                guard let pageNumber = row[5] as? NSNumber else {
+                    print("fail to get page number.")
+                    continue
+                }
+
+                let info = BookmarkInfo(bookmarkId: bookmarkId.intValue, bookmarkName: bookmarkName, bookmarkTime: bookmarkTime, contents: content, bookId: bookId, pageNumber: pageNumber.intValue)
                 
                 infos.append(info)
             }
