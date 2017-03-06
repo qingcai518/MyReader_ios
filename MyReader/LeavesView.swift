@@ -181,40 +181,27 @@ class LeavesView: UIView {
         }
     }
     
-    func setLayerFrames() {
-        var topPageStartY = CGFloat(0)
-        if (topEdge >= 0.5) {
-            topPageStartY = self.layer.bounds.origin.y
-        }
-        
-        self.topPage.frame = CGRect(x: self.layer.bounds.origin.x, y: topPageStartY, width: self.leafEdge * self.bounds.size.width, height: self.topEdge * self.layer.bounds.size.height)
-        
-        self.topPageReverse.frame = CGRect(x: self.layer.bounds.origin.x + (2 * self.leafEdge - 1) * self.bounds.size.width
-            , y: self.layer.bounds.origin.y, width: ( 1 - self.leafEdge) + self.bounds.size.width, height: self.layer.bounds.size.height)
-        self.bottomPage.frame = self.layer.bounds
-        self.topPageShadow.frame = CGRect(x: self.topPageReverse.frame.origin.x - 40, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
-        
-        self.topPageReverseImage.frame = self.topPageReverseImage.bounds
-        self.topPageReverseImage.transform = CATransform3DMakeScale(-1, 1, 1)
-        
-        self.topPageReverseOverlay.frame = self.topPageReverseOverlay.bounds
-    
-        self.topPageReverseShading.frame = CGRect(x: self.topPageReverse.bounds.size.width, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
-        
-        self.bottomPageShadow.frame = CGRect(x: self.topPageReverse.bounds.size.width - 50, y: 0, width: 50 + 1, height: self.topPageReverse.bounds.size.height)
-        
-        self.bottomPageShadow.frame = CGRect(x: self.leafEdge * self
-            .bounds.size.width, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
-        
-        self.topPageOverlay.frame = self.topPage.bounds
-        
-    }
-    
 //    func setLayerFrames() {
-//        self.topPage.frame = CGRect(x: self.layer.bounds.origin.x, y: self.layer.bounds.origin.y, width: self.leafEdge * self.bounds.size.width, height: self.layer.bounds.size.height)
+//        // top pageを設定する.
+//        var topPageStartY = CGFloat(0)
+//        var topPageHeight = CGFloat(0)
 //        
-//        self.topPageReverse.frame = CGRect(x: self.layer.bounds.origin.x + (2 * self.leafEdge - 1) * self.bounds.size.width
-//            , y: self.layer.bounds.origin.y, width: (1 - self.leafEdge) * self.bounds.size.width, height: self.layer.bounds.size.height)
+//        if (topEdge <= 0.5) {
+//            topPageStartY = topEdge * self.bounds.size.height
+//            topPageHeight = (1 - topEdge) * self.bounds.size.height
+//        } else {
+//            topPageStartY = 0
+//            topPageHeight = topEdge * self.bounds.size.height
+//        }
+//        
+//        self.topPage.frame = CGRect(x: self.layer.bounds.origin.x, y: topPageStartY, width: self.leafEdge * self.bounds.size.width, height: topPageHeight)
+//        
+//        // top page reverseを設定する.
+//        let topPageReverseStartX = self.layer.bounds.origin.x + (2 * self.leafEdge - 1) * self.bounds.size.width
+//        let topPageReverseStartY = self.layer.bounds.origin.y + (2 * self.topEdge - 1) * self.bounds.size.height
+//        let topPageReverseWidth = (1 - self.leafEdge) * self.bounds.size.width
+//        let topPageReverseHeight = (1 - self.topEdge) * self.layer.bounds.size.height
+//        self.topPageReverse.frame = CGRect(x: topPageReverseStartX, y: topPageReverseStartY, width: topPageReverseWidth, height: topPageReverseHeight)
 //        
 //        self.bottomPage.frame = self.layer.bounds
 //        self.topPageShadow.frame = CGRect(x: self.topPageReverse.frame.origin.x - 40, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
@@ -228,10 +215,29 @@ class LeavesView: UIView {
 //        self.topPageOverlay.frame = self.topPage.bounds
 //    }
     
+    func setLayerFrames() {
+        self.topPage.frame = CGRect(x: self.layer.bounds.origin.x, y: self.layer.bounds.origin.y, width: self.leafEdge * self.bounds.size.width, height: self.layer.bounds.size.height)
+        
+        self.topPageReverse.frame = CGRect(x: self.layer.bounds.origin.x + (2 * self.leafEdge - 1) * self.bounds.size.width
+            , y: self.layer.bounds.origin.y, width: (1 - self.leafEdge) * self.bounds.size.width, height: self.layer.bounds.size.height)
+        
+        self.bottomPage.frame = self.layer.bounds
+        self.topPageShadow.frame = CGRect(x: self.topPageReverse.frame.origin.x - 40, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
+        
+        self.topPageReverseImage.frame = self.topPageReverse.bounds
+        self.topPageReverseImage.transform = CATransform3DMakeScale(-1, 1, 1)
+        self.topPageReverseOverlay.frame = self.topPageReverse.bounds
+        self.topPageReverseShading.frame = CGRect(x: self.topPageReverse.bounds.size.width - 50, y: 0, width: 50 + 1, height: self.topPageReverse.bounds.size.height)
+        
+        self.bottomPageShadow.frame = CGRect(x: self.leafEdge * self.bounds.size.width, y: 0, width: 40, height: self.bottomPage.bounds.size.height)
+        self.topPageOverlay.frame = self.topPage.bounds
+    }
+    
     func willTurnToPageAtIndex(index: Int) {
         self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
         
-//        if (self.delegate.responds(to: #selector(LeavesView.willTurnToPageAtIndex(index:)))) {
+//        if (self.delegate.responds(to
+        : #selector(LeavesView.willTurnToPageAtIndex(index:)))) {
 //            self.delegate.leavesView(leavesView: self, willTurnToPageAtIndex: index)
 //        }
     }
