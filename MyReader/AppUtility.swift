@@ -160,4 +160,13 @@ class AppUtility {
         
         return formattedDate
     }
+    
+    static func saveCurrentPage(bookId: String, pageIndex: Int) {
+        UserDefaults.standard.set(pageIndex, forKey: UDKey.CurrentPage + "_" + bookId)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func getCurrentPage(bookId: String) -> Int {
+        return UserDefaults.standard.integer(forKey: UDKey.CurrentPage + "_" + bookId)
+    }
 }

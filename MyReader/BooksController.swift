@@ -10,6 +10,7 @@ import UIKit
 
 class BooksController: ViewController {
     @IBOutlet weak var collectionView : UICollectionView!
+    @IBOutlet weak var indicator : UIActivityIndicatorView!
     
     let model = BooksModel()
     
@@ -17,7 +18,7 @@ class BooksController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setRecieveNotification()
         setCollectionView()
         getData()
@@ -26,6 +27,7 @@ class BooksController: ViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     private func setRecieveNotification() {
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.FinishDownload)).bindNext { [weak self] sender in
@@ -90,7 +92,9 @@ class BooksController: ViewController {
     }
 
     private func getData() {
+        indicator.startAnimating()
         model.getBookInfos { [weak self] msg in
+            self?.indicator.stopAnimating()
             if let errorMsg = msg {
                 print("error = \(errorMsg)")
             }
@@ -103,14 +107,23 @@ class BooksController: ViewController {
 extension BooksController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-
-        let storyboard = UIStoryboard(name: "Book", bundle: nil)
-        guard let next = storyboard.instantiateInitialViewController() as? BookController else {
-            return
-        }
         
-        next.bookInfo = model.bookInfos[indexPath.row]
-        self.present(next, animated: true, completion: nil)
+        let bookInfo = model.bookInfos[indexPath.row]
+
+        indicator.startAnimating()
+        model.readFile(bookInfo: bookInfo) { [weak self] content in
+            self?.indicator.stopAnimating()
+            guard let contents = self?.model.pageContents else {
+                return
+            }
+            
+            guard let chapterInfos = self?.model.chapterInfos else {
+                return
+            }
+            
+            let bookController = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
+            self?.present(bookController, animated: true, completion: nil)
+        }
     }
 }
 

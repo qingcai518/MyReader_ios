@@ -1,50 +1,23 @@
 //
-//  BooksModel.swift
+//  BookCustomModel.swift
 //  MyReader
 //
-//  Created by RN-079 on 2017/02/21.
+//  Created by RN-079 on 2017/02/22.
 //  Copyright © 2017年 RN-079. All rights reserved.
 //
 
 import Foundation
+import UIKit
 import RxSwift
 
-class BooksModel {
-    var bookInfos = [LocalBookInfo]()
-    
-    // 読み込みした後の本の情報.
+class BookCustomModel {
     var pageContents = [NSMutableAttributedString]()
-    
-    // 読み込み後の章の情報.
+    let letterSpacing = 1.0
+    let lineSpacing = CGFloat(6.0)
+    let font = UIFont.Helvetica18()
+    var currentChapter = Variable("")
     var chapterInfos = [ChapterInfo]()
-    
-    func getBookInfos(completion: @escaping (String?) -> Void) {
-        bookInfos = SQLiteManager.sharedInstance.selectBooks()
-        
-        for bookInfo in bookInfos {
-            let bookId = bookInfo.bookId
-            let bookName = bookInfo.bookName
-            let authorName = bookInfo.authorName
-            let localPath = bookInfo.localPath
-            let bookImgUrl = bookInfo.bookImgUrl
-            
-            print("book info = \(bookId), \(bookName), \(authorName), \(localPath), \(bookImgUrl)")
-        }
-        
-        return completion(nil)
-    }
 
-    func removeBookById(bookId: String,completion: @escaping (String?) -> Void) {
-        SQLiteManager.sharedInstance.deleteBook(bookId: bookId)
-        
-        bookInfos = SQLiteManager.sharedInstance.selectBooks()
-        
-        return completion(nil)
-    }
-    
-    
-    // dummy.
-    
     func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
         DispatchQueue.global().async { [weak self] in
             let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
@@ -100,7 +73,7 @@ class BooksModel {
         var chapterName = "序言"
         for i in 0..<contents.count {
             let content = contents[i]
-            
+ 
             // 章节分类.
             let contentTrim = content.trimmingCharacters(in: CharacterSet.whitespaces)
             if (contentTrim.hasPrefix("Chapter") || (contentTrim.hasPrefix("第") && contentTrim.contains("章"))) {
@@ -137,7 +110,7 @@ class BooksModel {
             self.addToPageContents(contentValue: contentValue)
         }
     }
-    
+
     private func addToPageContents(contentValue : String) {
         let attributedText = NSMutableAttributedString(string: contentValue)
         let range = NSMakeRange(0, attributedText.length)
@@ -161,4 +134,5 @@ class BooksModel {
         
         pageContents.append(attributedText)
     }
+    
 }
