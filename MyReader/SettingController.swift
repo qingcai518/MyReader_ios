@@ -25,10 +25,37 @@ class SettingController: ViewController {
     
     // param.
     var bookInfo: LocalBookInfo!
+    var pageNumber: Int!
+    var content: String!
     
     @IBAction func doClose() {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func addBookmark() {
+        let storyboard = UIStoryboard(name: "AddBookmark", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? AddBookmarkController else {return}
+        next.bookId = bookInfo.bookId
+        next.content = content
+        next.pageNumber = pageNumber
+    }
+    
+    @IBAction func showChapters() {
+        print("show chapter infos.")
+    }
+    
+    @IBAction func showBookmarks() {
+        print("show bookmark infos.")
+    }
+    
+    @IBAction func setFont() {
+        print("set font infos.")
+    }
+    
+    @IBAction func setLight() {
+        print("set light infos.")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

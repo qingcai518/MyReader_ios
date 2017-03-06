@@ -56,8 +56,13 @@ class BookController: UIPageViewController {
                 return
             }
             
-            next.bookInfo = self.bookInfo
+            let currentPage = AppUtility.getCurrentPage(bookId: self.bookInfo.bookId)
+            let currentContent = self.pageContents[currentPage].string
+            
             next.modalPresentationStyle = .custom
+            next.bookInfo = self.bookInfo
+            next.content = currentContent
+            next.pageNumber = currentPage
             self.present(next, animated: true, completion: nil)
         }.addDisposableTo(disposeBag)
         recognizer.delegate = self

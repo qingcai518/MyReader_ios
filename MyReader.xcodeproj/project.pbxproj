@@ -218,7 +218,6 @@
 		3C67EDD01E5D33BE00B5156D /* BookPage_customView */ = {
 			isa = PBXGroup;
 			children = (
-				3C587EE41E66C2F800B622E2 /* AddBookmarkPage */,
 				3C67EDD11E5D33D500B5156D /* BookCustom.storyboard */,
 				3C67EDD31E5D346200B5156D /* BookCustomController.swift */,
 				3C67EDD51E5D34D500B5156D /* BookCustomModel.swift */,
@@ -336,6 +335,7 @@
 		3CD1E3861E6D312200EEE765 /* SettingPage */ = {
 			isa = PBXGroup;
 			children = (
+				3C587EE41E66C2F800B622E2 /* AddBookmarkPage */,
 				3CD1E3891E6D314E00EEE765 /* Setting.storyboard */,
 				3CD1E3871E6D313B00EEE765 /* SettingController.swift */,
 			);
