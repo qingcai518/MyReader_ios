@@ -57,13 +57,13 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPh-CI-Z1w">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPh-CI-Z1w">
                                                     <rect key="frame" x="84" y="92" width="275" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNf-BA-q8Y" customClass="CosmosView" customModule="Cosmos">
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNf-BA-q8Y" customClass="CosmosView" customModule="Cosmos">
                                                     <rect key="frame" x="84" y="68" width="120" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -95,26 +95,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fGd-WA-vLC">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <color key="color" red="0.86622596149999997" green="0.35365022779999999" blue="0.11312403140000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="mDM-rz-C8t" secondAttribute="bottom" id="0Mf-dw-7jp"/>
-                            <constraint firstItem="fGd-WA-vLC" firstAttribute="centerY" secondItem="Pas-L5-Q5B" secondAttribute="centerY" id="3uA-wM-lG1"/>
                             <constraint firstItem="mDM-rz-C8t" firstAttribute="top" secondItem="Pas-L5-Q5B" secondAttribute="top" id="C8z-Zu-haq"/>
                             <constraint firstAttribute="trailing" secondItem="mDM-rz-C8t" secondAttribute="trailing" id="Cjq-QS-qvt"/>
                             <constraint firstItem="mDM-rz-C8t" firstAttribute="leading" secondItem="Pas-L5-Q5B" secondAttribute="leading" id="UrD-lR-2LV"/>
-                            <constraint firstItem="fGd-WA-vLC" firstAttribute="centerX" secondItem="Pas-L5-Q5B" secondAttribute="centerX" id="XIi-lG-mnB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="书库" id="3uF-jl-HrX"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="indicator" destination="fGd-WA-vLC" id="OZz-NT-Ecd"/>
                         <outlet property="tableView" destination="mDM-rz-C8t" id="P6Y-OO-ryR"/>
                         <segue destination="ffG-6j-CZ8" kind="show" identifier="ToCloudDetail" id="b63-rB-Ik4"/>
                     </connections>

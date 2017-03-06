@@ -91,7 +91,9 @@ class BooksController: ViewController {
     }
 
     private func getData() {
+        startIndicator()
         model.getBookInfos { [weak self] msg in
+            self?.stopIndicator()
             if let errorMsg = msg {
                 print("error = \(errorMsg)")
             }
@@ -107,7 +109,10 @@ extension BooksController : UICollectionViewDelegate {
         
         let bookInfo = model.bookInfos[indexPath.row]
 
+        startIndicator()
         model.readFile(bookInfo: bookInfo) { [weak self] content in
+            self?.stopIndicator()
+            
             guard let contents = self?.model.pageContents else {
                 return
             }

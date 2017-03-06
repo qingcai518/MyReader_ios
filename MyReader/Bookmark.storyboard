@@ -77,18 +77,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6Fa-Vx-zxu">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <color key="color" red="0.86622596149999997" green="0.35365022779999999" blue="0.11312403140000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yVz-eO-rqo" firstAttribute="leading" secondItem="V8Q-wZ-gvs" secondAttribute="leading" id="2wF-YN-lgT"/>
                             <constraint firstItem="yVz-eO-rqo" firstAttribute="top" secondItem="V8Q-wZ-gvs" secondAttribute="top" id="c6C-2j-R6Y"/>
-                            <constraint firstItem="6Fa-Vx-zxu" firstAttribute="centerX" secondItem="V8Q-wZ-gvs" secondAttribute="centerX" id="fxS-1e-j3P"/>
                             <constraint firstAttribute="trailing" secondItem="yVz-eO-rqo" secondAttribute="trailing" id="tdx-pU-fF2"/>
-                            <constraint firstItem="6Fa-Vx-zxu" firstAttribute="centerY" secondItem="V8Q-wZ-gvs" secondAttribute="centerY" id="vd9-ld-6gC"/>
                             <constraint firstItem="6xj-zO-aLE" firstAttribute="top" secondItem="yVz-eO-rqo" secondAttribute="bottom" id="vhe-8H-UAa"/>
                         </constraints>
                     </view>
@@ -107,7 +101,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="closeBtn" destination="dpH-Mr-yBt" id="35v-Qd-GkH"/>
-                        <outlet property="indicator" destination="6Fa-Vx-zxu" id="2Gs-zC-1Mw"/>
                         <outlet property="tableView" destination="yVz-eO-rqo" id="hTu-Uc-fOV"/>
                     </connections>
                 </viewController>

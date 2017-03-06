@@ -3,6 +3,7 @@ PODS:
   - Cosmos (7.0.0)
   - Kingfisher (3.2.4)
   - MJRefresh (3.1.12)
+  - NVActivityIndicatorView (3.2)
   - RxCocoa (3.1.0):
     - RxSwift (~> 3.1)
   - RxSwift (3.1.0)
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - Cosmos (~> 7.0)
   - Kingfisher (~> 3.0)
   - MJRefresh
+  - NVActivityIndicatorView
   - RxCocoa (~> 3.0)
   - RxSwift (~> 3.0)
   - SQLite.swift (~> 0.11.2)
@@ -24,10 +26,11 @@ SPEC CHECKSUMS:
   Cosmos: 2c8299147138758f6ebbb247cf1aeed77998bdf9
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
   SQLite.swift: 670c3e9e0a806bbfd56a3de5d530768dc0e6fe7c
 
-PODFILE CHECKSUM: 6c621ac0d014dafc5c7e7dd77555431c19424507
+PODFILE CHECKSUM: a321056809fa592209890faafd72790e1d125d2e
 
 COCOAPODS: 1.1.1
