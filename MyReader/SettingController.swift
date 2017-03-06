@@ -34,7 +34,10 @@ class SettingController: ViewController {
     
     @IBAction func addBookmark() {
         let storyboard = UIStoryboard(name: "AddBookmark", bundle: nil)
-        guard let next = storyboard.instantiateInitialViewController() as? AddBookmarkController else {return}
+        guard let next = storyboard.instantiateInitialViewController() as? AddBookmarkController else {
+            print("can not find next.")
+            return
+        }
         next.bookId = bookInfo.bookId
         next.content = content
         next.pageNumber = pageNumber
