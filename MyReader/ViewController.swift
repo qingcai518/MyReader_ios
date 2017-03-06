@@ -19,8 +19,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        indicator = NVActivityIndicatorView(frame: CGRect(x: 100, y: 100, width: 200, height: 150), type: NVActivityIndicatorType.ballGridBeat, color: UIColor.brown, padding: 10)
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,6 +37,12 @@ class ViewController: UIViewController {
     
     func doEnd(_ sender: UITapGestureRecognizer?) {
         self.view.endEditing(true)
+    }
+    
+    func createIndicator() {
+        let width = CGFloat(100)
+        let height = CGFloat(100)
+        indicator = NVActivityIndicatorView(frame: CGRect(x: (screenWidth - width) / 2, y: (screenHeight - height) / 2, width: width, height: height), type: NVActivityIndicatorType.ballGridBeat, color: UIColor.brown, padding: 10)
     }
     
     func startIndicator() {

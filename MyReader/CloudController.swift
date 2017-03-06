@@ -22,6 +22,7 @@ class CloudController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createIndicator()
         setRefreshHeaderAndFooter()
         setTableView()
         getData()

@@ -18,6 +18,7 @@ class BooksController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createIndicator()
         setRecieveNotification()
         setCollectionView()
         getData()

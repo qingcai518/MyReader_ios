@@ -21,6 +21,7 @@ class BookmarkController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createIndicator()
         setTableView()
     }
     

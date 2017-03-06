@@ -60,24 +60,6 @@ class BookCustomController: LeavesViewController {
         guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
             return
         }
-        
-        guard let ChapterController = next.viewControllers.first as? ChapterController else {
-            return
-        }
-        
-        ChapterController.chapterInfos = model.chapterInfos
-        self.present(next, animated: true, completion: nil)
-        
-        
-        // second.
-        
-        
-        
-        
-        let storyboard = UIStoryboard(name: "Chapter", bundle: nil)
-        guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
-            return
-        }
         guard let chapterController = next.viewControllers.first as? ChapterController else {
             return
         }
