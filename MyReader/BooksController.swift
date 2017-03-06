@@ -108,13 +108,8 @@ extension BooksController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: "Book", bundle: nil)
-        guard let next = storyboard.instantiateInitialViewController() as? BookController else {
-            return
-        }
-        
         let bookInfo = model.bookInfos[indexPath.row]
-        
+
         indicator.startAnimating()
         model.readFile(bookInfo: bookInfo) { [weak self] content in
             self?.indicator.stopAnimating()
@@ -126,10 +121,8 @@ extension BooksController : UICollectionViewDelegate {
                 return
             }
             
-            next.pageContents = contents
-            next.chapterInfos = chapterInfos
-            next.bookInfo = bookInfo
-            self?.present(next, animated: true, completion: nil)
+            let bookController = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
+            self?.present(bookController, animated: true, completion: nil)
         }
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class BookController: UIPageViewController {    
+class BookController: UIPageViewController {
     // 現在の章の情報.
     let disposeBag = DisposeBag()
     var currentChapter = Variable("")
@@ -19,13 +19,22 @@ class BookController: UIPageViewController {
     var bookInfo : LocalBookInfo!
     var pageContents = [NSMutableAttributedString]()
     var chapterInfos = [ChapterInfo]()
-
+    
+    init(bookInfo: LocalBookInfo, pageContents: [NSMutableAttributedString], chapterInfos: [ChapterInfo]) {
+        super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
+        self.bookInfo = bookInfo
+        self.pageContents = pageContents
+        self.chapterInfos = chapterInfos
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = self
-
         setView()
-        setRecognizer()
+//        setRecognizer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,29 +55,33 @@ class BookController: UIPageViewController {
         if let firstController = controllers.first {
             self.setViewControllers([firstController], direction: .forward, animated: true, completion: nil)
         }
+        
+        print("controllers =\(controllers.count) ")
+        
+        self.dataSource = self
     }
     
-    private func setRecognizer() {
-        let recognizer = UITapGestureRecognizer()
-        recognizer.rx.event.bindNext { sender in
-            let storyboard = UIStoryboard(name: "Setting", bundle: nil)
-            guard let next = storyboard.instantiateInitialViewController() as? SettingController else {
-                return
-            }
-            
-            let currentPage = AppUtility.getCurrentPage(bookId: self.bookInfo.bookId)
-            let currentContent = self.pageContents[currentPage].string
-            
-            next.modalPresentationStyle = .custom
-            next.bookInfo = self.bookInfo
-            next.content = currentContent
-            next.pageNumber = currentPage
-            next.chapterInfos = self.chapterInfos
-            self.present(next, animated: true, completion: nil)
-        }.addDisposableTo(disposeBag)
-        recognizer.delegate = self
-        self.view.addGestureRecognizer(recognizer)
-    }
+//    private func setRecognizer() {
+//        let recognizer = UITapGestureRecognizer()
+//        recognizer.rx.event.bindNext { sender in
+//            let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+//            guard let next = storyboard.instantiateInitialViewController() as? SettingController else {
+//                return
+//            }
+//            
+//            let currentPage = AppUtility.getCurrentPage(bookId: self.bookInfo.bookId)
+//            let currentContent = self.pageContents[currentPage].string
+//            
+//            next.modalPresentationStyle = .custom
+//            next.bookInfo = self.bookInfo
+//            next.content = currentContent
+//            next.pageNumber = currentPage
+//            next.chapterInfos = self.chapterInfos
+//            self.present(next, animated: true, completion: nil)
+//        }.addDisposableTo(disposeBag)
+//        recognizer.delegate = self
+//        self.view.addGestureRecognizer(recognizer)
+//    }
 }
 
 extension BookController : UIPageViewControllerDataSource {
@@ -93,14 +106,14 @@ extension BookController : UIPageViewControllerDataSource {
     }
 }
 
-extension BookController : UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        let location = touch.location(in: self.view)
-        
-        if ((location.x < (screenWidth - 44) / 2) || (location.x > (screenWidth + 44) / 2)) {
-            return false
-        }
-        
-        return true
-    }
-}
+//extension BookController : UIGestureRecognizerDelegate {
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        let location = touch.location(in: self.view)
+//        
+//        if ((location.x < (screenWidth - 44) / 2) || (location.x > (screenWidth + 44) / 2)) {
+//            return false
+//        }
+//        
+//        return true
+//    }
+//}
