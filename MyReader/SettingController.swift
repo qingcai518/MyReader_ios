@@ -38,9 +38,12 @@ class SettingController: ViewController {
             print("can not find next.")
             return
         }
+        
         next.bookId = bookInfo.bookId
         next.content = content
         next.pageNumber = pageNumber
+        
+        self.present(next, animated: true, completion: nil)
     }
     
     @IBAction func showChapters() {
