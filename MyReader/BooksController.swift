@@ -10,15 +10,14 @@ import UIKit
 
 class BooksController: ViewController {
     @IBOutlet weak var collectionView : UICollectionView!
-    @IBOutlet weak var indicator : UIActivityIndicatorView!
-    
+
     let model = BooksModel()
     
     var currentInfo : LocalBookInfo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setRecieveNotification()
         setCollectionView()
         getData()
