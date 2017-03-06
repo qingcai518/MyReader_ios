@@ -182,10 +182,12 @@ class LeavesView: UIView {
     }
     
     func setLayerFrames() {
-        print("topEdge value = \(self.topEdge)")
-        print("leafEdge value = \(self.leafEdge)")
+        var topPageStartY = CGFloat(0)
+        if (topEdge >= 0.5) {
+            topPageStartY = self.layer.bounds.origin.y
+        }
         
-        self.topPage.frame = CGRect(x: self.layer.bounds.origin.x, y: self.layer.bounds.origin.y, width: self.leafEdge * self.bounds.size.width, height: self.leafEdge * self.layer.bounds.size.height)
+        self.topPage.frame = CGRect(x: self.layer.bounds.origin.x, y: topPageStartY, width: self.leafEdge * self.bounds.size.width, height: self.topEdge * self.layer.bounds.size.height)
         
         self.topPageReverse.frame = CGRect(x: self.layer.bounds.origin.x + (2 * self.leafEdge - 1) * self.bounds.size.width
             , y: self.layer.bounds.origin.y, width: ( 1 - self.leafEdge) + self.bounds.size.width, height: self.layer.bounds.size.height)
