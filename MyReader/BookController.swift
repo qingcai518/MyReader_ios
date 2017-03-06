@@ -63,6 +63,7 @@ class BookController: UIPageViewController {
             next.bookInfo = self.bookInfo
             next.content = currentContent
             next.pageNumber = currentPage
+            next.chapterInfos = self.chapterInfos
             self.present(next, animated: true, completion: nil)
         }.addDisposableTo(disposeBag)
         recognizer.delegate = self

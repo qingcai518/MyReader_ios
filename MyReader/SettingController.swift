@@ -27,6 +27,7 @@ class SettingController: ViewController {
     var bookInfo: LocalBookInfo!
     var pageNumber: Int!
     var content: String!
+    var chapterInfos = [ChapterInfo]()
     
     @IBAction func doClose() {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -47,11 +48,25 @@ class SettingController: ViewController {
     }
     
     @IBAction func showChapters() {
-        print("show chapter infos.")
+        let storyboard = UIStoryboard(name: "Chapter", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
+            return
+        }
+        guard let chapterController = next.viewControllers.first as? ChapterController else {
+            return
+        }
+        chapterController.chapterInfos = self.chapterInfos
+        
+        self.present(next, animated: true, completion: nil)
     }
     
     @IBAction func showBookmarks() {
-        print("show bookmark infos.")
+        let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
+            return
+        }
+        
+        self.present(next, animated: true, completion: nil)
     }
     
     @IBAction func setFont() {
