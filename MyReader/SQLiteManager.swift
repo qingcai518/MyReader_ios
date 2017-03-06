@@ -164,6 +164,7 @@ class SQLiteManager {
     
     func insertBookmark(name: String, bookId: String, time: String, content: String, pageNumber: Int) -> Int {
         if (table_bookmarks == nil) {
+            print("no table exists.")
             return -1
         }
         
