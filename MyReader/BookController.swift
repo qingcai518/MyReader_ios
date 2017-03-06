@@ -34,7 +34,7 @@ class BookController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-//        setRecognizer()
+        setRecognizer()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,27 +61,31 @@ class BookController: UIPageViewController {
         self.dataSource = self
     }
     
-//    private func setRecognizer() {
-//        let recognizer = UITapGestureRecognizer()
-//        recognizer.rx.event.bindNext { sender in
-//            let storyboard = UIStoryboard(name: "Setting", bundle: nil)
-//            guard let next = storyboard.instantiateInitialViewController() as? SettingController else {
-//                return
-//            }
-//            
-//            let currentPage = AppUtility.getCurrentPage(bookId: self.bookInfo.bookId)
-//            let currentContent = self.pageContents[currentPage].string
-//            
-//            next.modalPresentationStyle = .custom
-//            next.bookInfo = self.bookInfo
-//            next.content = currentContent
-//            next.pageNumber = currentPage
-//            next.chapterInfos = self.chapterInfos
-//            self.present(next, animated: true, completion: nil)
-//        }.addDisposableTo(disposeBag)
-//        recognizer.delegate = self
-//        self.view.addGestureRecognizer(recognizer)
-//    }
+    private func setRecognizer() {
+        let recognizer = UITapGestureRecognizer()
+        recognizer.rx.event.bindNext { sender in
+            let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+            guard let next = storyboard.instantiateInitialViewController() as? SettingController else {
+                return
+            }
+            
+            let currentPage = AppUtility.getCurrentPage(bookId: self.bookInfo.bookId)
+            let currentContent = self.pageContents[currentPage].string
+            
+            next.modalPresentationStyle = .custom
+            next.bookInfo = self.bookInfo
+            next.content = currentContent
+            next.pageNumber = currentPage
+            next.chapterInfos = self.chapterInfos
+            self.present(next, animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
+        
+        let tapView = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: screenHeight))
+        tapView.center = CGPoint(x: screenWidth / 2, y: screenHeight / 2)
+        tapView.backgroundColor = UIColor.clear
+        self.view.addSubview(tapView)
+        tapView.addGestureRecognizer(recognizer)
+    }
 }
 
 extension BookController : UIPageViewControllerDataSource {
