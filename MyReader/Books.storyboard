@@ -81,12 +81,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ghx-iT-zJ6">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.86622596149999997" green="0.35365022779999999" blue="0.11312403140000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="90h-i6-XEG" secondAttribute="bottom" id="2Ot-Kn-kmv"/>
                             <constraint firstItem="90h-i6-XEG" firstAttribute="top" secondItem="aRL-ls-R5s" secondAttribute="top" id="3p5-qY-0GR"/>
                             <constraint firstAttribute="trailing" secondItem="90h-i6-XEG" secondAttribute="trailing" id="88U-K4-bBz"/>
+                            <constraint firstItem="Ghx-iT-zJ6" firstAttribute="centerX" secondItem="aRL-ls-R5s" secondAttribute="centerX" id="oi6-kC-heh"/>
+                            <constraint firstItem="Ghx-iT-zJ6" firstAttribute="centerY" secondItem="aRL-ls-R5s" secondAttribute="centerY" id="tPG-x2-dsv"/>
                             <constraint firstItem="90h-i6-XEG" firstAttribute="leading" secondItem="aRL-ls-R5s" secondAttribute="leading" id="wiQ-6F-iug"/>
                         </constraints>
                     </view>
@@ -94,6 +100,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="90h-i6-XEG" id="QwB-4i-Ctm"/>
+                        <outlet property="indicator" destination="Ghx-iT-zJ6" id="vbP-al-Cvf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itT-ld-imd" userLabel="First Responder" sceneMemberID="firstResponder"/>
