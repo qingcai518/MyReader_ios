@@ -31,6 +31,10 @@ enum DLStatus : Int {
     case after = 2
 }
 
+let lightModeDay = 0
+let lightModeNight = 1
+
 struct UDKey {
     static let CurrentPage = "CurrentPage"
+    static let LightMode = "LightMode"
 }

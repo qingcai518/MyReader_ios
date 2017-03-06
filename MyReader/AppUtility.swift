@@ -78,7 +78,7 @@ class AppUtility {
     /*
      * 画像を文字列から取得する処理.
      */
-    static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize) -> UIImage? {
+    static func imageWithText(attributedText: NSMutableAttributedString, size: CGSize, context: CGContext) -> UIImage? {
         let scale = UIScreen.main.scale
         
         // イメージサイズ
@@ -89,6 +89,7 @@ class AppUtility {
         
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
+
         UIGraphicsEndImageContext()
         
         return image
@@ -149,5 +150,14 @@ class AppUtility {
         
         print("mac chinese simp.")
         return String.init(data: data, encoding: String.Encoding(rawValue: encode5))
+    }
+    
+    static func getCurrentTimeString() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = formatter.string(from: date)
+        
+        return formattedDate
     }
 }

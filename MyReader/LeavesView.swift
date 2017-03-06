@@ -85,6 +85,8 @@ class LeavesView: UIView {
         self.clipsToBounds = true
         topPage = CALayer()
         topPage.masksToBounds = true
+        
+        // テストのために追加する.
         topPage.backgroundColor = UIColor.white.cgColor
         
         topPageOverlay = CALayer()

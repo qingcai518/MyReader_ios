@@ -12,6 +12,7 @@ import SQLite
 class SQLiteManager {
     var db : Connection!
     var table_books: Table!
+    var table_bookmarks: Table!
     
     class var sharedInstance : SQLiteManager {
         struct Static {
@@ -48,6 +49,25 @@ class SQLiteManager {
                 table.column(bookUrl, unique: true)
                 table.column(imageUrl)
             })
+
+            // bookmark tableを作成する.
+            table_bookmarks = Table("Bookmarks")
+            let bookmarkId = Expression<Int>("id")
+            let bookmarkName = Expression<String>("name")
+            let bookId = Expression<String>("bookId")
+            let content = Expression<String>("content")
+            let time = Expression<String>("time")
+            let pageNumber = Expression<Int>("pageNumber")
+            
+            try db.run(table_bookmarks.create{ table in
+                table.column(bookmarkId, primaryKey: PrimaryKey.autoincrement)
+                table.column(bookId)
+                table.column(bookmarkName)
+                table.column(content)
+                table.column(time)
+                table.column(pageNumber)
+            })
+            
         } catch {
             print("11111")
         }
@@ -139,5 +159,96 @@ class SQLiteManager {
         }
         
         return nil
+    }
+    
+    func insertBookmark(name: String, bookId: String, time: String, content: String, pageNumber: Int) -> Int {
+        if (table_bookmarks == nil) {
+            print("no table exists.")
+            return -1
+        }
+        
+        do {
+            let statement = try db.prepare("insert into Bookmarks (name, bookId, content, time, pageNumber) values (?, ?, ?, ?, ?)")
+            
+            try statement.run([name, bookId, content, time, pageNumber])
+            let totalChanges = db.totalChanges
+            let changes = db.changes
+            let lastInsertRowId = db.lastInsertRowid
+            
+            print("total changes = \(totalChanges), changes = \(changes), last row id = \(lastInsertRowId)")
+            
+            return Int(lastInsertRowId)
+        } catch {
+            print("fail to insert table_bookmarks")
+        }
+        
+        return -1
+    }
+    
+    func selectBookmarks() -> [BookmarkInfo] {
+        var infos = [BookmarkInfo]()
+        if (table_bookmarks == nil) {
+            return infos
+        }
+        
+        do {
+            for row in try db.prepare("select * from Bookmarks") {
+                guard let bookmarkId = row[0] as? NSNumber else {
+                    print("fail to get bookmark id.")
+                    continue
+                }
+                
+                guard let bookId = row[1] as? String else {
+                    print("fail to get book id.")
+                    continue
+                }
+                
+                guard let bookmarkName = row[2] as? String else {
+                    print("fail to get bookmark name")
+                    continue
+                }
+                
+                guard let content = row[3] as? String else {
+                    print("fail to get content.")
+                    continue
+                }
+                
+                guard let bookmarkTime = row[4] as? String else {
+                    print("fail to get time.")
+                    continue
+                }
+                
+                guard let pageNumber = row[5] as? NSNumber else {
+                    print("fail to get page number.")
+                    continue
+                }
+
+                let info = BookmarkInfo(bookmarkId: bookmarkId.intValue, bookmarkName: bookmarkName, bookmarkTime: bookmarkTime, contents: content, bookId: bookId, pageNumber: pageNumber.intValue)
+                
+                infos.append(info)
+            }
+        } catch {
+            print("fail to get bookmark infos.")
+        }
+        
+        return infos
+    }
+    
+    func deleteBookmark(bookmarkId: Int) {
+        if (table_bookmarks == nil) {
+            return
+        }
+        
+        do {
+            let statement = try db.prepare("delete from Bookmarks where id = ?")
+            try statement.run(bookmarkId)
+            
+            let total = db.totalChanges
+            let changes = db.changes
+            
+            print("total = \(total), changes = \(changes)")
+        } catch {
+            print("fail to delete bookmark.")
+        }
     }
 }
