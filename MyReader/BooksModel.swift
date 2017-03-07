@@ -42,24 +42,6 @@ class BooksModel {
         return completion(nil)
     }
     
-//    func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
-//        DispatchQueue.global().async { [weak self] in
-//            let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
-//            
-//            fileHandle?.seek(toFileOffset: 0)
-//            guard let data = fileHandle?.readDataToEndOfFile() else {
-//                print("read no data.")
-//                return completion(nil)
-//            }
-//            
-//            let readStr = AppUtility.getStringFromData(data: data)
-//            self?.setContents(text: readStr)
-//            
-//            print("finish read file and make data structure.")
-//            return completion(readStr)
-//        }
-//    }
-    
     func readFile(bookInfo: LocalBookInfo) {
         let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
         fileHandle?.seek(toFileOffset: 0)
