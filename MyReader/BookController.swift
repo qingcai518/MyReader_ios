@@ -10,9 +10,10 @@ import UIKit
 import RxSwift
 
 class BookController: UIPageViewController {
+    var settingView: SettingView!
+    
     // 現在の章の情報.
     let disposeBag = DisposeBag()
-    var currentChapter = Variable("")
     var controllers = [PageController]()
     
     // params.
@@ -33,6 +34,7 @@ class BookController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setView()
         setRecognizer()
     }
@@ -57,25 +59,41 @@ class BookController: UIPageViewController {
         }
         
         self.dataSource = self
+        self.delegate = self
+        
+        // setting view.
+        let nib = UINib(nibName: "SettingView", bundle: nil)
+        
+        guard let setView = nib.instantiate(withOwner: self, options: nil).first as? SettingView else {
+            return
+        }
+        
+        settingView = setView
+        settingView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        settingView.backgroundColor = UIColor.init(white: 0, alpha: 0.4)
+        settingView.topView.transform = settingView.topView.transform.translatedBy(x: 0, y: -settingView.topView.bounds.height)
+        settingView.bottomView.transform = settingView.bottomView.transform.translatedBy(x: 0, y: settingView.bottomView.bounds.height)
+        settingView.isHidden = true
+        
+        // close button.
+        settingView.backBtn.rx.tap.asObservable().bindNext { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
+        
+        
+        
+        self.view.addSubview(settingView)
     }
     
     private func setRecognizer() {
         let recognizer = UITapGestureRecognizer()
-        recognizer.rx.event.bindNext { sender in
-            let storyboard = UIStoryboard(name: "Setting", bundle: nil)
-            guard let next = storyboard.instantiateInitialViewController() as? SettingController else {
-                return
+        recognizer.rx.event.bindNext { [weak self] sender in
+            guard let setView = self?.settingView else {return}
+            if (setView.isHidden) {
+                self?.showSettingView()
+            } else {
+                self?.hideSettingView()
             }
-            
-            let currentPage = AppUtility.getCurrentPage(bookId: self.bookInfo.bookId)
-            let currentContent = self.pageContents[currentPage].string
-            
-            next.modalPresentationStyle = .custom
-            next.bookInfo = self.bookInfo
-            next.content = currentContent
-            next.pageNumber = currentPage
-            next.chapterInfos = self.chapterInfos
-            self.present(next, animated: true, completion: nil)
         }.addDisposableTo(disposeBag)
         
         let tapView = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: screenHeight))
@@ -83,6 +101,34 @@ class BookController: UIPageViewController {
         tapView.backgroundColor = UIColor.clear
         self.view.addSubview(tapView)
         tapView.addGestureRecognizer(recognizer)
+    }
+    
+    private func showSettingView() {
+        settingView.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let setView = self?.settingView else {return}
+            setView.topView.transform = setView.topView.transform.translatedBy(x: 0, y: setView.topView.bounds.height)
+            setView.bottomView.transform = setView.bottomView.transform.translatedBy(x: 0, y: -setView.bottomView.bounds.height)
+        }, completion: nil)
+    }
+    
+    private func hideSettingView() {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let setView = self?.settingView else {return}
+            setView.topView.transform = setView.topView.transform.translatedBy(x: 0, y: -setView.topView.bounds.height)
+            setView.bottomView.transform = setView.bottomView.transform.translatedBy(x: 0, y: setView.bottomView.bounds.height)
+        }) { [weak self] isFinished in
+            if (isFinished) {
+                self?.settingView.isHidden = true
+            }
+        }
+    }
+}
+
+extension BookController : UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        print("finish change page.")
+        
     }
 }
 
@@ -107,15 +153,3 @@ extension BookController : UIPageViewControllerDataSource {
         }
     }
 }
-
-//extension BookController : UIGestureRecognizerDelegate {
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        let location = touch.location(in: self.view)
-//        
-//        if ((location.x < (screenWidth - 44) / 2) || (location.x > (screenWidth + 44) / 2)) {
-//            return false
-//        }
-//        
-//        return true
-//    }
-//}

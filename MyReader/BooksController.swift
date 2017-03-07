@@ -28,10 +28,38 @@ class BooksController: ViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
     private func setRecieveNotification() {
+        // ファイルのダウンロードが完了する際の通知を受け取る.
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.FinishDownload)).bindNext { [weak self] sender in
             self?.getData()
+        }.addDisposableTo(disposeBag)
+        
+        // ファイルの読み込みが完了する際の通知を受け取る.
+        NotificationCenter.default.rx.notification(FileHandle.readCompletionNotification).bindNext { [weak self] sender in
+            print("123132123")
+            
+            self?.stopIndicator()
+            guard let data = sender.userInfo?[NSFileHandleNotificationDataItem] as? Data else {
+                print("read no data.")
+                return
+            }
+            
+            let readStr = AppUtility.getStringFromData(data: data)
+            self?.model.setContents(text: readStr)
+            
+            guard let contents = self?.model.pageContents else {
+                return
+            }
+            
+            guard let chapterInfos = self?.model.chapterInfos else {
+                return
+            }
+            
+            guard let bookInfo = self?.currentInfo else {
+                return
+            }
+            let next = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
+            self?.present(next, animated: true, completion: nil)
         }.addDisposableTo(disposeBag)
     }
     
@@ -109,22 +137,25 @@ extension BooksController : UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let bookInfo = model.bookInfos[indexPath.row]
-
+        currentInfo = bookInfo
         startIndicator()
-        model.readFile(bookInfo: bookInfo) { [weak self] content in
-            self?.stopIndicator()
-            
-            guard let contents = self?.model.pageContents else {
-                return
-            }
-            
-            guard let chapterInfos = self?.model.chapterInfos else {
-                return
-            }
-            
-            let bookController = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
-            self?.present(bookController, animated: true, completion: nil)
-        }
+        model.readFile(bookInfo: bookInfo)
+        
+//        model.readFile(bookInfo: bookInfo) { [weak self] content in
+//            print("begin to open file.")
+//            self?.stopIndicator()
+//            
+//            guard let contents = self?.model.pageContents else {
+//                return
+//            }
+//            
+//            guard let chapterInfos = self?.model.chapterInfos else {
+//                return
+//            }
+//            
+//            let bookController = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
+//            self?.present(bookController, animated: true, completion: nil)
+//        }
     }
 }
 
