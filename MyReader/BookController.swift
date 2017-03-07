@@ -239,6 +239,7 @@ extension BookController : UIPageViewControllerDataSource {
         guard let index = self.controllers.index(of: pageController) else {return nil}
         if (index < self.controllers.count - 1) {
             return self.controllers[index + 1]
+            
         } else {
             return nil
         }
