@@ -160,6 +160,8 @@ class BookController: UIPageViewController {
     }
     
     private func showSettingView() {
+        self.setChapterInfo()
+        
         settingView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let setView = self?.settingView else {return}
