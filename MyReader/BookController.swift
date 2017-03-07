@@ -130,7 +130,8 @@ class BookController: UIPageViewController {
         }.addDisposableTo(disposeBag)
         
         // bookmark一覧表示ボタン.
-        settingView.bookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
+        set
+        tingView.bookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
             let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
             guard let next = storyboard.instantiateInitialViewController() else {
                 return
