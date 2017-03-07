@@ -75,13 +75,70 @@ class BookController: UIPageViewController {
         settingView.bottomView.transform = settingView.bottomView.transform.translatedBy(x: 0, y: settingView.bottomView.bounds.height)
         settingView.isHidden = true
         
+        // タイトル.
+        settingView.titleLbl.text = bookInfo.bookName
+        
+        // bookmark追加ボタン.
+        settingView.addBookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
+            guard let info = self?.bookInfo else {return}
+            
+            let storyboard = UIStoryboard(name: "AddBookmark", bundle: nil)
+            guard let next = storyboard.instantiateInitialViewController() as? AddBookmarkController else {
+                return
+            }
+            
+            next.modalPresentationStyle = .custom
+            let currentPageNumber = AppUtility.getCurrentPage(bookId: info.bookId)
+            next.pageNumber = AppUtility.getCurrentPage(bookId: info.bookId)
+            if let contents = self?.pageContents {
+                next.content = contents[currentPageNumber].string
+            }
+            next.bookId = info.bookId
+            self?.present(next, animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
+        
         // close button.
         settingView.backBtn.rx.tap.asObservable().bindNext { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }.addDisposableTo(disposeBag)
         
+        // bookmark表示ボタン.
+        settingView.bookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
+            let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
+            guard let next = storyboard.instantiateInitialViewController() else {
+                return
+            }
+            self?.present(next, animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
         
+        // 章の一覧を表示するボタン.
+        settingView.listBtn.rx.tap.asObservable().bindNext { [weak self] in
+            let storyboard = UIStoryboard(name: "Chapter", bundle: nil)
+            guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
+                return
+            }
+            
+            guard let chapterController = next.viewControllers.first as? ChapterController else {
+                return
+            }
+            
+            guard let chapterInfos = self?.chapterInfos else {
+                return
+            }
+            chapterController.chapterInfos = chapterInfos
+            self?.present(next, animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
         
+        // bookmark一覧表示ボタン.
+        settingView.bookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
+            let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
+            guard let next = storyboard.instantiateInitialViewController() else {
+                return
+            }
+            
+            self?.present(next, animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
+
         self.view.addSubview(settingView)
     }
     

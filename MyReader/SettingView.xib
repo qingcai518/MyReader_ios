@@ -226,7 +226,7 @@
             <connections>
                 <outlet property="addBookmarkBtn" destination="VB7-tM-Jr7" id="dLR-vx-qzm"/>
                 <outlet property="backBtn" destination="RDt-kf-VNv" id="kbz-XZ-Rvn"/>
-                <outlet property="bookmarkBtn" destination="j71-K3-D1t" id="wqM-VU-Dcf"/>
+                <outlet property="bookmarkBtn" destination="j71-K3-D1t" id="ZnQ-fO-epS"/>
                 <outlet property="bottomView" destination="Cnl-2I-MU8" id="HqZ-Wm-Jsc"/>
                 <outlet property="chapterLbl" destination="n48-Zo-1h3" id="VbN-jJ-wBC"/>
                 <outlet property="fontBtn" destination="LA4-QU-3zm" id="Ugf-ze-RbH"/>

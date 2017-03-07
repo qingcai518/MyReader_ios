@@ -55,7 +55,6 @@ class BooksModel {
         
         let letersPerLine = Int(floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing)))))
         let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
-        print("leters per line = \(letersPerLine), lines = \(lines)")
         
         let array = content.components(separatedBy: .newlines)
         
