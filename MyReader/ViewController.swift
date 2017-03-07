@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     func createIndicator() {
         let width = CGFloat(100)
         let height = CGFloat(100)
-        indicator = NVActivityIndicatorView(frame: CGRect(x: (screenWidth - width) / 2, y: (screenHeight - height) / 2, width: width, height: height), type: NVActivityIndicatorType.ballGridBeat, color: UIColor.brown, padding: 10)
+        indicator = NVActivityIndicatorView(frame: CGRect(x: (screenWidth - width) / 2, y: (screenHeight - height) / 2, width: width, height: height), type: NVActivityIndicatorType.ballSpinFadeLoader, color: UIColor.brown, padding: 10)
         self.view.addSubview(indicator)
     }
     
