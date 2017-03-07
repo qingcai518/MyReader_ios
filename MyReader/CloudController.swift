@@ -12,7 +12,6 @@ import Kingfisher
 
 class CloudController: ViewController {
     @IBOutlet weak var tableView : UITableView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     let model = CloudModel()
     var header : MJRefreshGifHeader!
@@ -23,6 +22,7 @@ class CloudController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createIndicator()
         setRefreshHeaderAndFooter()
         setTableView()
         getData()
@@ -53,10 +53,10 @@ class CloudController: ViewController {
     }
     
     func getData() {
-        indicator.startAnimating()
+        startIndicator()
         model.getCloudBooks { [weak self] msg in
             self?.header.endRefreshing()
-            self?.indicator.stopAnimating()
+            self?.stopIndicator()
             
             if let errorMsg = msg {
                 print("error = \(errorMsg)")

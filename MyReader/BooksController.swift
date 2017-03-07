@@ -10,15 +10,15 @@ import UIKit
 
 class BooksController: ViewController {
     @IBOutlet weak var collectionView : UICollectionView!
-    @IBOutlet weak var indicator : UIActivityIndicatorView!
-    
+
     let model = BooksModel()
     
     var currentInfo : LocalBookInfo!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        createIndicator()
         setRecieveNotification()
         setCollectionView()
         getData()
@@ -92,9 +92,9 @@ class BooksController: ViewController {
     }
 
     private func getData() {
-        indicator.startAnimating()
+        startIndicator()
         model.getBookInfos { [weak self] msg in
-            self?.indicator.stopAnimating()
+            self?.stopIndicator()
             if let errorMsg = msg {
                 print("error = \(errorMsg)")
             }
@@ -110,9 +110,10 @@ extension BooksController : UICollectionViewDelegate {
         
         let bookInfo = model.bookInfos[indexPath.row]
 
-        indicator.startAnimating()
+        startIndicator()
         model.readFile(bookInfo: bookInfo) { [weak self] content in
-            self?.indicator.stopAnimating()
+            self?.stopIndicator()
+            
             guard let contents = self?.model.pageContents else {
                 return
             }

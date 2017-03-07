@@ -10,7 +10,6 @@ import UIKit
 
 class BookmarkController: ViewController {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var closeBtn: UIButton!
     
     let model = BookmarkModel()
@@ -22,6 +21,7 @@ class BookmarkController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createIndicator()
         setTableView()
     }
     
@@ -41,10 +41,9 @@ class BookmarkController: ViewController {
     }
     
     private func getData() {
-        self.indicator.startAnimating()
+        startIndicator()
         model.getBookmarkInfos { [weak self] msg in
-            self?.indicator.stopAnimating()
-            
+            self?.stopIndicator()
             if let errorMsg = msg {
                 print("error message = \(errorMsg)")
                 return

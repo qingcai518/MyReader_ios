@@ -56,8 +56,6 @@ class BookController: UIPageViewController {
             self.setViewControllers([firstController], direction: .forward, animated: true, completion: nil)
         }
         
-        print("controllers =\(controllers.count) ")
-        
         self.dataSource = self
     }
     
