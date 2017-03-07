@@ -219,7 +219,6 @@ class BookController: UIPageViewController {
 extension BookController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         print("finish change page.")
-        
     }
 }
 
