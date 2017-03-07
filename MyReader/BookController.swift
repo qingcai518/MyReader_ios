@@ -130,8 +130,7 @@ class BookController: UIPageViewController {
         }.addDisposableTo(disposeBag)
         
         // bookmark一覧表示ボタン.
-        set
-        tingView.bookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
+        settingView.bookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
             let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
             guard let next = storyboard.instantiateInitialViewController() else {
                 return
@@ -139,7 +138,6 @@ class BookController: UIPageViewController {
             
             self?.present(next, animated: true, completion: nil)
         }.addDisposableTo(disposeBag)
-
         self.view.addSubview(settingView)
     }
     
@@ -180,6 +178,39 @@ class BookController: UIPageViewController {
                 self?.settingView.isHidden = true
             }
         }
+    }
+    
+    private func setChapterInfo() {
+        let currentIndex = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        
+        var chapterNumber : Int!
+        for chapterInfo in chapterInfos {
+            let chapterName = chapterInfo.chapterName
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                self.settingView.chapterLbl.text = chapterName
+                chapterNumber = chapterInfo.chapterNumber
+                
+                // slideの内容を設定する.
+                if (endIndex > startIndex) {
+                    settingView.slider.maximumValue = Float(endIndex - startIndex)
+                    settingView.slider.value = Float(currentIndex - startIndex)
+                } else {
+                    settingView.slider.value = 1.0
+                }
+                
+                break
+            }
+        }
+        
+        if (chapterNumber == nil) {
+            return
+        }
+        
+        settingView.preBtn.isEnabled = chapterNumber != 0
+        settingView.nextBtn.isEnabled = chapterNumber != chapterInfos.count - 1
     }
 }
 
