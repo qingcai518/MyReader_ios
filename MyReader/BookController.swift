@@ -228,13 +228,9 @@ extension BookController : UIPageViewControllerDelegate {
             return
         }
         
-        print("finish paging and current page number = \(index)")
-
         AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: index)
         
         self.setChapterInfo()
-        
-        self.view.bringSubview(toFront: tapView)
     }
 }
 
