@@ -47,7 +47,6 @@ class BookController: UIPageViewController {
     private func setView() {
         for i in 0..<pageContents.count {
             let content = pageContents[i]
-//        for content in pageContents {
             let storyboard = UIStoryboard(name: "Page", bundle: nil)
             guard let controller = storyboard.instantiateInitialViewController() as? PageController else {
                 continue
@@ -156,6 +155,8 @@ class BookController: UIPageViewController {
             }
         }.addDisposableTo(disposeBag)
         
+        recognizer.delegate = self
+        
         tapView.frame = CGRect(x: 0, y: 0, width: 44, height: screenHeight)
         tapView.center = CGPoint(x: screenWidth / 2, y: screenHeight / 2)
         tapView.backgroundColor = UIColor.clear
@@ -254,5 +255,17 @@ extension BookController : UIPageViewControllerDataSource {
         } else {
             return nil
         }
+    }
+}
+
+extension BookController : UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let _ = gestureRecognizer as? UITapGestureRecognizer {
+            let touchPoint = touch.location(in: self.view)
+            
+            print("touch point = \(touchPoint)")
+        }
+        
+        return true
     }
 }

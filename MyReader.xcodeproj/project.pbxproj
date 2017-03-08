@@ -59,6 +59,8 @@
 		3CD1E38F1E6E454300EEE765 /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD1E38E1E6E454300EEE765 /* SettingView.xib */; };
 		3CD1E3911E6E45B100EEE765 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1E3901E6E45B100EEE765 /* SettingView.swift */; };
 		3CD1E3951E6FAEE200EEE765 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1E3941E6FAEE200EEE765 /* UIApplication.swift */; };
+		3CD1E39B1E6FB62600EEE765 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CD1E39A1E6FB62600EEE765 /* Setting.storyboard */; };
+		3CD1E39D1E6FB67500EEE765 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1E39C1E6FB67500EEE765 /* SettingController.swift */; };
 		67EBCA78149652371BAB0607 /* Pods_MyReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DA9AE444F48A7348EDD1FA /* Pods_MyReader.framework */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +120,8 @@
 		3CD1E38E1E6E454300EEE765 /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
 		3CD1E3901E6E45B100EEE765 /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3CD1E3941E6FAEE200EEE765 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		3CD1E39A1E6FB62600EEE765 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		3CD1E39C1E6FB67500EEE765 /* SettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		55DA9AE444F48A7348EDD1FA /* Pods_MyReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		633C6E8CFF6C3BDA58D8D016 /* Pods-MyReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyReader/Pods-MyReader.release.xcconfig"; sourceTree = "<group>"; };
 		D47CE1EF355D2DCA382B6261 /* Pods-MyReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyReader/Pods-MyReader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 		3C587EE91E6D0A9C00B622E2 /* BookPage */ = {
 			isa = PBXGroup;
 			children = (
+				3CD1E3991E6FB60E00EEE765 /* SettingPage */,
 				3C587EE41E66C2F800B622E2 /* AddBookmarkPage */,
 				3CD1E38D1E6E453000EEE765 /* SettingView */,
 				3C587EEE1E6D0AFA00B622E2 /* BookController.swift */,
@@ -342,6 +347,15 @@
 			name = SettingView;
 			sourceTree = "<group>";
 		};
+		3CD1E3991E6FB60E00EEE765 /* SettingPage */ = {
+			isa = PBXGroup;
+			children = (
+				3CD1E39A1E6FB62600EEE765 /* Setting.storyboard */,
+				3CD1E39C1E6FB67500EEE765 /* SettingController.swift */,
+			);
+			name = SettingPage;
+			sourceTree = "<group>";
+		};
 		E7D11207D4CEF991B7FDBD0E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +441,7 @@
 				3C999BD41E5AE49E0095A696 /* Cloud.storyboard in Resources */,
 				3CD1E38F1E6E454300EEE765 /* SettingView.xib in Resources */,
 				3C587EF11E6D0C7E00B622E2 /* Page.storyboard in Resources */,
+				3CD1E39B1E6FB62600EEE765 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CD1E39D1E6FB67500EEE765 /* SettingController.swift in Sources */,
 				3C999BC81E5AE1B40095A696 /* Navi2Controller.swift in Sources */,
 				3C999BC41E5ADE480095A696 /* MainController.swift in Sources */,
 				3C67EDD41E5D346200B5156D /* BookCustomController.swift in Sources */,
