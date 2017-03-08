@@ -11,6 +11,7 @@ import RxSwift
 
 class BookController: UIPageViewController {
     var settingView: SettingView!
+    var tapView = UIView()
     
     // 現在の章の情報.
     let disposeBag = DisposeBag()
@@ -155,7 +156,7 @@ class BookController: UIPageViewController {
             }
         }.addDisposableTo(disposeBag)
         
-        let tapView = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: screenHeight))
+        tapView.frame = CGRect(x: 0, y: 0, width: 44, height: screenHeight)
         tapView.center = CGPoint(x: screenWidth / 2, y: screenHeight / 2)
         tapView.backgroundColor = UIColor.clear
         self.view.addSubview(tapView)
@@ -187,17 +188,13 @@ class BookController: UIPageViewController {
  
     fileprivate func setChapterInfo() {
         let currentIndex = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
-        
-        print("current index = \(currentIndex)")
-        
+
         var chapterNumber : Int!
         for chapterInfo in chapterInfos {
             let chapterName = chapterInfo.chapterName
             let startIndex = chapterInfo.startPage
             let endIndex = chapterInfo.endPage
-            
-            print("\(chapterName) : startIndex = \(startIndex), endIndex = \(endIndex)")
-            
+
             if (currentIndex >= startIndex && currentIndex <= endIndex) {
                 settingView.chapterLbl.text = chapterName
                 chapterNumber = chapterInfo.chapterNumber
@@ -227,12 +224,13 @@ class BookController: UIPageViewController {
 extension BookController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
+        print("finish presint controllers.")
+        
         guard let index = pageViewController.viewControllers?.first?.view.tag else {
             return
         }
-        
-        UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
-        UserDefaults.standard.synchronize()
+
+        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: index)
         
         self.setChapterInfo()
     }
