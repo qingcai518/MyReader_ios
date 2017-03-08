@@ -44,13 +44,16 @@ class BookController: UIPageViewController {
     }
     
     private func setView() {
-        for content in pageContents {
+        for i in 0..<pageContents.count {
+            let content = pageContents[i]
+//        for content in pageContents {
             let storyboard = UIStoryboard(name: "Page", bundle: nil)
             guard let controller = storyboard.instantiateInitialViewController() as? PageController else {
                 continue
             }
             
             controller.content = content
+            controller.view.tag = i
             self.controllers.append(controller)
         }
         
@@ -181,9 +184,11 @@ class BookController: UIPageViewController {
             }
         }
     }
-    
-    private func setChapterInfo() {
+ 
+    fileprivate func setChapterInfo() {
         let currentIndex = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        
+        print("current index = \(currentIndex)")
         
         var chapterNumber : Int!
         for chapterInfo in chapterInfos {
@@ -191,8 +196,10 @@ class BookController: UIPageViewController {
             let startIndex = chapterInfo.startPage
             let endIndex = chapterInfo.endPage
             
+            print("\(chapterName) : startIndex = \(startIndex), endIndex = \(endIndex)")
+            
             if (currentIndex >= startIndex && currentIndex <= endIndex) {
-                self.settingView.chapterLbl.text = chapterName
+                settingView.chapterLbl.text = chapterName
                 chapterNumber = chapterInfo.chapterNumber
                 
                 // slideの内容を設定する.
@@ -211,6 +218,7 @@ class BookController: UIPageViewController {
             return
         }
         
+        // ボタンの活性非活性設定.
         settingView.preBtn.isEnabled = chapterNumber != 0
         settingView.nextBtn.isEnabled = chapterNumber != chapterInfos.count - 1
     }
@@ -218,7 +226,15 @@ class BookController: UIPageViewController {
 
 extension BookController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        print("finish change page.")
+        
+        guard let index = pageViewController.viewControllers?.first?.view.tag else {
+            return
+        }
+        
+        UserDefaults.standard.set(index, forKey: UDKey.CurrentPage)
+        UserDefaults.standard.synchronize()
+        
+        self.setChapterInfo()
     }
 }
 
