@@ -49,7 +49,12 @@ class SettingController: ViewController {
     }
     
     @IBAction func doShowBookmarks() {
+        let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() else {
+            return
+        }
         
+        self.present(next, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
