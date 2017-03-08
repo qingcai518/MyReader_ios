@@ -224,15 +224,17 @@ class BookController: UIPageViewController {
 extension BookController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
-        print("finish presint controllers.")
-        
         guard let index = pageViewController.viewControllers?.first?.view.tag else {
             return
         }
+        
+        print("finish paging and current page number = \(index)")
 
         AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: index)
         
         self.setChapterInfo()
+        
+        self.view.bringSubview(toFront: tapView)
     }
 }
 
