@@ -38,6 +38,9 @@
                                             <constraint firstAttribute="width" constant="44" id="nLs-uu-Sk4"/>
                                         </constraints>
                                         <state key="normal" image="back"/>
+                                        <connections>
+                                            <action selector="doClose" destination="gXb-eJ-e5r" eventType="touchUpInside" id="3Lx-kD-YL4"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxX-FD-dvh">
                                         <rect key="frame" x="44" y="19" width="287" height="44"/>
@@ -55,6 +58,9 @@
                                             <constraint firstAttribute="height" constant="44" id="oWh-QX-rfQ"/>
                                         </constraints>
                                         <state key="normal" image="btn_bookmark"/>
+                                        <connections>
+                                            <action selector="doAddBookmark" destination="gXb-eJ-e5r" eventType="touchUpInside" id="IHh-s9-RP9"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -133,10 +139,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQS-NL-tjQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="93" height="75"/>
                                                 <state key="normal" image="btn_list"/>
+                                                <connections>
+                                                    <action selector="doShowChapters" destination="gXb-eJ-e5r" eventType="touchUpInside" id="QNO-Xc-Jga"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmy-MR-fXV">
                                                 <rect key="frame" x="94" y="0.0" width="93" height="75"/>
                                                 <state key="normal" image="btn_bookmark"/>
+                                                <connections>
+                                                    <action selector="doShowBookmarks" destination="gXb-eJ-e5r" eventType="touchUpInside" id="4Q9-up-soG"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
