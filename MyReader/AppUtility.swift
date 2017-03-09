@@ -136,7 +136,7 @@ class AppUtility {
         
         for encode in encodes {
             if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode)) {
-                print("encode = \(String.Encoding(rawValue: encode))")
+                print("encoding = \(encode)")
                 return text
             }
         }
