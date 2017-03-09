@@ -169,4 +169,20 @@ class AppUtility {
     static func getCurrentPage(bookId: String) -> Int {
         return UserDefaults.standard.integer(forKey: UDKey.CurrentPage + "_" + bookId)
     }
+    
+    static func getCurrentChapter(bookId: String, chapterInfos: [ChapterInfo]) -> ChapterInfo? {
+        let currentIndex = AppUtility.getCurrentPage(bookId: bookId)
+        var currentChapter : ChapterInfo?
+        for chapterInfo in chapterInfos {
+            let startIndex = chapterInfo.startPage
+            let endIndex = chapterInfo.endPage
+            
+            if (currentIndex >= startIndex && currentIndex <= endIndex) {
+                currentChapter = chapterInfo
+                break
+            }
+        }
+        
+        return currentChapter
+    }
 }

@@ -35,11 +35,22 @@ class BookController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setRecieveNotification()
         setView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func setRecieveNotification() {
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: "test")).bindNext { [weak self] notification in
+            guard let bookId = self?.bookInfo.bookId else {return}
+            let currentPage = AppUtility.getCurrentPage(bookId: bookId)
+            guard let viewController = self?.controllers[currentPage] else {return}
+            self?.setViewControllers([viewController], direction: .forward, animated: true, completion: nil)
+            
+        }.addDisposableTo(disposeBag)
     }
     
     private func setView() {
@@ -63,7 +74,8 @@ class BookController: UIPageViewController {
         
         self.dataSource = self
         self.delegate = self
-        
+
+
 //        // bookmark追加ボタン.
 //        settingView.addBookmarkBtn.rx.tap.asObservable().bindNext { [weak self] in
 //            guard let info = self?.bookInfo else {return}

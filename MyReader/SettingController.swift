@@ -69,6 +69,26 @@ class SettingController: ViewController {
         self.present(next, animated: true, completion: nil)
     }
     
+    @IBAction func itemSlider(slider: UISlider, event: UIEvent) {
+        guard let touch = event.allTouches?.first else {return}
+        if (touch.phase != .moved && touch.phase != .began) {
+            guard let currentChapter = AppUtility.getCurrentChapter(bookId: bookInfo.bookId, chapterInfos: chapterInfos) else {
+                return
+            }
+            
+            let pageIndex = currentChapter.startPage + Int(ceil(slider.value))
+            
+            // 画面の通知を実施する.
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
+            
+            
+            AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageIndex)
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()

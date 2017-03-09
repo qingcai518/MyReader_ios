@@ -118,6 +118,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="BN5-Fg-bP0"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="itemSliderWithSlider:event:" destination="gXb-eJ-e5r" eventType="valueChanged" id="3Hc-n1-if7"/>
+                                        </connections>
                                     </slider>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFN-kE-uPr">
                                         <rect key="frame" x="187" y="85" width="1" height="75"/>
