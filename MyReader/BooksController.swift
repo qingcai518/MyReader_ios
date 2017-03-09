@@ -137,9 +137,6 @@ extension BooksController : UICollectionViewDelegate {
         let bookInfo = model.bookInfos[indexPath.row]
         currentInfo = bookInfo
         startIndicator()
-        
-        print("book info = \(bookInfo.bookId), \(bookInfo.bookName), \(bookInfo.bookImgUrl), \(bookInfo.authorName), \(bookInfo.localPath)")
-        
         model.readFile(bookInfo: bookInfo)
     }
 }

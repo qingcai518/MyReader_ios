@@ -122,34 +122,27 @@ class AppUtility {
     }
     
     static func getStringFromData(data: Data) -> String? {
-        let encode1 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_2312_80.rawValue))
-        let encode2 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue))
-        let encode3 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GBK_95.rawValue))
-        let encode4 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.HZ_GB_2312.rawValue))
-        let encode5 = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
+        let encodes = [
+            CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_2312_80.rawValue)),
+            CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GB_18030_2000.rawValue)),
+            CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.GBK_95.rawValue)),
+            CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.HZ_GB_2312.rawValue)),
+            CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.big5.rawValue)),
+            CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.big5_E.rawValue)),
+            CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.big5_HKSCS_1999.rawValue))
+        ]
         
-        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode1)) {
-            print("gb 2312 80.")
-            return text
+//        let defaultEncode = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(CFStringEncodings.macChineseSimp.rawValue))
+        
+        for encode in encodes {
+            if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode)) {
+                print("encode = \(String.Encoding(rawValue: encode))")
+                return text
+            }
         }
         
-        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode2)) {
-            print("gb 18030 2000")
-            return text
-        }
-        
-        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode3)) {
-            print("gbk 95.")
-            return text
-        }
-        
-        if let text = String.init(data: data, encoding: String.Encoding(rawValue: encode4)) {
-            print("hz gb 2312.")
-            return text
-        }
-        
-        print("mac chinese simp.")
-        return String.init(data: data, encoding: String.Encoding(rawValue: encode5))
+        return String.init(data: data, encoding: String.Encoding.utf8)
+//        return String.init(data: data, encoding: String.Encoding(rawValue: defaultEncode))
     }
     
     static func getCurrentTimeString() -> String {
