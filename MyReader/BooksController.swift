@@ -36,8 +36,6 @@ class BooksController: ViewController {
         
         // ファイルの読み込みが完了する際の通知を受け取る.
         NotificationCenter.default.rx.notification(FileHandle.readCompletionNotification).bindNext { [weak self] sender in
-            print("123132123")
-            
             self?.stopIndicator()
             guard let data = sender.userInfo?[NSFileHandleNotificationDataItem] as? Data else {
                 print("read no data.")

@@ -79,9 +79,7 @@ class SettingController: ViewController {
             let pageIndex = currentChapter.startPage + Int(ceil(slider.value))
             
             // 画面の通知を実施する.
-            
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
-            
             
             AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageIndex)
             

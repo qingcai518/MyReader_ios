@@ -47,7 +47,10 @@ class BookController: UIPageViewController {
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: "test")).bindNext { [weak self] notification in
             guard let bookId = self?.bookInfo.bookId else {return}
             let currentPage = AppUtility.getCurrentPage(bookId: bookId)
+            
+            // 画面を移動させる処理を実施する.
             guard let viewController = self?.controllers[currentPage] else {return}
+            
             self?.setViewControllers([viewController], direction: .forward, animated: true, completion: nil)
             
         }.addDisposableTo(disposeBag)
