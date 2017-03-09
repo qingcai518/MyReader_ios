@@ -83,6 +83,9 @@ class BooksModel {
         var startPage = 0
         var chapterNumber = 0
         var chapterName = "序言"
+        
+        self.chapterInfos.removeAll()
+        
         for i in 0..<contents.count {
             let content = contents[i]
             
