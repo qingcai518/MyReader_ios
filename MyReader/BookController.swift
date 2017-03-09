@@ -54,7 +54,7 @@ class BookController: UIPageViewController {
             
             print("content = \(viewController.contentLbl.text)")
             
-            self?.setViewControllers([viewController], direction: .reverse, animated: true, completion: nil)
+            self?.setViewControllers([viewController], direction: .reverse, animated: false, completion: nil)
             
             
 //            // 画面を移動させる処理を実施する.

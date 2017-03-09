@@ -83,27 +83,12 @@ class SettingController: ViewController {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
             self.dismiss(animated: true, completion: nil)
         }
-        
-//        guard let touch = event.allTouches?.first else {return}
-//        if (touch.phase != .moved && touch.phase != .began) {
-//            guard let currentChapter = AppUtility.getCurrentChapter(bookId: bookInfo.bookId, chapterInfos: chapterInfos) else {
-//                return
-//            }
-//            
-//            let pageIndex = currentChapter.startPage + Int(ceil(slider.value))
-//            
-//            // 画面の通知を実施する.
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
-//            
-//            AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageIndex)
-//            
-//            self.dismiss(animated: true, completion: nil)
-//        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
+        setChapterInfo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -159,6 +144,30 @@ class SettingController: ViewController {
                 self?.bottomView.isHidden = true
             }
         }
+    }
+    
+    private func setChapterInfo() {
+        guard let currentChapter = AppUtility.getCurrentChapter(bookId: bookInfo.bookId, chapterInfos: chapterInfos) else {
+            return
+        }
+        
+        let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        let chapterName = currentChapter.chapterName
+        let chapterNumber = currentChapter.chapterNumber
+        let startPage = currentChapter.startPage
+        let endPage = currentChapter.endPage
+        
+        self.chapterLbl.text = chapterName
+        
+        if (endPage > startPage) {
+            slider.maximumValue = Float(endPage - startPage)
+            slider.value = Float(currentPage - startPage)
+        } else {
+            slider.value = 1.0
+        }
+
+        preBtn.isEnabled = chapterNumber != 0
+        nextBtn.isEnabled = chapterNumber != chapterInfos.count - 1
     }
 }
 
