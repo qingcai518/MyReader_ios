@@ -31,7 +31,6 @@ class SettingController: ViewController {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func doAddBookmark() {
         
     }
