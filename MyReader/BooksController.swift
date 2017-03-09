@@ -137,23 +137,10 @@ extension BooksController : UICollectionViewDelegate {
         let bookInfo = model.bookInfos[indexPath.row]
         currentInfo = bookInfo
         startIndicator()
-        model.readFile(bookInfo: bookInfo)
         
-//        model.readFile(bookInfo: bookInfo) { [weak self] content in
-//            print("begin to open file.")
-//            self?.stopIndicator()
-//            
-//            guard let contents = self?.model.pageContents else {
-//                return
-//            }
-//            
-//            guard let chapterInfos = self?.model.chapterInfos else {
-//                return
-//            }
-//            
-//            let bookController = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
-//            self?.present(bookController, animated: true, completion: nil)
-//        }
+        print("book info = \(bookInfo.bookId), \(bookInfo.bookName), \(bookInfo.bookImgUrl), \(bookInfo.authorName), \(bookInfo.localPath)")
+        
+        model.readFile(bookInfo: bookInfo)
     }
 }
 
