@@ -205,6 +205,18 @@ class BookController: UIPageViewController {
 //        settingView.preBtn.isEnabled = chapterNumber != 0
 //        settingView.nextBtn.isEnabled = chapterNumber != chapterInfos.count - 1
 //    }
+    
+    fileprivate func openSettingPage() {
+        let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? SettingController else {return}
+        next.modalPresentationStyle = .custom
+        
+        // パラメータを設定する.
+        next.chapterInfos = self.chapterInfos
+        next.bookInfo = self.bookInfo
+        
+        self.present(next, animated: true, completion: nil)
+    }
 }
 
 extension BookController : UIPageViewControllerDelegate {
@@ -241,24 +253,12 @@ extension BookController : UIPageViewControllerDataSource {
             return nil
         }
     }
-    
-    fileprivate func openSettingPage() {
-        let storyboard = UIStoryboard(name: "Setting", bundle: nil)
-        guard let next = storyboard.instantiateInitialViewController() as? SettingController else {return}
-        next.modalPresentationStyle = .custom
-        
-        // パラメータを設定する.
-        next.chapterInfos = self.chapterInfos
-        
-        self.present(next, animated: true, completion: nil)
-    }
 }
 
 extension BookController : UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let _ = gestureRecognizer as? UITapGestureRecognizer {
             let touchPoint = touch.location(in: self.view)
-            print("touch point = \(touchPoint)")
             
             let startX = (screenWidth - 100) / 2
             let endX = (screenWidth + 100) / 2
@@ -268,7 +268,6 @@ extension BookController : UIGestureRecognizerDelegate {
                 openSettingPage()
                 return false
             }
-            
         }
         
         return true

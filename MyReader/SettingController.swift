@@ -24,11 +24,13 @@ class SettingController: ViewController {
     @IBOutlet weak var addBookmarkBtn: UIButton!
     
     // params.
+    var bookInfo : LocalBookInfo!
     var chapterInfos = [ChapterInfo]()
     
     @IBAction func doClose() {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
     
     @IBAction func doAddBookmark() {
         
@@ -77,6 +79,8 @@ class SettingController: ViewController {
     }
     
     private func setView() {
+        self.titleLbl.text = bookInfo.bookName
+        
         self.view.backgroundColor = UIColor.init(white: 0, alpha: 0.4)
         topView.transform = topView.transform.translatedBy(x: 0, y: -topView.bounds.height)
         bottomView.transform = bottomView.transform.translatedBy(x: 0, y: bottomView.bounds.height)
