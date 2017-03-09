@@ -84,6 +84,30 @@ class SettingController: ViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    @IBAction func toNext(_ sender: UIButton) {
+        guard let currentChapter = AppUtility.getCurrentChapter(bookId: bookInfo.bookId, chapterInfos: chapterInfos) else {
+            return
+            
+        }
+        
+        let currentChapterNumber = currentChapter.chapterNumber
+        let nextChapterNumber = currentChapterNumber + 1
+        if (nextChapterNumber >= self.chapterInfos.count) {
+            return
+        }
+        
+        let nextChapter = self.chapterInfos[nextChapterNumber]
+        let pageNumber = nextChapter.startPage
+        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageNumber)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func toPre(_ sender: UIButton) {
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

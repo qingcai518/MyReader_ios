@@ -104,6 +104,9 @@
                                             <constraint firstAttribute="height" constant="44" id="Tvf-8G-8f4"/>
                                         </constraints>
                                         <state key="normal" title="前一章"/>
+                                        <connections>
+                                            <action selector="toPre:" destination="gXb-eJ-e5r" eventType="touchUpInside" id="PFg-ug-hg4"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pah-22-wlI">
                                         <rect key="frame" x="295" y="41" width="80" height="44"/>
@@ -112,6 +115,9 @@
                                             <constraint firstAttribute="height" constant="44" id="jTq-4W-wOo"/>
                                         </constraints>
                                         <state key="normal" title="下一章"/>
+                                        <connections>
+                                            <action selector="toNext:" destination="gXb-eJ-e5r" eventType="touchUpInside" id="yGF-DU-oep"/>
+                                        </connections>
                                     </button>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1tc-yH-G8i">
                                         <rect key="frame" x="78" y="41" width="219" height="45"/>
