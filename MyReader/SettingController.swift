@@ -106,7 +106,24 @@ class SettingController: ViewController {
     }
     
     @IBAction func toPre(_ sender: UIButton) {
+        guard let currentChapter = AppUtility.getCurrentChapter(bookId: bookInfo.bookId, chapterInfos: chapterInfos) else {
+            return
+        }
         
+        let currentChapterNumber = currentChapter.chapterNumber
+        let preChapterNumber = currentChapterNumber - 1
+        
+        if (preChapterNumber < 0 ) {
+            return
+        }
+        
+        let preChapter = self.chapterInfos[preChapterNumber]
+        let pageNumber = preChapter.startPage
+        
+        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageNumber)
+
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
