@@ -48,11 +48,20 @@ class BookController: UIPageViewController {
             guard let bookId = self?.bookInfo.bookId else {return}
             let currentPage = AppUtility.getCurrentPage(bookId: bookId)
             
-            // 画面を移動させる処理を実施する.
-            guard let viewController = self?.controllers[currentPage] else {return}
+            guard let viewController = self?.controllers[currentPage] else {
+                return
+            }
             
             print("content = \(viewController.contentLbl.text)")
-            self?.setViewControllers([viewController], direction: .forward, animated: true, completion: nil)
+            
+            self?.setViewControllers([viewController], direction: .reverse, animated: true, completion: nil)
+            
+            
+//            // 画面を移動させる処理を実施する.
+//            guard let viewController = self?.controllers[currentPage] else {return}
+//            
+//            print("content = \(viewController.contentLbl.text)")
+//            self?.setViewControllers([viewController], direction: .forward, animated: true, completion: nil)
             
             
         }.addDisposableTo(disposeBag)
