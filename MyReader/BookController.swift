@@ -214,6 +214,7 @@ class BookController: UIPageViewController {
         // パラメータを設定する.
         next.chapterInfos = self.chapterInfos
         next.bookInfo = self.bookInfo
+        next.pageContents = self.pageContents
         
         self.present(next, animated: true, completion: nil)
     }

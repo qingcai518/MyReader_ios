@@ -26,13 +26,24 @@ class SettingController: ViewController {
     // params.
     var bookInfo : LocalBookInfo!
     var chapterInfos = [ChapterInfo]()
+    var pageContents = [NSMutableAttributedString]()
     
     @IBAction func doClose() {
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doAddBookmark() {
+        let storyboard = UIStoryboard(name: "AddBookmark", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? AddBookmarkController else {
+            return
+        }
         
+        next.bookId = bookInfo.bookId
+        let pageNumber = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        next.pageNumber = pageNumber
+        next.content = self.pageContents[pageNumber].string
+        
+        self.present(next, animated: true, completion: nil)
     }
     
     @IBAction func doShowChapters() {
