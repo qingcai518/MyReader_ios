@@ -23,10 +23,6 @@ class BookmarkController: ViewController {
         
         createIndicator()
         setTableView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         getData()
     }
 
