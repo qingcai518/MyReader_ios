@@ -60,8 +60,7 @@ class BooksModel {
                 print("fail to get text from data.")
                 return completion(nil)
             }
-
-            print("text = \(text)")
+            
             self.setContents(text: text)
             
             DispatchQueue.main.async {
@@ -77,7 +76,7 @@ class BooksModel {
         
         let letersPerLine = Int(floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing)))))
         let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
-        
+
         let array = content.components(separatedBy: .newlines)
         
         var contents = [String]()
@@ -87,11 +86,13 @@ class BooksModel {
                 contents.append(lineStr)
             } else {
                 var temp = lineStr
+                print("11111 begin.")
                 while temp.characters.count > letersPerLine {
                     let subText = (temp as NSString).substring(to: letersPerLine)
                     contents.append(subText)
                     temp = (temp as NSString).substring(from: letersPerLine)
                 }
+                print("22222 end --> temp = \(temp)")
                 
                 if (temp != "") {
                     contents.append(temp)
@@ -105,7 +106,7 @@ class BooksModel {
         var startPage = 0
         var chapterNumber = 0
         var chapterName = "序言"
-
+        
         for i in 0..<contents.count {
             let content = contents[i]
             
