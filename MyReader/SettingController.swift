@@ -63,10 +63,15 @@ class SettingController: ViewController {
     
     @IBAction func doShowBookmarks() {
         let storyboard = UIStoryboard(name: "Bookmark", bundle: nil)
-        guard let next = storyboard.instantiateInitialViewController() else {
+        guard let next = storyboard.instantiateInitialViewController() as? NavigationController else {
             return
         }
         
+        guard let bookmarkController = next.viewControllers.first as? BookmarkController else {
+            return
+        }
+        
+        bookmarkController.bookInfo = self.bookInfo
         self.present(next, animated: true, completion: nil)
     }
     

@@ -12,6 +12,9 @@ class BookmarkController: ViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeBtn: UIButton!
     
+    // params.
+    var bookInfo: LocalBookInfo!
+    
     let model = BookmarkModel()
 
     @IBAction func doClose() {
@@ -53,6 +56,18 @@ class BookmarkController: ViewController {
 extension BookmarkController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 16 + 18 + 8 + 40 + 24
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let info = model.bookmarkInfos[indexPath.row]
+        
+        let currentPage = info.pageNumber
+        // 現在のページを保存する.
+        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: currentPage)
+        
+        // 通知を出す.
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeChapter), object: nil)
     }
 }
 
