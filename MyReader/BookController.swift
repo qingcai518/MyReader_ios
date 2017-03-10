@@ -120,7 +120,6 @@ extension BookController : UIPageViewControllerDelegate {
         
         AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: index)
         
-//        self.setChapterInfo()
     }
 }
 
