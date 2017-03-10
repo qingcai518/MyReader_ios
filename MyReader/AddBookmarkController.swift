@@ -56,7 +56,6 @@ class AddBookmarkController: ViewController {
     }
     
     private func setBookmarkInfo(bookmarkName: String) {
-        print("content = \(content), pageNumber = \(pageNumber), bookId = \(bookId)")
         if (content == nil || pageNumber == nil || bookId == nil) {
             return
         }

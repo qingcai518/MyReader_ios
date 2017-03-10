@@ -28,8 +28,8 @@ class BooksController: ViewController {
         super.didReceiveMemoryWarning()
     }
     
-    
     private func setRecieveNotification() {
+        // ファイルのダウンロードが完了する際の通知を受け取る.
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.FinishDownload)).bindNext { [weak self] sender in
             self?.getData()
         }.addDisposableTo(disposeBag)
@@ -109,12 +109,12 @@ extension BooksController : UICollectionViewDelegate {
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let bookInfo = model.bookInfos[indexPath.row]
-
+        currentInfo = bookInfo
         startIndicator()
-        model.readFile(bookInfo: bookInfo) { [weak self] content in
+        model.readFileInBackground(bookInfo: bookInfo) { [weak self] text in
             self?.stopIndicator()
             
-            guard let contents = self?.model.pageContents else {
+            guard let pageContents = self?.model.pageContents else {
                 return
             }
             
@@ -122,8 +122,10 @@ extension BooksController : UICollectionViewDelegate {
                 return
             }
             
-            let bookController = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
-            self?.present(bookController, animated: true, completion: nil)
+            let next = BookController(bookInfo: bookInfo, pageContents: pageContents, chapterInfos: chapterInfos)
+
+            self?.present(next, animated: true, completion: nil)
+            
         }
     }
 }

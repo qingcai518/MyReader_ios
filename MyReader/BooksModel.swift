@@ -42,35 +42,41 @@ class BooksModel {
         return completion(nil)
     }
     
-    
-    // dummy.
-    
-    func readFile(bookInfo: LocalBookInfo, completion : @escaping (String?) -> Void) {
-        DispatchQueue.global().async { [weak self] in
-            let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
-            
-            fileHandle?.seek(toFileOffset: 0)
+    func readFileInBackground(bookInfo: LocalBookInfo, completion: @escaping (String?) -> Void) {
+        pageContents.removeAll()
+        chapterInfos.removeAll()
+        
+        let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
+        fileHandle?.seek(toFileOffset: 0)
+        
+        
+        DispatchQueue(label: "read file").async {
             guard let data = fileHandle?.readDataToEndOfFile() else {
-                print("read no data.")
+                print("fail to get data from file.")
                 return completion(nil)
             }
             
-            let readStr = AppUtility.getStringFromData(data: data)
-            self?.setContents(text: readStr)
+            guard let text = AppUtility.getStringFromData(data: data) else {
+                print("fail to get text from data.")
+                return completion(nil)
+            }
             
-            return completion(readStr)
+            self.setContents(text: text)
+            
+            DispatchQueue.main.async {
+                return completion(text)
+            }
         }
     }
     
-    private func setContents(text: String?) {
+    func setContents(text: String?) {
         guard let content = text else {
             return
         }
         
         let letersPerLine = Int(floor(Double(textWidth / (font.pointSize + CGFloat(letterSpacing)))))
         let lines = floor(Double(textHeight / (font.lineHeight + lineSpacing)))
-        print("leters per line = \(letersPerLine), lines = \(lines)")
-        
+
         let array = content.components(separatedBy: .newlines)
         
         var contents = [String]()
@@ -80,11 +86,14 @@ class BooksModel {
                 contents.append(lineStr)
             } else {
                 var temp = lineStr
+                print("11111 begin.")
+                // TODO.対象文字列が長い場合、ここの処理速度が極めて遅い.
                 while temp.characters.count > letersPerLine {
                     let subText = (temp as NSString).substring(to: letersPerLine)
                     contents.append(subText)
                     temp = (temp as NSString).substring(from: letersPerLine)
                 }
+                print("22222 end --> temp = \(temp)")
                 
                 if (temp != "") {
                     contents.append(temp)
@@ -98,6 +107,7 @@ class BooksModel {
         var startPage = 0
         var chapterNumber = 0
         var chapterName = "序言"
+        
         for i in 0..<contents.count {
             let content = contents[i]
             

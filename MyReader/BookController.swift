@@ -10,9 +10,10 @@ import UIKit
 import RxSwift
 
 class BookController: UIPageViewController {
+    var tapView = UIView()
+    
     // 現在の章の情報.
     let disposeBag = DisposeBag()
-    var currentChapter = Variable("")
     var controllers = [PageController]()
     
     // params.
@@ -33,56 +34,91 @@ class BookController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setRecieveNotification()
         setView()
-        setRecognizer()
+        
+        setLightMode()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    private func setLightMode() {
+        let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        let currentController = controllers[currentPage]
+        
+        isNightMode.asObservable().bindNext { value in
+            if (value) {
+                currentController.view.backgroundColor = UIColor.black
+                currentController.contentLbl.textColor = UIColor.white
+            } else {
+                currentController.view.backgroundColor = UIColor.white
+                currentController.contentLbl.textColor = UIColor.black
+            }
+        }.addDisposableTo(disposeBag)
+    }
+    
+    private func setRecieveNotification() {
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeChapter)).bindNext { [weak self] notification in
+            guard let bookId = self?.bookInfo.bookId else {return}
+            let currentPage = AppUtility.getCurrentPage(bookId: bookId)
+            
+            guard let viewController = self?.controllers[currentPage] else {
+                return
+            }
+
+            self?.setViewControllers([viewController], direction: .reverse, animated: false, completion: nil)
+        }.addDisposableTo(disposeBag)
+    }
+    
     private func setView() {
-        for content in pageContents {
+        self.modalTransitionStyle = .crossDissolve
+        
+        for i in 0..<pageContents.count {
+            let content = pageContents[i]
             let storyboard = UIStoryboard(name: "Page", bundle: nil)
             guard let controller = storyboard.instantiateInitialViewController() as? PageController else {
                 continue
             }
             
             controller.content = content
+            controller.view.tag = i
             self.controllers.append(controller)
         }
         
-        if let firstController = controllers.first {
-            self.setViewControllers([firstController], direction: .forward, animated: true, completion: nil)
-        }
+        let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        let currentController = controllers[currentPage]
+        self.setViewControllers([currentController], direction: .forward, animated: true, completion: nil)
         
         self.dataSource = self
+        self.delegate = self
     }
     
-    private func setRecognizer() {
-        let recognizer = UITapGestureRecognizer()
-        recognizer.rx.event.bindNext { sender in
-            let storyboard = UIStoryboard(name: "Setting", bundle: nil)
-            guard let next = storyboard.instantiateInitialViewController() as? SettingController else {
-                return
-            }
-            
-            let currentPage = AppUtility.getCurrentPage(bookId: self.bookInfo.bookId)
-            let currentContent = self.pageContents[currentPage].string
-            
-            next.modalPresentationStyle = .custom
-            next.bookInfo = self.bookInfo
-            next.content = currentContent
-            next.pageNumber = currentPage
-            next.chapterInfos = self.chapterInfos
-            self.present(next, animated: true, completion: nil)
-        }.addDisposableTo(disposeBag)
+    fileprivate func openSettingPage() {
+        let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? SettingController else {return}
+        next.modalPresentationStyle = .custom
         
-        let tapView = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: screenHeight))
-        tapView.center = CGPoint(x: screenWidth / 2, y: screenHeight / 2)
-        tapView.backgroundColor = UIColor.clear
-        self.view.addSubview(tapView)
-        tapView.addGestureRecognizer(recognizer)
+        // パラメータを設定する.
+        next.chapterInfos = self.chapterInfos
+        next.bookInfo = self.bookInfo
+        next.pageContents = self.pageContents
+        
+        self.present(next, animated: true, completion: nil)
+    }
+}
+
+extension BookController : UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        
+        guard let index = pageViewController.viewControllers?.first?.view.tag else {
+            return
+        }
+        
+        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: index)
     }
 }
 
@@ -102,20 +138,28 @@ extension BookController : UIPageViewControllerDataSource {
         guard let index = self.controllers.index(of: pageController) else {return nil}
         if (index < self.controllers.count - 1) {
             return self.controllers[index + 1]
+            
         } else {
             return nil
         }
     }
 }
 
-//extension BookController : UIGestureRecognizerDelegate {
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        let location = touch.location(in: self.view)
-//        
-//        if ((location.x < (screenWidth - 44) / 2) || (location.x > (screenWidth + 44) / 2)) {
-//            return false
-//        }
-//        
-//        return true
-//    }
-//}
+extension BookController : UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let _ = gestureRecognizer as? UITapGestureRecognizer {
+            let touchPoint = touch.location(in: self.view)
+            
+            let startX = (screenWidth - 100) / 2
+            let endX = (screenWidth + 100) / 2
+            let touchX = touchPoint.x
+            
+            if (touchX >= startX && touchX <= endX) {
+                openSettingPage()
+                return false
+            }
+        }
+        
+        return true
+    }
+}
