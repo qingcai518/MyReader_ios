@@ -131,6 +131,7 @@ class SettingController: ViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeChapter), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
