@@ -71,9 +71,9 @@ class BookController: UIPageViewController {
             self.controllers.append(controller)
         }
         
-        if let firstController = controllers.first {
-            self.setViewControllers([firstController], direction: .forward, animated: true, completion: nil)
-        }
+        let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        let currentController = controllers[currentPage]
+        self.setViewControllers([currentController], direction: .forward, animated: true, completion: nil)
         
         self.dataSource = self
         self.delegate = self

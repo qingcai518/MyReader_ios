@@ -52,14 +52,16 @@ class BooksModel {
         
         DispatchQueue(label: "read file").async {
             guard let data = fileHandle?.readDataToEndOfFile() else {
+                print("fail to get data from file.")
                 return completion(nil)
             }
             
             guard let text = AppUtility.getStringFromData(data: data) else {
-                
+                print("fail to get text from data.")
                 return completion(nil)
             }
 
+            print("text = \(text)")
             self.setContents(text: text)
             
             DispatchQueue.main.async {
