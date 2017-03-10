@@ -87,6 +87,7 @@ class BooksModel {
             } else {
                 var temp = lineStr
                 print("11111 begin.")
+                // TODO.対象文字列が長い場合、ここの処理速度が極めて遅い.
                 while temp.characters.count > letersPerLine {
                     let subText = (temp as NSString).substring(to: letersPerLine)
                     contents.append(subText)
