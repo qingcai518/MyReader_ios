@@ -51,6 +51,48 @@ class BooksModel {
         fileHandle?.readInBackgroundAndNotify()
     }
     
+    func readFileInBackground(bookInfo: LocalBookInfo, completion: @escaping (String?) -> Void) {
+        pageContents.removeAll()
+        chapterInfos.removeAll()
+        
+        let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
+        fileHandle?.seek(toFileOffset: 0)
+        
+        
+        DispatchQueue(label: "read file").async {
+            guard let data = fileHandle?.readDataToEndOfFile() else {
+                return completion(nil)
+            }
+            
+            guard let text = AppUtility.getStringFromData(data: data) else {
+                return completion(nil)
+            }
+            
+            print("text = \(text)")
+            
+            self.setContents(text: text)
+            
+            return completion(text)
+            
+            
+//            self?.model.setContents(text: readStr)
+//            
+//            guard let contents = self?.model.pageContents else {
+//                return
+//            }
+//            
+//            guard let chapterInfos = self?.model.chapterInfos else {
+//                return
+//            }
+//            
+//            guard let bookInfo = self?.currentInfo else {
+//                return
+//            }
+//            let next = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
+//            self?.present(next, animated: true, completion: nil)
+        }
+    }
+    
     func setContents(text: String?) {
         guard let content = text else {
             return

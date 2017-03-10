@@ -34,31 +34,31 @@ class BooksController: ViewController {
             self?.getData()
         }.addDisposableTo(disposeBag)
         
-        // ファイルの読み込みが完了する際の通知を受け取る.
-        NotificationCenter.default.rx.notification(FileHandle.readCompletionNotification).bindNext { [weak self] sender in
-            self?.stopIndicator()
-            guard let data = sender.userInfo?[NSFileHandleNotificationDataItem] as? Data else {
-                print("read no data.")
-                return
-            }
-            
-            let readStr = AppUtility.getStringFromData(data: data)
-            self?.model.setContents(text: readStr)
-            
-            guard let contents = self?.model.pageContents else {
-                return
-            }
-            
-            guard let chapterInfos = self?.model.chapterInfos else {
-                return
-            }
-            
-            guard let bookInfo = self?.currentInfo else {
-                return
-            }
-            let next = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
-            self?.present(next, animated: true, completion: nil)
-        }.addDisposableTo(disposeBag)
+//        // ファイルの読み込みが完了する際の通知を受け取る.
+//        NotificationCenter.default.rx.notification(FileHandle.readCompletionNotification).bindNext { [weak self] sender in
+//            self?.stopIndicator()
+//            guard let data = sender.userInfo?[NSFileHandleNotificationDataItem] as? Data else {
+//                print("read no data.")
+//                return
+//            }
+//            
+//            let readStr = AppUtility.getStringFromData(data: data)
+//            self?.model.setContents(text: readStr)
+//            
+//            guard let contents = self?.model.pageContents else {
+//                return
+//            }
+//            
+//            guard let chapterInfos = self?.model.chapterInfos else {
+//                return
+//            }
+//            
+//            guard let bookInfo = self?.currentInfo else {
+//                return
+//            }
+//            let next = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
+//            self?.present(next, animated: true, completion: nil)
+//        }.addDisposableTo(disposeBag)
     }
     
     private func setCollectionView() {
@@ -137,7 +137,30 @@ extension BooksController : UICollectionViewDelegate {
         let bookInfo = model.bookInfos[indexPath.row]
         currentInfo = bookInfo
         startIndicator()
-        model.readFile(bookInfo: bookInfo)
+//        model.readFile(bookInfo: bookInfo)
+        model.readFileInBackground(bookInfo: bookInfo) { [weak self] text in
+//            guard let content = text else {
+//                return print("has no contents.")
+//            }
+            
+            self?.stopIndicator()
+            
+            guard let pageContents = self?.model.pageContents else {
+                return
+            }
+            
+            guard let chapterInfos = self?.model.chapterInfos else {
+                return
+            }
+            
+            let next = BookController(bookInfo: bookInfo, pageContents: pageContents, chapterInfos: chapterInfos)
+            
+            self?.present(next, animated: true, completion: nil)
+            
+            //            let next = BookController(bookInfo: bookInfo, pageContents: contents, chapterInfos: chapterInfos)
+            //            self?.present(next, animated: true, completion: nil)
+        }
+        
     }
 }
 
