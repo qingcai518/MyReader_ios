@@ -61,13 +61,13 @@ extension BookmarkController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let info = model.bookmarkInfos[indexPath.row]
-        
         let currentPage = info.pageNumber
-        // 現在のページを保存する.
-        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: currentPage)
         
-        // 通知を出す.
+        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: currentPage)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeChapter), object: nil)
+        
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        
     }
 }
 
