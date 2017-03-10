@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
@@ -17,6 +18,9 @@ let textHeight = screenHeight - UIApplication.shared.statusBarFrame.size.height 
 
 let baseUrl = "https://main-myreader.ssl-lolipop.jp"
 let bookService = baseUrl + "/Books"
+
+// 阅读模式.   夜间/白天
+var isNightMode = Variable(UserDefaults.standard.bool(forKey: UDKey.LightMode))
 
 // 本の基本情報.
 let letterSpacing = 1.0   // 文字間隔

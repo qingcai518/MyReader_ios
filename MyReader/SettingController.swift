@@ -132,6 +132,12 @@ class SettingController: ViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func changeLightMode() {
+        isNightMode.value = !isNightMode.value
+        UserDefaults.standard.set(isNightMode.value, forKey: UDKey.LightMode)
+        UserDefaults.standard.synchronize()
+        self.dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

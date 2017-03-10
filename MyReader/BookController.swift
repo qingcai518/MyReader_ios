@@ -37,10 +37,28 @@ class BookController: UIPageViewController {
         
         setRecieveNotification()
         setView()
+        
+        setLightMode()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func setLightMode() {
+        let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        let currentController = controllers[currentPage]
+        
+        isNightMode.asObservable().bindNext { value in
+            if (value) {
+                currentController.view.backgroundColor = UIColor.black
+                currentController.contentLbl.textColor = UIColor.white
+            } else {
+                currentController.view.backgroundColor = UIColor.white
+                currentController.contentLbl.textColor = UIColor.black
+            }
+        }.addDisposableTo(disposeBag)
     }
     
     private func setRecieveNotification() {
