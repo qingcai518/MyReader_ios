@@ -14,6 +14,7 @@ class ChapterController: ViewController {
     
     // params.
     var chapterInfos = [ChapterInfo]()
+    var bookInfo: LocalBookInfo!
     
     @IBAction func doClose() {
         self.dismiss(animated: true, completion: nil)
@@ -42,7 +43,12 @@ extension ChapterController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("chater is clicked .")
+        let info = chapterInfos[indexPath.row]
+        let startPage = info.startPage
+        AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: startPage)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeChapter), object: nil)
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
 

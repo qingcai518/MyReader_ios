@@ -25,6 +25,7 @@ let font = UIFont.Helvetica18()  // フォント
 
 struct NotificationName {
     static let FinishDownload = "FinishDownload"
+    static let ChangeChapter = "ChangeChapter"
 }
 
 enum DLStatus : Int {

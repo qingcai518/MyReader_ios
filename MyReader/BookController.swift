@@ -44,7 +44,7 @@ class BookController: UIPageViewController {
     }
     
     private func setRecieveNotification() {
-        NotificationCenter.default.rx.notification(Notification.Name(rawValue: "test")).bindNext { [weak self] notification in
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeChapter)).bindNext { [weak self] notification in
             guard let bookId = self?.bookInfo.bookId else {return}
             let currentPage = AppUtility.getCurrentPage(bookId: bookId)
             

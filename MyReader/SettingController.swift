@@ -57,6 +57,7 @@ class SettingController: ViewController {
         }
         
         chapterController.chapterInfos = self.chapterInfos
+        chapterController.bookInfo = self.bookInfo
         self.present(next, animated: true, completion: nil)
     }
     
@@ -80,7 +81,7 @@ class SettingController: ViewController {
             AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageIndex)
             
             // 画面の通知を実施する.
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeChapter), object: nil)
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -101,7 +102,7 @@ class SettingController: ViewController {
         let pageNumber = nextChapter.startPage
         AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageNumber)
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeChapter), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -122,7 +123,7 @@ class SettingController: ViewController {
         
         AppUtility.saveCurrentPage(bookId: bookInfo.bookId, pageIndex: pageNumber)
 
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "test"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeChapter), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
 

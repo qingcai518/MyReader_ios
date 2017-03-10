@@ -56,13 +56,15 @@ class BooksModel {
             }
             
             guard let text = AppUtility.getStringFromData(data: data) else {
+                
                 return completion(nil)
             }
-            
+
             self.setContents(text: text)
             
-
-            
+            DispatchQueue.main.async {
+                return completion(text)
+            }
         }
     }
     
