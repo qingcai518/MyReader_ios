@@ -43,6 +43,9 @@ class BooksModel {
     }
     
     func readFile(bookInfo: LocalBookInfo) {
+        pageContents.removeAll()
+        chapterInfos.removeAll()
+        
         let fileHandle = FileHandle(forReadingAtPath: bookInfo.localPath)
         fileHandle?.seek(toFileOffset: 0)
         fileHandle?.readInBackgroundAndNotify()
@@ -83,9 +86,7 @@ class BooksModel {
         var startPage = 0
         var chapterNumber = 0
         var chapterName = "序言"
-        
-        self.chapterInfos.removeAll()
-        
+
         for i in 0..<contents.count {
             let content = contents[i]
             
