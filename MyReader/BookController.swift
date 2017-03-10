@@ -130,7 +130,6 @@ extension BookController : UIPageViewControllerDataSource {
             return self.controllers[index - 1]
         } else {
             return nil
-            
         }
     }
     
