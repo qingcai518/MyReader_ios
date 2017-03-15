@@ -19,9 +19,6 @@ let textHeight = screenHeight - UIApplication.shared.statusBarFrame.size.height 
 let baseUrl = "https://main-myreader.ssl-lolipop.jp"
 let bookService = baseUrl + "/Books"
 
-// 阅读模式.   夜间/白天
-var isNightMode = Variable(UserDefaults.standard.bool(forKey: UDKey.LightMode))
-
 // 本の基本情報.
 let letterSpacing = 1.0   // 文字間隔
 let lineSpacing = CGFloat(6.0)  // 行間隔
@@ -30,6 +27,7 @@ let font = UIFont.Helvetica18()  // フォント
 struct NotificationName {
     static let FinishDownload = "FinishDownload"
     static let ChangeChapter = "ChangeChapter"
+    static let ChangeLightMode = "ChangeLightMode"
 }
 
 enum DLStatus : Int {

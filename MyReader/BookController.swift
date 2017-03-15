@@ -50,15 +50,14 @@ class BookController: UIPageViewController {
         let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
         let currentController = controllers[currentPage]
         
-        isNightMode.asObservable().bindNext { value in
-            if (value) {
-                currentController.view.backgroundColor = UIColor.black
-                currentController.contentLbl.textColor = UIColor.white
-            } else {
-                currentController.view.backgroundColor = UIColor.white
-                currentController.contentLbl.textColor = UIColor.black
-            }
-        }.addDisposableTo(disposeBag)
+        let isNightMode = UserDefaults.standard.bool(forKey: UDKey.LightMode)
+        if (isNightMode) {
+            currentController.view.backgroundColor = UIColor.black
+            currentController.contentLbl.textColor = UIColor.white
+        } else {
+            currentController.view.backgroundColor = UIColor.white
+            currentController.contentLbl.textColor = UIColor.black
+        }
     }
     
     private func setRecieveNotification() {
@@ -71,6 +70,10 @@ class BookController: UIPageViewController {
             }
 
             self?.setViewControllers([viewController], direction: .reverse, animated: false, completion: nil)
+        }.addDisposableTo(disposeBag)
+        
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeLightMode)).bindNext { [weak self] notification in
+            self?.setLightMode()
         }.addDisposableTo(disposeBag)
     }
     
