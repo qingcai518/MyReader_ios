@@ -188,6 +188,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3i-0x-7Et">
                                                 <rect key="frame" x="0.0" y="0.0" width="93" height="75"/>
                                                 <state key="normal" image="btn_font"/>
+                                                <connections>
+                                                    <action selector="doShowSetting2" destination="gXb-eJ-e5r" eventType="touchUpInside" id="YSI-KU-H1E"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wge-hb-scH">
                                                 <rect key="frame" x="94" y="0.0" width="93" height="75"/>

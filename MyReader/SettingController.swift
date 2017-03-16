@@ -132,6 +132,19 @@ class SettingController: ViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func doShowSetting2() {
+        let storyboard = UIStoryboard(name: "Setting2", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? Setting2Controller else {
+            return
+        }
+        next.modalPresentationStyle = .custom
+        
+        let current = self.presentingViewController
+        self.dismiss(animated: true, completion: {
+            current?.present(next, animated: true, completion: nil)
+        })
+    }
+    
     @IBAction func changeLightMode() {
         let isNightMode = UserDefaults.standard.bool(forKey: UDKey.LightMode)
         
