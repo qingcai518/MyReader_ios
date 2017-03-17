@@ -49,4 +49,5 @@ struct UDKey {
     static let TxtColor_G = "TxtColor_G"
     static let TxtColor_B = "TxtColor_B"
     static let Brightness = "Brightness"
+    static let FontSize = "FontSize"
 }

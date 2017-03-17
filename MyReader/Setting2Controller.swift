@@ -29,6 +29,34 @@ class Setting2Controller: UIViewController {
         UserDefaults.standard.synchronize()
     }
     
+    @IBAction func toSmall() {
+        // 文字サイズを縮小する.
+        let currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        let fontSize = currentFontSize - 2
+        UserDefaults.standard.set(fontSize, forKey: UDKey.FontSize)
+        UserDefaults.standard.synchronize()
+        
+        bigBtn.isEnabled = true
+        if (fontSize <= 10) {
+            smallBtn.isEnabled = false
+        }
+    }
+    
+    @IBAction func toBig() {
+        // 文字サイズを拡大する.
+        let currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        let fontSize = currentFontSize + 2
+        UserDefaults.standard.set(fontSize, forKey: UDKey.FontSize)
+        UserDefaults.standard.synchronize()
+        
+        smallBtn.isEnabled = true
+        if (fontSize >= 30) {
+            bigBtn.isEnabled = false
+            
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBottomView()
