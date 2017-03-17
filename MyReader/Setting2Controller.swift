@@ -71,6 +71,8 @@ class Setting2Controller: UIViewController {
         
         self.bottomView.addSubview(btn)
         
+        
+        
         btn.rx.tap.bindNext {
             let bkRGB = UIColor.getRGB(color: bkColor)
             let txtRGB = UIColor.getRGB(color: textColor)
@@ -87,9 +89,6 @@ class Setting2Controller: UIViewController {
             
             // 背景色が変更されたことを通知する.
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationName.ChangeLightMode), object: nil)
-            
-//            self?.dismiss(animated: true, completion: nil)
-            
         }.addDisposableTo(disposeBag)
     }
 }
