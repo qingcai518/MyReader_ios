@@ -42,4 +42,10 @@ let lightModeNight = 1
 struct UDKey {
     static let CurrentPage = "CurrentPage"
     static let LightMode = "LightMode"
+    static let BKColor_R = "BKColor_R"
+    static let BKColor_G = "BKCOlor_G"
+    static let BKColor_B = "BKColor_B"
+    static let TxtColor_R = "TxtColor_R"
+    static let TxtColor_G = "TxtColor_G"
+    static let TxtColor_B = "TxtColor_B"
 }

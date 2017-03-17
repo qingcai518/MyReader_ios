@@ -46,6 +46,48 @@ class Setting2Controller: UIViewController {
         recognizer.delegate = self
         
         self.view.addGestureRecognizer(recognizer)
+        
+        
+        // 色を変更するボタンを追加する.
+        let width = screenWidth / 4
+        let size = CGFloat(40)
+        let startY = CGFloat(24 + 18 + 24 + 30 + 16)
+        let startX = (width - size) / 2
+        createCircleBtn(x: startX, y: startY, size: size, bkColor: UIColor.blue, textColor: UIColor.white)
+        createCircleBtn(x: width + startX, y: startY, size: size, bkColor: UIColor.red, textColor: UIColor.white)
+        createCircleBtn(x: 2 * width + startX, y: startY, size: size, bkColor: UIColor.yellow, textColor: UIColor.black)
+        createCircleBtn(x: 3 * width + startX, y: startY, size: size, bkColor: UIColor.orange, textColor: UIColor.black)
+    }
+    
+    private func createCircleBtn(x: CGFloat, y: CGFloat, size: CGFloat, bkColor: UIColor, textColor: UIColor){
+        
+        let btn = UIButton(frame: CGRect(x: x, y: y, width: size, height: size))
+        btn.backgroundColor = bkColor
+        btn.setTitleColor(textColor, for: .normal)
+        btn.setTitle("A", for: .normal)
+        btn.titleLabel?.font = UIFont.Helvetica14()
+        btn.layer.cornerRadius = size / 2
+        btn.clipsToBounds = true
+        
+        self.bottomView.addSubview(btn)
+        
+        btn.rx.tap.bindNext { [weak self] in
+            let bkRGB = UIColor.getRGB(color: bkColor)
+            let txtRGB = UIColor.getRGB(color: textColor)
+            
+            UserDefaults.standard.set(bkRGB.r, forKey: UDKey.BKColor_R)
+            UserDefaults.standard.set(bkRGB.g, forKey: UDKey.BKColor_G)
+            UserDefaults.standard.set(bkRGB.b, forKey: UDKey.BKColor_B)
+            
+            UserDefaults.standard.set(txtRGB.r, forKey: UDKey.TxtColor_R)
+            UserDefaults.standard.set(txtRGB.g, forKey: UDKey.TxtColor_G)
+            UserDefaults.standard.set(txtRGB.b, forKey: UDKey.TxtColor_B)
+            
+            UserDefaults.standard.synchronize()
+            
+            self?.dismiss(animated: true, completion: nil)
+            
+        }.addDisposableTo(disposeBag)
     }
 }
 

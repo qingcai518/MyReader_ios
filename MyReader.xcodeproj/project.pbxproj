@@ -37,6 +37,7 @@
 		3C67EE111E5FFB4F00B5156D /* LeavesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67EE0E1E5FFB4F00B5156D /* LeavesViewController.swift */; };
 		3C96053B1E7A1B700050D1A0 /* Setting2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C96053A1E7A1B700050D1A0 /* Setting2.storyboard */; };
 		3C96053D1E7A34CD0050D1A0 /* Setting2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96053C1E7A34CD0050D1A0 /* Setting2Controller.swift */; };
+		3C96055E1E7B75F70050D1A0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96055D1E7B75F70050D1A0 /* UIColor.swift */; };
 		3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */; };
 		3C999BAE1E5ADC9B0095A696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAC1E5ADC9B0095A696 /* Main.storyboard */; };
 		3C999BB01E5ADC9B0095A696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAF1E5ADC9B0095A696 /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		3C67EE0E1E5FFB4F00B5156D /* LeavesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeavesViewController.swift; sourceTree = "<group>"; };
 		3C96053A1E7A1B700050D1A0 /* Setting2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting2.storyboard; sourceTree = "<group>"; };
 		3C96053C1E7A34CD0050D1A0 /* Setting2Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting2Controller.swift; sourceTree = "<group>"; };
+		3C96055D1E7B75F70050D1A0 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		3C999BA51E5ADC9B0095A696 /* MyReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C999BAD1E5ADC9B0095A696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				3C67EDC61E5C1E9A00B5156D /* UIFont.swift */,
+				3C96055D1E7B75F70050D1A0 /* UIColor.swift */,
 				3CD1E3941E6FAEE200EEE765 /* UIApplication.swift */,
 			);
 			name = Extension;
@@ -501,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CD1E39D1E6FB67500EEE765 /* SettingController.swift in Sources */,
+				3C96055E1E7B75F70050D1A0 /* UIColor.swift in Sources */,
 				3C999BC81E5AE1B40095A696 /* Navi2Controller.swift in Sources */,
 				3C999BC41E5ADE480095A696 /* MainController.swift in Sources */,
 				3C67EDD41E5D346200B5156D /* BookCustomController.swift in Sources */,

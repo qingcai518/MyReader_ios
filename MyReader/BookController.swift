@@ -55,8 +55,24 @@ class BookController: UIPageViewController {
             currentController.view.backgroundColor = UIColor.black
             currentController.contentLbl.textColor = UIColor.white
         } else {
-            currentController.view.backgroundColor = UIColor.white
-            currentController.contentLbl.textColor = UIColor.black
+            
+            // TODO 色の設定が反映されない.
+            
+            let bkColorR = UserDefaults.standard.float(forKey: UDKey.BKColor_R)
+            let bkColorG = UserDefaults.standard.float(forKey: UDKey.BKColor_G)
+            let bkColorB = UserDefaults.standard.float(forKey: UDKey.BKColor_B)
+            
+            let txtColorR = UserDefaults.standard.float(forKey: UDKey.TxtColor_R)
+            let txtColorG = UserDefaults.standard.float(forKey: UDKey.TxtColor_G)
+            let txtColorB = UserDefaults.standard.float(forKey: UDKey.TxtColor_B)
+            
+            if (bkColorR == txtColorR && bkColorG == txtColorG && bkColorB == txtColorB) {
+                currentController.view.backgroundColor = UIColor.white
+                currentController.contentLbl.textColor = UIColor.black
+            } else {
+                currentController.view.backgroundColor = UIColor(red: CGFloat(bkColorR), green: CGFloat(bkColorG), blue: CGFloat(bkColorB), alpha: 1)
+                currentController.contentLbl.textColor = UIColor(red: CGFloat(txtColorR), green: CGFloat(txtColorG), blue: CGFloat(txtColorB), alpha: 1)
+            }
         }
     }
     
