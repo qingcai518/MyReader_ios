@@ -88,6 +88,28 @@ class BookController: UIPageViewController {
         }
     }
     
+    private func setFont() {
+        var fontName = "Helvetica"
+        var fontSize = CGFloat(14)
+        
+        if let name = UserDefaults.standard.object(forKey: UDKey.FontName) as? String {
+            fontName = name
+        }
+        
+        let size = UserDefaults.standard.integer(forKey: UDKey.FontSize)
+        
+        if (size > 0) {
+            fontSize = CGFloat(size)
+        }
+        
+        let font = UIFont(name: fontName, size: fontSize)
+
+        let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
+        let currentController = controllers[currentPage]
+        
+        currentController.contentLbl.font = font
+    }
+    
     private func setRecieveNotification() {
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeChapter)).bindNext { [weak self] notification in
             guard let bookId = self?.bookInfo.bookId else {return}
@@ -104,6 +126,10 @@ class BookController: UIPageViewController {
         
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeLightMode)).bindNext { [weak self] notification in
             self?.setLightMode()
+        }.addDisposableTo(disposeBag)
+        
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeFont)).bindNext { [weak self] notification in
+            self?.setFont()
         }.addDisposableTo(disposeBag)
     }
     

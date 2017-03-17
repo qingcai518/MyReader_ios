@@ -40,6 +40,8 @@ class Setting2Controller: UIViewController {
         if (fontSize <= 10) {
             smallBtn.isEnabled = false
         }
+
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationName.ChangeFont), object: nil)
     }
     
     @IBAction func toBig() {
@@ -54,6 +56,7 @@ class Setting2Controller: UIViewController {
             bigBtn.isEnabled = false
         }
         
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationName.ChangeFont), object: nil)
     }
     
     override func viewDidLoad() {

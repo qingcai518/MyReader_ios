@@ -28,6 +28,7 @@ struct NotificationName {
     static let FinishDownload = "FinishDownload"
     static let ChangeChapter = "ChangeChapter"
     static let ChangeLightMode = "ChangeLightMode"
+    static let ChangeFont = "ChangeFont"
 }
 
 enum DLStatus : Int {
@@ -50,4 +51,5 @@ struct UDKey {
     static let TxtColor_B = "TxtColor_B"
     static let Brightness = "Brightness"
     static let FontSize = "FontSize"
+    static let FontName = "FontName"
 }
