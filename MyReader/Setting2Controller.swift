@@ -52,7 +52,6 @@ class Setting2Controller: UIViewController {
         smallBtn.isEnabled = true
         if (fontSize >= 30) {
             bigBtn.isEnabled = false
-            
         }
         
     }
