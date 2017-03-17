@@ -19,10 +19,18 @@ class Setting2Controller: UIViewController {
     @IBOutlet weak var bigBtn: UIButton!
     
     let disposeBag = DisposeBag()
-
+    
+    @IBAction func changeBrightness(slider: UISlider, event: UIEvent) {
+        print("slider value = \(slider.value)")
+        UIScreen.main.brightness = CGFloat(slider.value)
+        
+        // 値を保存する.
+        UserDefaults.standard.set(slider.value, forKey: UDKey.Brightness)
+        UserDefaults.standard.synchronize()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setBottomView()
     }
 
@@ -33,6 +41,10 @@ class Setting2Controller: UIViewController {
 
     private func setBottomView() {
         self.view.backgroundColor = UIColor.init(white: 0, alpha: 0.4)
+        // slider view の値の設定.
+        let sliderValue = UserDefaults.standard.float(forKey: UDKey.Brightness)
+        self.sliderView.value = sliderValue
+        
         smallBtn.layer.borderColor = UIColor.blue.cgColor
         smallBtn.layer.borderWidth = 1
         
@@ -70,9 +82,7 @@ class Setting2Controller: UIViewController {
         btn.clipsToBounds = true
         
         self.bottomView.addSubview(btn)
-        
-        
-        
+
         btn.rx.tap.bindNext {
             let bkRGB = UIColor.getRGB(color: bkColor)
             let txtRGB = UIColor.getRGB(color: textColor)

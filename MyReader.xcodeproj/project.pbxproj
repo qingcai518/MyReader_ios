@@ -194,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				3CD1E3991E6FB60E00EEE765 /* SettingPage */,
+				3C9605391E7A1B310050D1A0 /* Setting2Page */,
 				3C587EE41E66C2F800B622E2 /* AddBookmarkPage */,
 				3C587EEE1E6D0AFA00B622E2 /* BookController.swift */,
 				3C587EF01E6D0C7E00B622E2 /* Page.storyboard */,
@@ -264,7 +265,6 @@
 		3C999BA71E5ADC9B0095A696 /* MyReader */ = {
 			isa = PBXGroup;
 			children = (
-				3C9605391E7A1B310050D1A0 /* Setting2Page */,
 				3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */,
 				3C999BAF1E5ADC9B0095A696 /* Assets.xcassets */,
 				3C999BB41E5ADC9B0095A696 /* Info.plist */,

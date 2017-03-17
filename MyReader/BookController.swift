@@ -21,6 +21,8 @@ class BookController: UIPageViewController {
     var pageContents = [NSMutableAttributedString]()
     var chapterInfos = [ChapterInfo]()
     
+    let currentBrightness = UIScreen.main.brightness
+    
     init(bookInfo: LocalBookInfo, pageContents: [NSMutableAttributedString], chapterInfos: [ChapterInfo]) {
         super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
         self.bookInfo = bookInfo
@@ -44,6 +46,18 @@ class BookController: UIPageViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let brightness = UserDefaults.standard.float(forKey: UDKey.Brightness)
+        UIScreen.main.brightness = CGFloat(brightness)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIScreen.main.brightness = currentBrightness
     }
     
     private func setLightMode() {
@@ -84,6 +98,8 @@ class BookController: UIPageViewController {
             }
 
             self?.setViewControllers([viewController], direction: .reverse, animated: false, completion: nil)
+            
+            self?.setLightMode()
         }.addDisposableTo(disposeBag)
         
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeLightMode)).bindNext { [weak self] notification in
