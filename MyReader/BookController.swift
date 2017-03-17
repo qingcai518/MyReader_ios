@@ -21,6 +21,8 @@ class BookController: UIPageViewController {
     var pageContents = [NSMutableAttributedString]()
     var chapterInfos = [ChapterInfo]()
     
+    let currentBrightness = UIScreen.main.brightness
+    
     init(bookInfo: LocalBookInfo, pageContents: [NSMutableAttributedString], chapterInfos: [ChapterInfo]) {
         super.init(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
         self.bookInfo = bookInfo
@@ -46,19 +48,44 @@ class BookController: UIPageViewController {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let brightness = UserDefaults.standard.float(forKey: UDKey.Brightness)
+        UIScreen.main.brightness = CGFloat(brightness)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIScreen.main.brightness = currentBrightness
+    }
+    
     private func setLightMode() {
         let currentPage = AppUtility.getCurrentPage(bookId: bookInfo.bookId)
         let currentController = controllers[currentPage]
         
-        isNightMode.asObservable().bindNext { value in
-            if (value) {
-                currentController.view.backgroundColor = UIColor.black
-                currentController.contentLbl.textColor = UIColor.white
-            } else {
+        let isNightMode = UserDefaults.standard.bool(forKey: UDKey.LightMode)
+        if (isNightMode) {
+            currentController.view.backgroundColor = UIColor.black
+            currentController.contentLbl.textColor = UIColor.white
+        } else {
+            // 色を設定する.
+            let bkColorR = UserDefaults.standard.float(forKey: UDKey.BKColor_R)
+            let bkColorG = UserDefaults.standard.float(forKey: UDKey.BKColor_G)
+            let bkColorB = UserDefaults.standard.float(forKey: UDKey.BKColor_B)
+            
+            let txtColorR = UserDefaults.standard.float(forKey: UDKey.TxtColor_R)
+            let txtColorG = UserDefaults.standard.float(forKey: UDKey.TxtColor_G)
+            let txtColorB = UserDefaults.standard.float(forKey: UDKey.TxtColor_B)
+            
+            if (bkColorR == txtColorR && bkColorG == txtColorG && bkColorB == txtColorB) {
                 currentController.view.backgroundColor = UIColor.white
                 currentController.contentLbl.textColor = UIColor.black
+            } else {
+                currentController.view.backgroundColor = UIColor(red: CGFloat(bkColorR), green: CGFloat(bkColorG), blue: CGFloat(bkColorB), alpha: 1)
+                currentController.contentLbl.textColor = UIColor(red: CGFloat(txtColorR), green: CGFloat(txtColorG), blue: CGFloat(txtColorB), alpha: 1)
             }
-        }.addDisposableTo(disposeBag)
+        }
     }
     
     private func setRecieveNotification() {
@@ -71,6 +98,12 @@ class BookController: UIPageViewController {
             }
 
             self?.setViewControllers([viewController], direction: .reverse, animated: false, completion: nil)
+            
+            self?.setLightMode()
+        }.addDisposableTo(disposeBag)
+        
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeLightMode)).bindNext { [weak self] notification in
+            self?.setLightMode()
         }.addDisposableTo(disposeBag)
     }
     

@@ -14,6 +14,8 @@ class CloudDetailController: ViewController {
     
     let model = CloudDetailModel()
     
+    let readModel = BooksModel()
+    
     var bookInfo: CloudBookInfo!  // params.
     
     @IBAction func doDownload() {
@@ -23,6 +25,7 @@ class CloudDetailController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createIndicator()
         setTableView()
         getData()
     }
@@ -71,12 +74,31 @@ extension CloudDetailController: UITableViewDataSource {
         
         cell.downloadBtn.rx.tap.asObservable().bindNext { [weak self] in
             guard let downloadFlag = self?.model.isDownloaded.value else {return}
+            guard let info = self?.bookInfo else { return }
+            
+            
             if (downloadFlag == DLStatus.before) {
-                guard let info = self?.bookInfo else {return}
                 self?.model.downloadFile(bookInfo: info)
             } else if (downloadFlag == DLStatus.after) {
                 // ファイルを開く処理をここに書く.
+                self?.startIndicator()
+                guard let localInfo = SQLiteManager.sharedInstance.selectBookById(bookId: info.bookId) else {
+                    return
+                }
                 
+                self?.readModel.readFileInBackground(bookInfo: localInfo, completion: { [weak self] text in
+                    self?.stopIndicator()
+                    guard let pageContents = self?.readModel.pageContents else {
+                        return
+                    }
+                    
+                    guard let chapterInfos = self?.readModel.chapterInfos else {
+                        return
+                    }
+                    
+                    let next = BookController(bookInfo: localInfo, pageContents: pageContents, chapterInfos: chapterInfos)
+                    self?.present(next, animated: true, completion: nil)
+                })
             }
         }.addDisposableTo(cell.disposeBag)
         

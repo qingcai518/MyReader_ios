@@ -132,11 +132,28 @@ class SettingController: ViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func doShowSetting2() {
+        let storyboard = UIStoryboard(name: "Setting2", bundle: nil)
+        guard let next = storyboard.instantiateInitialViewController() as? Setting2Controller else {
+            return
+        }
+        next.modalPresentationStyle = .custom
+        
+        let current = self.presentingViewController
+        self.dismiss(animated: true, completion: {
+            current?.present(next, animated: true, completion: nil)
+        })
+    }
+    
     @IBAction func changeLightMode() {
-        isNightMode.value = !isNightMode.value
-        UserDefaults.standard.set(isNightMode.value, forKey: UDKey.LightMode)
+        let isNightMode = UserDefaults.standard.bool(forKey: UDKey.LightMode)
+        
+        UserDefaults.standard.set(!isNightMode, forKey: UDKey.LightMode)
         UserDefaults.standard.synchronize()
-        self.dismiss(animated: true, completion: nil)
+        
+        setLightBtnImage()
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationName.ChangeLightMode), object: nil)
     }
 
     override func viewDidLoad() {
@@ -172,6 +189,18 @@ class SettingController: ViewController {
         }.addDisposableTo(disposeBag)
         recognizer.delegate = self
         self.view.addGestureRecognizer(recognizer)
+        
+        // ボタンの画像を設定する.
+        setLightBtnImage()
+    }
+    
+    private func setLightBtnImage() {
+        let isLightMode = UserDefaults.standard.bool(forKey: UDKey.LightMode)
+        if (isLightMode) {
+            lightBtn.setImage(UIImage(named: "btn_sun"), for: .normal)
+        } else {
+            lightBtn.setImage(UIImage(named: "btn_moon"), for: .normal)
+        }
     }
     
     private func showTopAndBottomViews() {
