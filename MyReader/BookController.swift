@@ -55,8 +55,7 @@ class BookController: UIPageViewController {
             currentController.view.backgroundColor = UIColor.black
             currentController.contentLbl.textColor = UIColor.white
         } else {
-            
-            // TODO 色の設定が反映されない.
+            // 色の繁栄はするが、色の設置がただっshくない。
             
             let bkColorR = UserDefaults.standard.float(forKey: UDKey.BKColor_R)
             let bkColorG = UserDefaults.standard.float(forKey: UDKey.BKColor_G)
