@@ -15,7 +15,7 @@ class SetMoreModel {
     
     func getSetInfos(completion: @escaping (String?) -> Void) {
         let info1 = SetMoreInfo(title: "护眼模式")
-        let info2 = SetMoreInfo(title: "翻页动画", rightText: "默认")
+        let info2 = SetMoreInfo(title: "翻页动画", rightText: "经典")
         let info3 = SetMoreInfo(title: "阅读背景", rightText: "默认")
         let info4 = SetMoreInfo(title: "行间距", rightText: "默认")
         let info5 = SetMoreInfo(title: "页边距", rightText: "默认")

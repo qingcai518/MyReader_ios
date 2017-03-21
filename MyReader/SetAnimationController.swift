@@ -16,6 +16,7 @@ class SetAnimationController: UIViewController {
         super.viewDidLoad()
         
         setTableView()
+        getData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +27,16 @@ class SetAnimationController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func getData() {
+        model.getInfos { [weak self] msg in
+            if let errorMsg = msg {
+                print("error = \(errorMsg)")
+            }
+            
+            self?.tableView.reloadData()
+        }
     }
 }
 
@@ -50,17 +61,13 @@ extension SetAnimationController : UITableViewDataSource {
         
         cell.titleLbl.text = info.title
         
-        var mode = UserDefaults.standard.integer(forKey: UDKey.AnimationMode)
-        if (mode == 0) {
-            mode = 1
-        }
-        
-        if (mode == indexPath.row + 1) {
+        let mode = UserDefaults.standard.integer(forKey: UDKey.AnimationMode)
+        if (mode == indexPath.row) {
             cell.checkImgView.isHidden = false
             cell.titleLbl.textColor = UIColor.blue
         } else {
             cell.checkImgView.isHidden = true
-            cell.titleLbl.textColor = UIColor.black
+            cell.titleLbl.textColor =  UIColor.black
         }
         
         return cell
