@@ -76,7 +76,6 @@ class Setting2Controller: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 
     private func setBottomView() {
         self.view.backgroundColor = UIColor.init(white: 0, alpha: 0.4)
