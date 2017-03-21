@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SetMoreController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
