@@ -11,10 +11,10 @@ import Foundation
 class ChapterInfo {
     var chapterNumber : Int
     var chapterName : String
-    var startPage : Int
-    var endPage : Int
+    var startPage: Int
+    var endPage: Int
     
-    init(chapterNumber : Int, chapterName: String, startPage: Int, endPage: Int) {
+    init(chapterNumber: Int, chapterName: String, startPage: Int, endPage: Int) {
         self.chapterNumber = chapterNumber
         self.chapterName = chapterName
         self.startPage = startPage
