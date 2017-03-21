@@ -41,6 +41,7 @@ class BookController: UIPageViewController {
         setView()
         
         setLightMode()
+        setFont()
         
     }
 
@@ -52,7 +53,9 @@ class BookController: UIPageViewController {
         super.viewWillAppear(animated)
         
         let brightness = UserDefaults.standard.float(forKey: UDKey.Brightness)
-        UIScreen.main.brightness = CGFloat(brightness)
+        if (brightness > 0) {
+            UIScreen.main.brightness = CGFloat(brightness)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
