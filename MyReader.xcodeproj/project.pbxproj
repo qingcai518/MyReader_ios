@@ -45,6 +45,11 @@
 		3C9605F11E80E3230050D1A0 /* SetSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605F01E80E3230050D1A0 /* SetSwitchCell.swift */; };
 		3C9605F31E80E36A0050D1A0 /* SetRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605F21E80E36A0050D1A0 /* SetRightCell.swift */; };
 		3C9605F51E80EE8B0050D1A0 /* SetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605F41E80EE8B0050D1A0 /* SetCell.swift */; };
+		3C9605F81E8113BF0050D1A0 /* SetAnimation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C9605F71E8113BF0050D1A0 /* SetAnimation.storyboard */; };
+		3C9605FA1E81148F0050D1A0 /* SetAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605F91E81148F0050D1A0 /* SetAnimationController.swift */; };
+		3C9605FC1E8114FA0050D1A0 /* SetAnimationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605FB1E8114FA0050D1A0 /* SetAnimationCell.swift */; };
+		3C9605FE1E8118FA0050D1A0 /* SetAnimatinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605FD1E8118FA0050D1A0 /* SetAnimatinInfo.swift */; };
+		3C9606001E8119560050D1A0 /* SetAnimationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605FF1E8119560050D1A0 /* SetAnimationModel.swift */; };
 		3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */; };
 		3C999BAE1E5ADC9B0095A696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAC1E5ADC9B0095A696 /* Main.storyboard */; };
 		3C999BB01E5ADC9B0095A696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAF1E5ADC9B0095A696 /* Assets.xcassets */; };
@@ -112,6 +117,11 @@
 		3C9605F01E80E3230050D1A0 /* SetSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetSwitchCell.swift; sourceTree = "<group>"; };
 		3C9605F21E80E36A0050D1A0 /* SetRightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRightCell.swift; sourceTree = "<group>"; };
 		3C9605F41E80EE8B0050D1A0 /* SetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCell.swift; sourceTree = "<group>"; };
+		3C9605F71E8113BF0050D1A0 /* SetAnimation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SetAnimation.storyboard; sourceTree = "<group>"; };
+		3C9605F91E81148F0050D1A0 /* SetAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetAnimationController.swift; sourceTree = "<group>"; };
+		3C9605FB1E8114FA0050D1A0 /* SetAnimationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetAnimationCell.swift; sourceTree = "<group>"; };
+		3C9605FD1E8118FA0050D1A0 /* SetAnimatinInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetAnimatinInfo.swift; sourceTree = "<group>"; };
+		3C9605FF1E8119560050D1A0 /* SetAnimationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetAnimationModel.swift; sourceTree = "<group>"; };
 		3C999BA51E5ADC9B0095A696 /* MyReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C999BAD1E5ADC9B0095A696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -262,6 +272,7 @@
 		3C9605E71E80E0630050D1A0 /* SetMorePage */ = {
 			isa = PBXGroup;
 			children = (
+				3C9605F61E8113A50050D1A0 /* SetAnimationPage */,
 				3C9605E81E80E06F0050D1A0 /* SetMore.storyboard */,
 				3C9605EA1E80E0830050D1A0 /* SetMoreController.swift */,
 				3C9605F01E80E3230050D1A0 /* SetSwitchCell.swift */,
@@ -271,6 +282,18 @@
 				3C9605EE1E80E13E0050D1A0 /* SetMoreInfo.swift */,
 			);
 			name = SetMorePage;
+			sourceTree = "<group>";
+		};
+		3C9605F61E8113A50050D1A0 /* SetAnimationPage */ = {
+			isa = PBXGroup;
+			children = (
+				3C9605F71E8113BF0050D1A0 /* SetAnimation.storyboard */,
+				3C9605F91E81148F0050D1A0 /* SetAnimationController.swift */,
+				3C9605FB1E8114FA0050D1A0 /* SetAnimationCell.swift */,
+				3C9605FF1E8119560050D1A0 /* SetAnimationModel.swift */,
+				3C9605FD1E8118FA0050D1A0 /* SetAnimatinInfo.swift */,
+			);
+			name = SetAnimationPage;
 			sourceTree = "<group>";
 		};
 		3C999B9C1E5ADC9B0095A696 = {
@@ -464,6 +487,7 @@
 				3C587ED31E66A1DE00B622E2 /* Chapter.storyboard in Resources */,
 				3C587EDB1E66A66800B622E2 /* Bookmark.storyboard in Resources */,
 				3C999BB31E5ADC9B0095A696 /* LaunchScreen.storyboard in Resources */,
+				3C9605F81E8113BF0050D1A0 /* SetAnimation.storyboard in Resources */,
 				3C999BCD1E5AE2330095A696 /* Books.storyboard in Resources */,
 				3C587EE61E66C31200B622E2 /* AddBookmark.storyboard in Resources */,
 				3C999BB01E5ADC9B0095A696 /* Assets.xcassets in Resources */,
@@ -537,12 +561,14 @@
 				3C96055E1E7B75F70050D1A0 /* UIColor.swift in Sources */,
 				3C999BC81E5AE1B40095A696 /* Navi2Controller.swift in Sources */,
 				3C999BC41E5ADE480095A696 /* MainController.swift in Sources */,
+				3C9605FA1E81148F0050D1A0 /* SetAnimationController.swift in Sources */,
 				3C67EDD41E5D346200B5156D /* BookCustomController.swift in Sources */,
 				3C587EDF1E66A75200B622E2 /* BookmarkCell.swift in Sources */,
 				3CD1E3851E6D2DA500EEE765 /* BookModel.swift in Sources */,
 				3C9605ED1E80E11F0050D1A0 /* SetMoreModel.swift in Sources */,
 				3C587EEF1E6D0AFA00B622E2 /* BookController.swift in Sources */,
 				3C999BE11E5AF0C70095A696 /* AppUtility.swift in Sources */,
+				3C9605FC1E8114FA0050D1A0 /* SetAnimationCell.swift in Sources */,
 				3CD1E3951E6FAEE200EEE765 /* UIApplication.swift in Sources */,
 				3C67EE0F1E5FFB4F00B5156D /* LeavesCache.swift in Sources */,
 				3C67EDCD1E5C3C2F00B5156D /* BooksModel.swift in Sources */,
@@ -554,6 +580,7 @@
 				3C999BC61E5AE1A90095A696 /* Navi1Controller.swift in Sources */,
 				3C67EDCB1E5C358200B5156D /* SQLiteManager.swift in Sources */,
 				3C9605F51E80EE8B0050D1A0 /* SetCell.swift in Sources */,
+				3C9606001E8119560050D1A0 /* SetAnimationModel.swift in Sources */,
 				3C96053D1E7A34CD0050D1A0 /* Setting2Controller.swift in Sources */,
 				3C67EE101E5FFB4F00B5156D /* LeavesView.swift in Sources */,
 				3C587ED51E66A2B600B622E2 /* ChapterController.swift in Sources */,
@@ -576,6 +603,7 @@
 				3C999BDF1E5AEFEC0095A696 /* CloudModel.swift in Sources */,
 				3C999BBD1E5ADD070095A696 /* NavigationController.swift in Sources */,
 				3C56DF071E6513B500812A16 /* ChapterInfo.swift in Sources */,
+				3C9605FE1E8118FA0050D1A0 /* SetAnimatinInfo.swift in Sources */,
 				3C67EDC91E5C23B000B5156D /* CloudDetailModel.swift in Sources */,
 				3C587EDD1E66A73600B622E2 /* BookmarkController.swift in Sources */,
 				3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */,

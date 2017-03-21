@@ -155,12 +155,22 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="closeBtn" destination="Oeg-L3-qxB" id="nGp-i1-AXF"/>
                         <outlet property="tableView" destination="VDj-eh-p2n" id="Pnh-DL-8Yd"/>
+                        <segue destination="jMG-XG-qbz" kind="show" identifier="ToSetAnimation" id="4oQ-ZI-iBm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Kv-Po-sbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1335.2" y="-98.50074962518741"/>
+        </scene>
+        <!--SetAnimation-->
+        <scene sceneID="tvC-Rs-bO5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SetAnimation" id="jMG-XG-qbz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uTH-1x-ovF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1834" y="-187"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HJN-Ze-1at">

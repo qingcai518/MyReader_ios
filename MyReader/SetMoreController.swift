@@ -53,7 +53,14 @@ extension SetMoreController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
+        if (indexPath.section == 0) {
+            
+        } else if (indexPath.section == 1) {
+            if (indexPath.row == 0) {
+                self.performSegue(withIdentifier: "ToSetAnimation", sender: nil)
+            }
+        }
     }
 }
 
