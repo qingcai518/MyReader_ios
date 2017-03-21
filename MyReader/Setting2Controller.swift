@@ -31,7 +31,11 @@ class Setting2Controller: UIViewController {
     
     @IBAction func toSmall() {
         // 文字サイズを縮小する.
-        let currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        var currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        if (currentFontSize == 0) {
+            currentFontSize = 14
+        }
+        
         let fontSize = currentFontSize - 2
         UserDefaults.standard.set(fontSize, forKey: UDKey.FontSize)
         UserDefaults.standard.synchronize()
@@ -40,13 +44,14 @@ class Setting2Controller: UIViewController {
         if (fontSize <= 10) {
             smallBtn.isEnabled = false
         }
-
+        
         NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationName.ChangeFont), object: nil)
     }
     
     @IBAction func toBig() {
         // 文字サイズを拡大する.
         let currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        
         let fontSize = currentFontSize + 2
         UserDefaults.standard.set(fontSize, forKey: UDKey.FontSize)
         UserDefaults.standard.synchronize()
