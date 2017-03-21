@@ -11,31 +11,41 @@
 import Foundation
 
 class SetMoreModel {
-    var section1Infos = [SetMoreInfo]()
-    var section2Infos = [SetMoreInfo]()
-    var section3Infos = [SetMoreInfo]()
-    var section4Infos = [SetMoreInfo]()
+    var sections = [[SetMoreInfo]]()
     
     func getSetInfos(completion: @escaping (String?) -> Void) {
-        let info1 = SetMoreInfo(name: "护眼模式", type: SetType.Switch)
-        let info2 = SetMoreInfo(name: "翻页动画", type: SetType.Right)
-        let info3 = SetMoreInfo(name: "阅读背景", type: SetType.Right)
-        let info4 = SetMoreInfo(name: "行间距", type: SetType.Right)
-        let info5 = SetMoreInfo(name: "页边距", type: SetType.Right)
-        let info6 = SetMoreInfo(name: "字体", type: SetType.Right)
-        let info7 = SetMoreInfo(name: "简体繁体切换", type: SetType.Right)
-        let info8 = SetMoreInfo(name: "初始设置", type: SetType.Normal)
-        let info9 = SetMoreInfo(name: "清楚阅读进度", type: SetType.Normal)
+        let info1 = SetMoreInfo(title: "护眼模式")
+        let info2 = SetMoreInfo(title: "翻页动画", rightText: "默认")
+        let info3 = SetMoreInfo(title: "阅读背景", rightText: "默认")
+        let info4 = SetMoreInfo(title: "行间距", rightText: "默认")
+        let info5 = SetMoreInfo(title: "页边距", rightText: "默认")
+        let info6 = SetMoreInfo(title: "字体", rightText: "默认")
+        let info7 = SetMoreInfo(title: "简体繁体切换", rightText: "默认")
+        let info8 = SetMoreInfo(title: "初始设置")
+        let info9 = SetMoreInfo(title: "清楚阅读进度")
+        
+        var section1Infos = [SetMoreInfo]()
+        var section2Infos = [SetMoreInfo]()
+        var section3Infos = [SetMoreInfo]()
+        var section4Infos = [SetMoreInfo]()
         
         section1Infos.append(info1)
+        
         section2Infos.append(info2)
         section2Infos.append(info3)
         section2Infos.append(info4)
         section2Infos.append(info5)
+        
         section3Infos.append(info6)
         section3Infos.append(info7)
+        
         section4Infos.append(info8)
         section4Infos.append(info9)
+        
+        sections.append(section1Infos)
+        sections.append(section2Infos)
+        sections.append(section3Infos)
+        sections.append(section4Infos)
         
         return completion(nil)
     }

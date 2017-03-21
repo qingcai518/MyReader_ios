@@ -37,12 +37,6 @@ enum DLStatus : Int {
     case after = 2
 }
 
-enum SetType : Int {
-    case Normal = 0
-    case Switch = 1
-    case Right = 2
-}
-
 let lightModeDay = 0
 let lightModeNight = 1
 

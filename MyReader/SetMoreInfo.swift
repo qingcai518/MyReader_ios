@@ -9,11 +9,11 @@
 import Foundation
 
 class SetMoreInfo {
-    var name: String
-    var type : SetType
+    var title: String
+    var rightText: String
     
-    init(name: String, type: SetType) {
-        self.name = name
-        self.type = type
+    init(title: String, rightText: String = "") {
+        self.title = title
+        self.rightText = rightText
     }
 }

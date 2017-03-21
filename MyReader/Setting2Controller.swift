@@ -118,6 +118,16 @@ class Setting2Controller: UIViewController {
         moreBtn.setTitle("更多设置", for: .normal)
         moreBtn.titleLabel?.font = UIFont.Helvetica14()
         moreBtn.setTitleColor(UIColor.black, for: .normal)
+        
+        moreBtn.rx.tap.bindNext { [weak self] in
+            let storyboard = UIStoryboard(name: "SetMore", bundle: nil)
+            guard let next = storyboard.instantiateInitialViewController() else {
+                return
+            }
+            
+            self?.present(next, animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
+        
         self.bottomView.addSubview(moreBtn)
     }
     
