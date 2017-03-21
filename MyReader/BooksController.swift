@@ -122,9 +122,7 @@ extension BooksController : UICollectionViewDelegate {
             }
             
             let next = BookController(bookInfo: bookInfo, pageContents: pageContents, chapterInfos: chapterInfos)
-
             self?.present(next, animated: true, completion: nil)
-            
         }
     }
 }
