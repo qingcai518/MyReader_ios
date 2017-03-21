@@ -9,10 +9,16 @@
 import UIKit
 
 class SetMoreController: UIViewController {
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var closeBtn : UIButton!
     
     let model = SetMoreModel()
 
+    
+    @IBAction func doClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
@@ -66,7 +72,6 @@ extension SetMoreController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SetSwitchCell", for: indexPath) as! SetSwitchCell
             cell.titleLbl.text = info.title
             cell.switchBtn.isOn = UserDefaults.standard.bool(forKey: UDKey.IsSafeMode)
-            
             return cell
         } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SetRightCell", for: indexPath) as! SetRightCell
