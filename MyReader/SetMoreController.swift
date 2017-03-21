@@ -13,7 +13,7 @@ class SetMoreController: UIViewController {
     @IBOutlet weak var closeBtn : UIButton!
     
     let model = SetMoreModel()
-
+    let disposeBag = DisposeBag()
     
     @IBAction func doClose() {
         self.dismiss(animated: true, completion: nil)
@@ -21,12 +21,20 @@ class SetMoreController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setRecieveNotification()
         setTableView()
         getData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func setRecieveNotification() {
+        NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.ChangeMoreSet)).bindNext { [weak self] sender in
+            self?.getData()
+        }.addDisposableTo(disposeBag)
     }
     
     private func setTableView() {

@@ -48,13 +48,10 @@ extension SetAnimationController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        var value = "经典"
-        if (indexPath.row == 1) {
-            value = "左右"
-        }
-        
-        UserDefaults.standard.set(value, forKey: UDKey.AnimationMode)
+        UserDefaults.standard.set(indexPath.row, forKey: UDKey.AnimationMode)
         UserDefaults.standard.synchronize()
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationName.ChangeMoreSet), object: nil)
         
         let _ = self.navigationController?.popViewController(animated: true)
     }
@@ -75,14 +72,12 @@ extension SetAnimationController : UITableViewDataSource {
         
         cell.titleLbl.text = info.title
         
-        if let value = UserDefaults.standard.object(forKey: UDKey.AnimationMode) as? String {
-            if (value == "经典") {
-                cell.checkImgView.isHidden = false
-                cell.titleLbl.textColor = UIColor.blue
-            } else {
-                cell.checkImgView.isHidden = true
-                cell.titleLbl.textColor = UIColor.black
-            }
+        if (UserDefaults.standard.integer(forKey: UDKey.AnimationMode) == indexPath.row) {
+            cell.checkImgView.isHidden = false
+            cell.titleLbl.textColor = UIColor.blue
+        } else {
+            cell.checkImgView.isHidden = true
+            cell.titleLbl.textColor = UIColor.black
         }
         
         return cell

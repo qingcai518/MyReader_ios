@@ -16,12 +16,12 @@ class SetMoreModel {
     func getSetInfos(completion: @escaping (String?) -> Void) {
         let info1 = SetMoreInfo(title: "护眼模式")
         
-        var animationMode = "经典"
-        if let mode1 = UserDefaults.standard.object(forKey: UDKey.AnimationMode) as? String {
-            animationMode = mode1
+        let modeValue = UserDefaults.standard.integer(forKey: UDKey.AnimationMode)
+        var modeText = "经典"
+        if (modeValue > 0) {
+            modeText = "左右"
         }
-        
-        let info2 = SetMoreInfo(title: "翻页动画", rightText: animationMode)
+        let info2 = SetMoreInfo(title: "翻页动画", rightText: modeText)
         let info3 = SetMoreInfo(title: "阅读背景", rightText: "默认")
         let info4 = SetMoreInfo(title: "行间距", rightText: "默认")
         let info5 = SetMoreInfo(title: "页边距", rightText: "默认")

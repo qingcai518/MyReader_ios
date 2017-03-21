@@ -29,6 +29,7 @@ struct NotificationName {
     static let ChangeChapter = "ChangeChapter"
     static let ChangeLightMode = "ChangeLightMode"
     static let ChangeFont = "ChangeFont"
+    static let ChangeMoreSet = "ChangeMoreSet"
 }
 
 enum DLStatus : Int {
