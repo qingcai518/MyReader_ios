@@ -38,6 +38,13 @@
 		3C96053B1E7A1B700050D1A0 /* Setting2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C96053A1E7A1B700050D1A0 /* Setting2.storyboard */; };
 		3C96053D1E7A34CD0050D1A0 /* Setting2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96053C1E7A34CD0050D1A0 /* Setting2Controller.swift */; };
 		3C96055E1E7B75F70050D1A0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C96055D1E7B75F70050D1A0 /* UIColor.swift */; };
+		3C9605E91E80E06F0050D1A0 /* SetMore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C9605E81E80E06F0050D1A0 /* SetMore.storyboard */; };
+		3C9605EB1E80E0840050D1A0 /* SetMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605EA1E80E0830050D1A0 /* SetMoreController.swift */; };
+		3C9605ED1E80E11F0050D1A0 /* SetMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605EC1E80E11F0050D1A0 /* SetMoreModel.swift */; };
+		3C9605EF1E80E13E0050D1A0 /* SetMoreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605EE1E80E13E0050D1A0 /* SetMoreInfo.swift */; };
+		3C9605F11E80E3230050D1A0 /* SetSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605F01E80E3230050D1A0 /* SetSwitchCell.swift */; };
+		3C9605F31E80E36A0050D1A0 /* SetRightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605F21E80E36A0050D1A0 /* SetRightCell.swift */; };
+		3C9605F51E80EE8B0050D1A0 /* SetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9605F41E80EE8B0050D1A0 /* SetCell.swift */; };
 		3C999BA91E5ADC9B0095A696 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */; };
 		3C999BAE1E5ADC9B0095A696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAC1E5ADC9B0095A696 /* Main.storyboard */; };
 		3C999BB01E5ADC9B0095A696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C999BAF1E5ADC9B0095A696 /* Assets.xcassets */; };
@@ -98,6 +105,13 @@
 		3C96053A1E7A1B700050D1A0 /* Setting2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting2.storyboard; sourceTree = "<group>"; };
 		3C96053C1E7A34CD0050D1A0 /* Setting2Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting2Controller.swift; sourceTree = "<group>"; };
 		3C96055D1E7B75F70050D1A0 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		3C9605E81E80E06F0050D1A0 /* SetMore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SetMore.storyboard; sourceTree = "<group>"; };
+		3C9605EA1E80E0830050D1A0 /* SetMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoreController.swift; sourceTree = "<group>"; };
+		3C9605EC1E80E11F0050D1A0 /* SetMoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoreModel.swift; sourceTree = "<group>"; };
+		3C9605EE1E80E13E0050D1A0 /* SetMoreInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMoreInfo.swift; sourceTree = "<group>"; };
+		3C9605F01E80E3230050D1A0 /* SetSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetSwitchCell.swift; sourceTree = "<group>"; };
+		3C9605F21E80E36A0050D1A0 /* SetRightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRightCell.swift; sourceTree = "<group>"; };
+		3C9605F41E80EE8B0050D1A0 /* SetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetCell.swift; sourceTree = "<group>"; };
 		3C999BA51E5ADC9B0095A696 /* MyReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C999BA81E5ADC9B0095A696 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C999BAD1E5ADC9B0095A696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -193,6 +207,7 @@
 		3C587EE91E6D0A9C00B622E2 /* BookPage */ = {
 			isa = PBXGroup;
 			children = (
+				3C9605E71E80E0630050D1A0 /* SetMorePage */,
 				3CD1E3991E6FB60E00EEE765 /* SettingPage */,
 				3C9605391E7A1B310050D1A0 /* Setting2Page */,
 				3C587EE41E66C2F800B622E2 /* AddBookmarkPage */,
@@ -242,6 +257,20 @@
 				3C96053C1E7A34CD0050D1A0 /* Setting2Controller.swift */,
 			);
 			name = Setting2Page;
+			sourceTree = "<group>";
+		};
+		3C9605E71E80E0630050D1A0 /* SetMorePage */ = {
+			isa = PBXGroup;
+			children = (
+				3C9605E81E80E06F0050D1A0 /* SetMore.storyboard */,
+				3C9605EA1E80E0830050D1A0 /* SetMoreController.swift */,
+				3C9605F01E80E3230050D1A0 /* SetSwitchCell.swift */,
+				3C9605F21E80E36A0050D1A0 /* SetRightCell.swift */,
+				3C9605F41E80EE8B0050D1A0 /* SetCell.swift */,
+				3C9605EC1E80E11F0050D1A0 /* SetMoreModel.swift */,
+				3C9605EE1E80E13E0050D1A0 /* SetMoreInfo.swift */,
+			);
+			name = SetMorePage;
 			sourceTree = "<group>";
 		};
 		3C999B9C1E5ADC9B0095A696 = {
@@ -442,6 +471,7 @@
 				3C67EDC01E5C0B0300B5156D /* CloudDetail.storyboard in Resources */,
 				3C999BAE1E5ADC9B0095A696 /* Main.storyboard in Resources */,
 				3C999BD41E5AE49E0095A696 /* Cloud.storyboard in Resources */,
+				3C9605E91E80E06F0050D1A0 /* SetMore.storyboard in Resources */,
 				3C96053B1E7A1B700050D1A0 /* Setting2.storyboard in Resources */,
 				3C587EF11E6D0C7E00B622E2 /* Page.storyboard in Resources */,
 				3CD1E39B1E6FB62600EEE765 /* Setting.storyboard in Resources */,
@@ -510,6 +540,7 @@
 				3C67EDD41E5D346200B5156D /* BookCustomController.swift in Sources */,
 				3C587EDF1E66A75200B622E2 /* BookmarkCell.swift in Sources */,
 				3CD1E3851E6D2DA500EEE765 /* BookModel.swift in Sources */,
+				3C9605ED1E80E11F0050D1A0 /* SetMoreModel.swift in Sources */,
 				3C587EEF1E6D0AFA00B622E2 /* BookController.swift in Sources */,
 				3C999BE11E5AF0C70095A696 /* AppUtility.swift in Sources */,
 				3CD1E3951E6FAEE200EEE765 /* UIApplication.swift in Sources */,
@@ -522,6 +553,7 @@
 				3C999BDD1E5AEDA90095A696 /* CloudBookInfo.swift in Sources */,
 				3C999BC61E5AE1A90095A696 /* Navi1Controller.swift in Sources */,
 				3C67EDCB1E5C358200B5156D /* SQLiteManager.swift in Sources */,
+				3C9605F51E80EE8B0050D1A0 /* SetCell.swift in Sources */,
 				3C96053D1E7A34CD0050D1A0 /* Setting2Controller.swift in Sources */,
 				3C67EE101E5FFB4F00B5156D /* LeavesView.swift in Sources */,
 				3C587ED51E66A2B600B622E2 /* ChapterController.swift in Sources */,
@@ -533,7 +565,11 @@
 				3C67EDC71E5C1E9A00B5156D /* UIFont.swift in Sources */,
 				3C999BD61E5AE5DA0095A696 /* CloudController.swift in Sources */,
 				3C999BD81E5AE5F50095A696 /* CloudCell.swift in Sources */,
+				3C9605F31E80E36A0050D1A0 /* SetRightCell.swift in Sources */,
+				3C9605EB1E80E0840050D1A0 /* SetMoreController.swift in Sources */,
+				3C9605F11E80E3230050D1A0 /* SetSwitchCell.swift in Sources */,
 				3C587EF31E6D0CF000B622E2 /* PageController.swift in Sources */,
+				3C9605EF1E80E13E0050D1A0 /* SetMoreInfo.swift in Sources */,
 				3C999BDB1E5AEAE30095A696 /* AppConstants.swift in Sources */,
 				3C67EE111E5FFB4F00B5156D /* LeavesViewController.swift in Sources */,
 				3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */,
