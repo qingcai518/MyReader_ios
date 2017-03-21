@@ -98,7 +98,6 @@ class Setting2Controller: UIViewController {
         
         self.view.addGestureRecognizer(recognizer)
         
-        
         // 色を変更するボタンを追加する.
         let width = screenWidth / 4
         let size = CGFloat(40)
@@ -108,6 +107,13 @@ class Setting2Controller: UIViewController {
         createCircleBtn(x: width + startX, y: startY, size: size, bkColor: UIColor.red, textColor: UIColor.white)
         createCircleBtn(x: 2 * width + startX, y: startY, size: size, bkColor: UIColor.yellow, textColor: UIColor.black)
         createCircleBtn(x: 3 * width + startX, y: startY, size: size, bkColor: UIColor.orange, textColor: UIColor.black)
+        
+        // more設定ボタンを追加する.
+        let moreBtn = UIButton(frame: CGRect(x: 60, y: startY + size + 16, width: screenWidth - 2 * 60, height: 40))
+        moreBtn.setTitle("更多设置", for: .normal)
+        moreBtn.titleLabel?.font = UIFont.Helvetica14()
+        moreBtn.setTitleColor(UIColor.black, for: .normal)
+        self.bottomView.addSubview(moreBtn)
     }
     
     private func createCircleBtn(x: CGFloat, y: CGFloat, size: CGFloat, bkColor: UIColor, textColor: UIColor){

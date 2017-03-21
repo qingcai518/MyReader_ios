@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qe-CY-n6R">
-                                <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="427" width="375" height="240"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XS5-JZ-F4c">
                                         <rect key="frame" x="56" y="24" width="263" height="19"/>
@@ -90,7 +90,7 @@
                                     <constraint firstItem="9Tm-w2-uP8" firstAttribute="top" secondItem="LWt-ak-xg5" secondAttribute="bottom" constant="24" id="9Ky-2e-AzA"/>
                                     <constraint firstAttribute="trailing" secondItem="l7h-G1-NNf" secondAttribute="trailing" constant="24" id="AuI-0o-aSl"/>
                                     <constraint firstItem="LWt-ak-xg5" firstAttribute="leading" secondItem="3Qe-CY-n6R" secondAttribute="leading" constant="24" id="D90-HL-Rka"/>
-                                    <constraint firstAttribute="height" constant="200" id="EQm-k8-Wh7"/>
+                                    <constraint firstAttribute="height" constant="240" id="EQm-k8-Wh7"/>
                                     <constraint firstItem="l7h-G1-NNf" firstAttribute="top" secondItem="tvZ-7W-I2p" secondAttribute="bottom" constant="24" id="Ito-Pg-KG1"/>
                                     <constraint firstItem="XS5-JZ-F4c" firstAttribute="leading" secondItem="LWt-ak-xg5" secondAttribute="trailing" constant="16" id="YjJ-Vi-eTY"/>
                                     <constraint firstItem="tvZ-7W-I2p" firstAttribute="top" secondItem="3Qe-CY-n6R" secondAttribute="top" constant="24" id="cAQ-vT-eWs"/>
