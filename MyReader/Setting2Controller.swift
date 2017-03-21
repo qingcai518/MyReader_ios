@@ -108,8 +108,14 @@ class Setting2Controller: UIViewController {
         createCircleBtn(x: 2 * width + startX, y: startY, size: size, bkColor: UIColor.yellow, textColor: UIColor.black)
         createCircleBtn(x: 3 * width + startX, y: startY, size: size, bkColor: UIColor.orange, textColor: UIColor.black)
         
+        // 分割線を追加する.
+        let separatorView = UIView(frame: CGRect(x: 0, y: startY + size + 24, width: screenWidth, height: 1))
+        separatorView.backgroundColor = UIColor.lightGray
+        self.bottomView.addSubview(separatorView)
+        
         // more設定ボタンを追加する.
-        let moreBtn = UIButton(frame: CGRect(x: 60, y: startY + size + 16, width: screenWidth - 2 * 60, height: 40))
+        let moreBtnStartY = startY  + size + 24 + 1
+        let moreBtn = UIButton(frame: CGRect(x: 0, y: moreBtnStartY, width: screenWidth, height: 240 - moreBtnStartY))
         moreBtn.setTitle("更多设置", for: .normal)
         moreBtn.titleLabel?.font = UIFont.Helvetica14()
         moreBtn.setTitleColor(UIColor.black, for: .normal)
