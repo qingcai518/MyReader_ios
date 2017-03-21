@@ -90,7 +90,7 @@ class BookController: UIPageViewController {
     
     private func setFont() {
         var fontName = "Helvetica"
-        var fontSize = CGFloat(14)
+        var fontSize = CGFloat(18)
         
         if let name = UserDefaults.standard.object(forKey: UDKey.FontName) as? String {
             fontName = name

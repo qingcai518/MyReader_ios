@@ -33,7 +33,7 @@ class Setting2Controller: UIViewController {
         // 文字サイズを縮小する.
         var currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
         if (currentFontSize == 0) {
-            currentFontSize = 14
+            currentFontSize = 18
         }
         
         let fontSize = currentFontSize - 2
@@ -50,9 +50,13 @@ class Setting2Controller: UIViewController {
     
     @IBAction func toBig() {
         // 文字サイズを拡大する.
-        let currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        var currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        if (currentFontSize == 0) {
+            currentFontSize = 18
+        }
         
         let fontSize = currentFontSize + 2
+
         UserDefaults.standard.set(fontSize, forKey: UDKey.FontSize)
         UserDefaults.standard.synchronize()
         
