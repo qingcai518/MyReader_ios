@@ -52,4 +52,5 @@ struct UDKey {
     static let Brightness = "Brightness"
     static let FontSize = "FontSize"
     static let FontName = "FontName"
+    static let IsSafeMode = "IsSafeMode"
 }

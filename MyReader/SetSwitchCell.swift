@@ -12,6 +12,15 @@ class SetSwitchCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var switchBtn: UISwitch!
     
+    @IBAction func doChangeValue() {
+        let value = switchBtn.isOn
+        print("value = \(value)")
+        
+        UserDefaults.standard.set(value, forKey: UDKey.IsSafeMode)
+        UserDefaults.standard.synchronize()
+
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLbl.text = nil

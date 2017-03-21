@@ -65,6 +65,8 @@ extension SetMoreController : UITableViewDataSource {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SetSwitchCell", for: indexPath) as! SetSwitchCell
             cell.titleLbl.text = info.title
+            cell.switchBtn.isOn = UserDefaults.standard.bool(forKey: UDKey.IsSafeMode)
+            
             return cell
         } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SetRightCell", for: indexPath) as! SetRightCell
