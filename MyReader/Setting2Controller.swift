@@ -29,6 +29,45 @@ class Setting2Controller: UIViewController {
         UserDefaults.standard.synchronize()
     }
     
+    @IBAction func toSmall() {
+        // 文字サイズを縮小する.
+        var currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        if (currentFontSize == 0) {
+            currentFontSize = 18
+        }
+        
+        let fontSize = currentFontSize - 2
+        UserDefaults.standard.set(fontSize, forKey: UDKey.FontSize)
+        UserDefaults.standard.synchronize()
+        
+        bigBtn.isEnabled = true
+        if (fontSize <= 10) {
+            smallBtn.isEnabled = false
+        }
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationName.ChangeFont), object: nil)
+    }
+    
+    @IBAction func toBig() {
+        // 文字サイズを拡大する.
+        var currentFontSize = UserDefaults.standard.float(forKey: UDKey.FontSize)
+        if (currentFontSize == 0) {
+            currentFontSize = 18
+        }
+        
+        let fontSize = currentFontSize + 2
+
+        UserDefaults.standard.set(fontSize, forKey: UDKey.FontSize)
+        UserDefaults.standard.synchronize()
+        
+        smallBtn.isEnabled = true
+        if (fontSize >= 30) {
+            bigBtn.isEnabled = false
+        }
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationName.ChangeFont), object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBottomView()
@@ -37,7 +76,6 @@ class Setting2Controller: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 
     private func setBottomView() {
         self.view.backgroundColor = UIColor.init(white: 0, alpha: 0.4)
@@ -59,7 +97,6 @@ class Setting2Controller: UIViewController {
         
         self.view.addGestureRecognizer(recognizer)
         
-        
         // 色を変更するボタンを追加する.
         let width = screenWidth / 4
         let size = CGFloat(40)
@@ -69,6 +106,29 @@ class Setting2Controller: UIViewController {
         createCircleBtn(x: width + startX, y: startY, size: size, bkColor: UIColor.red, textColor: UIColor.white)
         createCircleBtn(x: 2 * width + startX, y: startY, size: size, bkColor: UIColor.yellow, textColor: UIColor.black)
         createCircleBtn(x: 3 * width + startX, y: startY, size: size, bkColor: UIColor.orange, textColor: UIColor.black)
+        
+        // 分割線を追加する.
+        let separatorView = UIView(frame: CGRect(x: 0, y: startY + size + 24, width: screenWidth, height: 1))
+        separatorView.backgroundColor = UIColor.lightGray
+        self.bottomView.addSubview(separatorView)
+        
+        // more設定ボタンを追加する.
+        let moreBtnStartY = startY  + size + 24 + 1
+        let moreBtn = UIButton(frame: CGRect(x: 0, y: moreBtnStartY, width: screenWidth, height: 240 - moreBtnStartY))
+        moreBtn.setTitle("更多设置", for: .normal)
+        moreBtn.titleLabel?.font = UIFont.Helvetica14()
+        moreBtn.setTitleColor(UIColor.black, for: .normal)
+        
+        moreBtn.rx.tap.bindNext { [weak self] in
+            let storyboard = UIStoryboard(name: "SetMore", bundle: nil)
+            guard let next = storyboard.instantiateInitialViewController() else {
+                return
+            }
+            
+            self?.present(next, animated: true, completion: nil)
+        }.addDisposableTo(disposeBag)
+        
+        self.bottomView.addSubview(moreBtn)
     }
     
     private func createCircleBtn(x: CGFloat, y: CGFloat, size: CGFloat, bkColor: UIColor, textColor: UIColor){

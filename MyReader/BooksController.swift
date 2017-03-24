@@ -29,7 +29,6 @@ class BooksController: ViewController {
     }
     
     private func setRecieveNotification() {
-        // ファイルのダウンロードが完了する際の通知を受け取る.
         NotificationCenter.default.rx.notification(Notification.Name(rawValue: NotificationName.FinishDownload)).bindNext { [weak self] sender in
             self?.getData()
         }.addDisposableTo(disposeBag)
@@ -123,9 +122,7 @@ extension BooksController : UICollectionViewDelegate {
             }
             
             let next = BookController(bookInfo: bookInfo, pageContents: pageContents, chapterInfos: chapterInfos)
-
             self?.present(next, animated: true, completion: nil)
-            
         }
     }
 }

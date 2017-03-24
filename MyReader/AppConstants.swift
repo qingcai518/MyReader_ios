@@ -28,6 +28,8 @@ struct NotificationName {
     static let FinishDownload = "FinishDownload"
     static let ChangeChapter = "ChangeChapter"
     static let ChangeLightMode = "ChangeLightMode"
+    static let ChangeFont = "ChangeFont"
+    static let ChangeMoreSet = "ChangeMoreSet"
 }
 
 enum DLStatus : Int {
@@ -49,4 +51,8 @@ struct UDKey {
     static let TxtColor_G = "TxtColor_G"
     static let TxtColor_B = "TxtColor_B"
     static let Brightness = "Brightness"
+    static let FontSize = "FontSize"
+    static let FontName = "FontName"
+    static let IsSafeMode = "IsSafeMode"
+    static let AnimationMode = "AnimationMode"
 }
