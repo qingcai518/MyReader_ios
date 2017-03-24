@@ -69,6 +69,8 @@ extension SetMoreController : UITableViewDelegate {
         } else if (indexPath.section == 1) {
             if (indexPath.row == 0) {
                 self.performSegue(withIdentifier: "ToSetAnimation", sender: nil)
+            } else if (indexPath.row == 1) {
+                self.performSegue(withIdentifier: "ToSetBackground", sender: nil)
             }
         }
     }

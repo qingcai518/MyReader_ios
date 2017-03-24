@@ -158,6 +158,7 @@
                         <outlet property="closeBtn" destination="Oeg-L3-qxB" id="nGp-i1-AXF"/>
                         <outlet property="tableView" destination="VDj-eh-p2n" id="Pnh-DL-8Yd"/>
                         <segue destination="jMG-XG-qbz" kind="show" identifier="ToSetAnimation" id="4oQ-ZI-iBm"/>
+                        <segue destination="EK0-VP-VRI" kind="show" identifier="ToSetBackground" id="4AE-1V-GS8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Kv-Po-sbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -171,6 +172,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTH-1x-ovF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1834" y="-187"/>
+        </scene>
+        <!--SetBackground-->
+        <scene sceneID="mpX-gD-co4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SetBackground" id="EK0-VP-VRI" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LDK-O6-Vvb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1863" y="-47"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HJN-Ze-1at">

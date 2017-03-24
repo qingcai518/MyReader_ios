@@ -70,6 +70,11 @@
 		3C999BDD1E5AEDA90095A696 /* CloudBookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BDC1E5AEDA90095A696 /* CloudBookInfo.swift */; };
 		3C999BDF1E5AEFEC0095A696 /* CloudModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BDE1E5AEFEC0095A696 /* CloudModel.swift */; };
 		3C999BE11E5AF0C70095A696 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C999BE01E5AF0C70095A696 /* AppUtility.swift */; };
+		3CB9FEBD1E85238B00B88912 /* SetBackground.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CB9FEBC1E85238B00B88912 /* SetBackground.storyboard */; };
+		3CB9FEBF1E8526C000B88912 /* SetBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9FEBE1E8526C000B88912 /* SetBackgroundController.swift */; };
+		3CB9FEC11E8526E400B88912 /* ColorSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9FEC01E8526E400B88912 /* ColorSetModel.swift */; };
+		3CB9FEC31E8526EE00B88912 /* ColorSetInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9FEC21E8526EE00B88912 /* ColorSetInfo.swift */; };
+		3CB9FEC51E85294E00B88912 /* ColorSetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB9FEC41E85294E00B88912 /* ColorSetCell.swift */; };
 		3CD1E3851E6D2DA500EEE765 /* BookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1E3841E6D2DA500EEE765 /* BookModel.swift */; };
 		3CD1E3951E6FAEE200EEE765 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1E3941E6FAEE200EEE765 /* UIApplication.swift */; };
 		3CD1E39B1E6FB62600EEE765 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CD1E39A1E6FB62600EEE765 /* Setting.storyboard */; };
@@ -144,6 +149,11 @@
 		3C999BDC1E5AEDA90095A696 /* CloudBookInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudBookInfo.swift; sourceTree = "<group>"; };
 		3C999BDE1E5AEFEC0095A696 /* CloudModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModel.swift; sourceTree = "<group>"; };
 		3C999BE01E5AF0C70095A696 /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
+		3CB9FEBC1E85238B00B88912 /* SetBackground.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SetBackground.storyboard; sourceTree = "<group>"; };
+		3CB9FEBE1E8526C000B88912 /* SetBackgroundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetBackgroundController.swift; sourceTree = "<group>"; };
+		3CB9FEC01E8526E400B88912 /* ColorSetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetModel.swift; sourceTree = "<group>"; };
+		3CB9FEC21E8526EE00B88912 /* ColorSetInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetInfo.swift; sourceTree = "<group>"; };
+		3CB9FEC41E85294E00B88912 /* ColorSetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSetCell.swift; sourceTree = "<group>"; };
 		3CD1E3841E6D2DA500EEE765 /* BookModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookModel.swift; sourceTree = "<group>"; };
 		3CD1E3941E6FAEE200EEE765 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		3CD1E39A1E6FB62600EEE765 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
@@ -272,6 +282,7 @@
 		3C9605E71E80E0630050D1A0 /* SetMorePage */ = {
 			isa = PBXGroup;
 			children = (
+				3CB9FEBB1E85235B00B88912 /* SetBackgroundPage */,
 				3C9605F61E8113A50050D1A0 /* SetAnimationPage */,
 				3C9605E81E80E06F0050D1A0 /* SetMore.storyboard */,
 				3C9605EA1E80E0830050D1A0 /* SetMoreController.swift */,
@@ -402,6 +413,18 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
+		3CB9FEBB1E85235B00B88912 /* SetBackgroundPage */ = {
+			isa = PBXGroup;
+			children = (
+				3CB9FEBC1E85238B00B88912 /* SetBackground.storyboard */,
+				3CB9FEBE1E8526C000B88912 /* SetBackgroundController.swift */,
+				3CB9FEC41E85294E00B88912 /* ColorSetCell.swift */,
+				3CB9FEC01E8526E400B88912 /* ColorSetModel.swift */,
+				3CB9FEC21E8526EE00B88912 /* ColorSetInfo.swift */,
+			);
+			name = SetBackgroundPage;
+			sourceTree = "<group>";
+		};
 		3CD1E3991E6FB60E00EEE765 /* SettingPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +518,7 @@
 				3C67EDC01E5C0B0300B5156D /* CloudDetail.storyboard in Resources */,
 				3C999BAE1E5ADC9B0095A696 /* Main.storyboard in Resources */,
 				3C999BD41E5AE49E0095A696 /* Cloud.storyboard in Resources */,
+				3CB9FEBD1E85238B00B88912 /* SetBackground.storyboard in Resources */,
 				3C9605E91E80E06F0050D1A0 /* SetMore.storyboard in Resources */,
 				3C96053B1E7A1B700050D1A0 /* Setting2.storyboard in Resources */,
 				3C587EF11E6D0C7E00B622E2 /* Page.storyboard in Resources */,
@@ -569,10 +593,12 @@
 				3C587EEF1E6D0AFA00B622E2 /* BookController.swift in Sources */,
 				3C999BE11E5AF0C70095A696 /* AppUtility.swift in Sources */,
 				3C9605FC1E8114FA0050D1A0 /* SetAnimationCell.swift in Sources */,
+				3CB9FEBF1E8526C000B88912 /* SetBackgroundController.swift in Sources */,
 				3CD1E3951E6FAEE200EEE765 /* UIApplication.swift in Sources */,
 				3C67EE0F1E5FFB4F00B5156D /* LeavesCache.swift in Sources */,
 				3C67EDCD1E5C3C2F00B5156D /* BooksModel.swift in Sources */,
 				3C999BCF1E5AE35A0095A696 /* BooksController.swift in Sources */,
+				3CB9FEC31E8526EE00B88912 /* ColorSetInfo.swift in Sources */,
 				3C67EDD61E5D34D500B5156D /* BookCustomModel.swift in Sources */,
 				3C67EDC21E5C0C8A00B5156D /* CloudDetailController.swift in Sources */,
 				3C67EDCF1E5C3C4F00B5156D /* LocalBookInfo.swift in Sources */,
@@ -590,6 +616,7 @@
 				3C587EE11E66A85F00B622E2 /* BookmarkInfo.swift in Sources */,
 				3C587EE31E66B2E800B622E2 /* BookmarkModel.swift in Sources */,
 				3C67EDC71E5C1E9A00B5156D /* UIFont.swift in Sources */,
+				3CB9FEC11E8526E400B88912 /* ColorSetModel.swift in Sources */,
 				3C999BD61E5AE5DA0095A696 /* CloudController.swift in Sources */,
 				3C999BD81E5AE5F50095A696 /* CloudCell.swift in Sources */,
 				3C9605F31E80E36A0050D1A0 /* SetRightCell.swift in Sources */,
@@ -602,6 +629,7 @@
 				3C67EDC41E5C0CB600B5156D /* CloudDetailCell.swift in Sources */,
 				3C999BDF1E5AEFEC0095A696 /* CloudModel.swift in Sources */,
 				3C999BBD1E5ADD070095A696 /* NavigationController.swift in Sources */,
+				3CB9FEC51E85294E00B88912 /* ColorSetCell.swift in Sources */,
 				3C56DF071E6513B500812A16 /* ChapterInfo.swift in Sources */,
 				3C9605FE1E8118FA0050D1A0 /* SetAnimatinInfo.swift in Sources */,
 				3C67EDC91E5C23B000B5156D /* CloudDetailModel.swift in Sources */,
